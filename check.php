@@ -43,50 +43,78 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 </head>
 <body class="cover" style="background-image: url(Vista/assets/img/loginFondoAux.jpg);">
+
 	<form autocomplete="off" class="full-box logInFormCheck">
 		<p class="text-center text-muted"><i class="zmdi zmdi-account-circle zmdi-hc-5x"></i></p>
 		<p class="text-center text-muted text-uppercase">Ingrese Usuario Para Asistencia</p>
 		<div class="form-group label-floating">
 		<fieldset>Asistencias de ANLI</fieldset>
-			<div class="form-group label-floating">
-				<label class="control-label">Fecha y Hora</label>
-				<input class="form-control" readonly type="text" id="fechaAsis">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-sm-4">
+				<div class="form-group label-floating">
+					<label class="control-label">Fecha y Hora</label>
+					<input class="form-control" readonly type="text" id="fechaAsis">
+				</div>
 			</div>
-			<div class="form-group">
-				<label class="control-label">Centro de Negocios</label>
-				<select class="form-control" id="slccentroCheck">
-					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
-					<?php foreach($queryCentros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado']) ?></option>
-					<?php } ?>
-				</select>
+			<div class="col-md-1 col-sm-2"></div>
+			<div class="col-md-3 col-sm-4">
+				<div class="form-group">
+					<label class="control-label">Centro de Negocios</label>
+					<select class="form-control" id="slccentroCheck">
+						<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
+						<?php foreach($queryCentros as $centro){ ?>
+						<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado']) ?></option>
+						<?php } ?>
+					</select>
+				</div>
 			</div>
-			<div class="form-group">
-				<label class="control-label">Usuario</label>
-				<select class="form-control" id="slcusuarioCheck">
-					<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
-					<?php foreach($queryUsuario as $usuario){ ?>
-					<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
-					<?php } ?>
-				</select>
+		</div>
+		<div class="row">
+			<div class="col-md-3 col-sm-4">
+				<div class="form-group">
+					<label class="control-label">Usuario</label>
+					<select class="form-control" id="slcusuarioCheck">
+						<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
+						<?php foreach($queryUsuario as $usuario){ ?>
+						<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
+						<?php } ?>
+					</select>
+				</div>
 			</div>
-			<div class="form-group label-floating">
-				<label class="control-label">Ingresa tu Usuario</label>
-				<input class="form-control" type="text" id="txtusuario" autocomplete="off">
+			<div class="col-md-1 col-sm-2"></div>
+			<div class="col-md-3 col-sm-4">
+				<div class="form-group label-floating">
+					<label class="control-label">Ingresa tu Usuario</label>
+					<input class="form-control" type="text" id="txtusuario" autocomplete="off">
+				</div>
 			</div>
-			<div class="form-group">
-				<label class="control-label">Asistencia: </label>
-				<select class="form-control" id="slcestado">
-					<option value="0" disabled="disabled" selected="true">-- Seleccione el Motivo de Asitencia --</option>
-					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo utf8_encode($estado['Estado']) ?></option>
-					<?php } ?>
-				</select>
+		</div>
+		<div class="row">
+			<div class="col-md-3 col-sm-4">
+				<div class="form-group">
+					<label class="control-label">Asistencia: </label>
+					<select class="form-control" id="slcestado">
+						<option value="0" disabled="disabled" selected="true">-- Seleccione el Motivo de Asitencia --</option>
+						<?php foreach($queryEstado as $estado){ ?>
+						<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo utf8_encode($estado['Estado']) ?></option>
+						<?php } ?>
+					</select>
+				</div>
 			</div>
-		<p class="text-center">
-			<button type="button" onclick="InsertarAsistencia2()"  class="btn btn-danger btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Save</button>
-		</p>
+			<div class="col-md-1 col-sm-2"></div>
+			<div class="col-md-3 col-sm-4">
+				<p class="text-center">
+					<button type="button" onclick="InsertarAsistencia2()"  class="btn btn-danger btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Save</button>
+				</p>
+			</div>
+		</div>
+	</div>
 	</form>
+
+
+
+
 	<!--====== Scripts -->
 	<script src="Vista/js/jquery-3.1.1.min.js"></script>
 	<script src="Vista/js/bootstrap.min.js"></script>
