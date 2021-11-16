@@ -167,7 +167,7 @@ body, html{
 	transition: all .3s ease-in-out;
 }
 .dashboard-sideBar-UserInfo ul > li > a:hover{
-	color: #FF5722;
+	color: rgba(43, 174, 168, 1);
 }
 .dashboard-sideBar-Menu{
 	padding-top: 15px;
@@ -222,8 +222,8 @@ body, html{
 	outline: none;
 }
 .dashboard-sideBar-Menu > li > ul > li > a:hover{
-	border-left: 3px solid #FF5722;
-	color: #FF5722;
+	border-left: 3px solid rgba(43, 174, 168, 1);;
+	color: rgba(43, 174, 168, 1);;
 }
 /*contentPage*/
 .dashboard-contentPage{

@@ -154,6 +154,7 @@ function ActualizarMantenimiento() {
 
 $(document).ready(function () {
     $('#id_tabla_mant').DataTable({
+        "order": [[ 2, "desc" ]],
         language: {
             aria: {
                 sortAscending: "Activar para ordenar la columna de manera ascendente",

@@ -154,6 +154,7 @@ function ActualizarEquipo() {
 
 $(document).ready(function () {
     $('#id_tabla_equipo').DataTable({
+        "order": [[ 1, "desc" ]],
         language: {
             aria: {
                 sortAscending: "Activar para ordenar la columna de manera ascendente",

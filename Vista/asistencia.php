@@ -10,7 +10,8 @@ ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN centronegocio
 ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN estadotiempo
-ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
+ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo
+ORDER BY controltiempo.Fecha DESC");
 
 $varsesion = $_SESSION['IdUsuario'];
 

@@ -11,7 +11,8 @@ ON mantenimiento.Equipo_idEquipo = equipo.IdEquipo
 INNER JOIN usuario
 ON mantenimiento.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN centronegocio
-ON equipo.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio");
+ON equipo.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
+ORDER BY mantenimiento.FechaMantenimiento DESC");
 
 
 $varsesion = $_SESSION['IdUsuario'];
