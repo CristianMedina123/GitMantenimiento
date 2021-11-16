@@ -15,11 +15,13 @@ function Header(){
     $this->Cell(70,10,'Asistencias por Usuario',0,0,'C');
     // Salto de línea
     $this->Ln(20);
-    $this->Cell(30,10,'Fecha', 1, 0, 'C', 0);
-    $this->Cell(40,10,utf8_decode('CN'), 1, 0, 'C', 0);
-    $this->Cell(40,10,'Nombre', 1, 0, 'C', 0);
-    $this->Cell(40,10,'Apellido Pat', 1, 0, 'C', 0);
-    $this->Cell(40,10,'Apellido Mat', 1, 1, 'C', 0);
+    $this->SetFillColor(19, 141, 117);
+    // $this->SetTextColor(144,30,30);
+    $this->Cell(30,10,'Fecha', 1, 0, 'C', 1);
+    $this->Cell(40,10,utf8_decode('CN'), 1, 0, 'C', 1);
+    $this->Cell(40,10,'Nombre', 1, 0, 'C', 1);
+    $this->Cell(40,10,'Apellido Pat', 1, 0, 'C', 1);
+    $this->Cell(40,10,'Apellido Mat', 1, 1, 'C', 1);
 
 }
 

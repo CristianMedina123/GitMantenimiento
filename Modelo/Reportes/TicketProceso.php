@@ -15,12 +15,13 @@ function Header(){
     $this->Cell(70,10,'Reportes de Tickets en Proceso',0,0,'C');
     // Salto de línea
     $this->Ln(20);
-    $this->Cell(55,10,'Ticket', 1, 0, 'C', 0);
-    $this->Cell(25,10,'Fecha', 1, 0, 'C', 0);
-    $this->Cell(25,10,'Estado', 1, 0, 'C', 0);
-    $this->Cell(30,10,'Nombre', 1, 0, 'C', 0);
-    $this->Cell(30,10,'Apellido Pat', 1, 0, 'C', 0);
-    $this->Cell(30,10,'Apellido Mat', 1, 1, 'C', 0);
+    $this->SetFillColor(19, 141, 117);
+    $this->Cell(55,10,'Ticket', 1, 0, 'C', 1);
+    $this->Cell(25,10,'Fecha', 1, 0, 'C', 1);
+    $this->Cell(25,10,'Estado', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Nombre', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Apellido Pat', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Apellido Mat', 1, 1, 'C', 1);
 
 }
 

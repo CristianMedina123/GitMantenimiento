@@ -16,13 +16,14 @@ function Header(){
     // Salto de línea
     $this->SetFont('Arial','B',9);
     $this->Ln(20);
-    $this->Cell(30,10,'Equipo', 1, 0, 'C', 0);
-    $this->Cell(20,10,utf8_decode('Código'), 1, 0, 'C', 0);
-    $this->Cell(25,10,'Modelo', 1, 0, 'C', 0);
-    $this->Cell(30,10,'CN', 1, 0, 'C', 0);
-    $this->Cell(30,10,'Estado', 1, 0, 'C', 0);
-    $this->Cell(25,10,'Fecha', 1, 0, 'C', 0);
-    $this->Cell(30,10,'Estatus', 1, 1, 'C', 0);
+    $this->SetFillColor(19, 141, 117);
+    $this->Cell(30,10,'Equipo', 1, 0, 'C', 1);
+    $this->Cell(20,10,utf8_decode('Código'), 1, 0, 'C', 1);
+    $this->Cell(25,10,'Modelo', 1, 0, 'C', 1);
+    $this->Cell(30,10,'CN', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Estado', 1, 0, 'C', 1);
+    $this->Cell(25,10,'Fecha', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Estatus', 1, 1, 'C', 1);
 
 }
 

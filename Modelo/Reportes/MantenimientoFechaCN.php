@@ -15,12 +15,13 @@ function Header(){
     $this->Cell(70,10,'Mantenimiento de Equipos por Fecha y CN',0,0,'C');
     // Salto de línea
     $this->Ln(20);
-    $this->Cell(55,10,'Equipo', 1, 0, 'C', 0);
-    $this->Cell(25,10,utf8_decode('Código'), 1, 0, 'C', 0);
-    $this->Cell(25,10,'Modelo', 1, 0, 'C', 0);
-    $this->Cell(30,10,'CN', 1, 0, 'C', 0);
-    $this->Cell(30,10,'Estado', 1, 0, 'C', 0);
-    $this->Cell(30,10,'Fecha', 1, 1, 'C', 0);
+    $this->SetFillColor(19, 141, 117);
+    $this->Cell(55,10,'Equipo', 1, 0, 'C', 1);
+    $this->Cell(25,10,utf8_decode('Código'), 1, 0, 'C', 1);
+    $this->Cell(25,10,'Modelo', 1, 0, 'C', 1);
+    $this->Cell(30,10,'CN', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Estado', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Fecha', 1, 1, 'C', 1);
 
 }
 
