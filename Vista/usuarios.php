@@ -118,7 +118,7 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="usuarios.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Alta Usuarios</a>
+							<a href="usuarios.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Usuarios</a>
 						</li>
 						<li>
 							<a href="tipousuarios.php"><i class="zmdi zmdi-accounts-add"></i> Tipo Usuarios</a>

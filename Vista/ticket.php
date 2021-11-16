@@ -301,7 +301,6 @@ $resultado = mysqli_query($conn,$query);
 											<th class="text-center">Antes</th>
 											<th class="text-center">Durante</th>
 											<th class="text-center">Después</th>
-											<th class="text-center">Editar</th>
 											<th class="text-center">Eliminar</th>
 										</tr>
 									</thead>
@@ -317,8 +316,7 @@ $resultado = mysqli_query($conn,$query);
 											<td><?php echo utf8_encode( $tabla['ObservacionPendiente']) ?></td>
 											<td><?php echo utf8_encode( $tabla['ObservacionProceso']) ?></td>
 											<td><?php echo utf8_encode( $tabla['ObservacionCompletado']) ?></td>
-											<td><a onclick="EditarTicket('<?php echo $tabla['IdTicket'] ?>')" data-toggle="modal" data-target="#ModalActualizarTicket"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-										<td ><button type="button" onclick="EliminarArea(<?php echo $tabla['IdTicket'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
+										<td ><button type="button" onclick="EliminarTicket(<?php echo $tabla['IdTicket'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 										</tr>
 										<?php } ?>
 									</tbody>

@@ -97,7 +97,7 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 					</a>
 					<ul class="list-unstyled full-box">
 						<li>
-							<a href="usuarios.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Administradores</a>
+							<a href="usuarios.php"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Empleados</a>
 						</li>
 						<li>
 							<a href="tipousuarios.php"><i class="zmdi zmdi-accounts-add"></i> Tipo Usuarios</a>

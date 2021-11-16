@@ -368,7 +368,6 @@ $resultado = mysqli_query($conn,$query);
 					</div>
 					<h4><b>Seleccione su Nuevo Centro de Negocios</b></h4>
 					<div class="form-group">
-						<label class="control-label">Seleccione el Nuevo Centro de Negocios</label>
 						<select class="form-control" id="slcCentrosEditar">
 							<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 							<?php foreach($queryCentro as $centro){ ?>
@@ -378,7 +377,6 @@ $resultado = mysqli_query($conn,$query);
 					</div>
 					<h4><b>Seleccione la Nueva Area</b></h4>
 					<div class="form-group">
-						<label class="control-label">Seleccione Nueva Area</label>
 						<select class="form-control" id="slcAreaEditar">
 							<option value="0" disabled="disabled" selected="true">-- Seleccione una Area --</option>
 							<?php foreach($queryArea as $area){ ?>
@@ -388,7 +386,6 @@ $resultado = mysqli_query($conn,$query);
 					</div>
 					<h4><b>Selecione el Nuevo Estado</b></h4>
 					<div class="form-group">
-						<label class="control-label">Seleccione el Estado</label>
 						<select class="form-control" id="slcEstadoEditar">
 							<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado --</option>
 							<?php foreach($queryEstado as $estado){ ?>
