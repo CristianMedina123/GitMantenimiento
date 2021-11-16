@@ -12,7 +12,7 @@ $querySelectCascada = mysqli_query($conn,
 
     foreach($querySelectCascada as $row)
 	{
-		$html.= "<option value='".$row['IdUsuario']."'>".$row['Nombre']." ".$row['ApellidoPat']." ".$row['ApellidoMat']."</option>";
+		$html.= "<option value='".$row['IdUsuario']."'>".utf8_encode($row['Nombre'])." ".utf8_encode($row['ApellidoPat'])." ".utf8_encode($row['ApellidoMat'])."</option>";
 	}
 	echo $html;
 

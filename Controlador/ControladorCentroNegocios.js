@@ -43,7 +43,7 @@ function EliminarCentroNegocio(id) {
 
 
 
-  function EditarCentroNegocio(id) {
+function EditarCentroNegocio(id) {
     // var titulo = document.getElementById('tipoIngredientetitle');
     
     cadena = "id=" + id;
@@ -53,11 +53,11 @@ function EliminarCentroNegocio(id) {
         dataType: "json",
         data: cadena,
         success: function (res){
-            //EstadoTicketObject = JSON.parse(res);
+            // CentroNegocioObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
             $('#txtIdCentroNegocioEditar').val(res.IdCentroNegocio);
             $('#txtCentroNegocioEditar').val(res.CentroNegocio);
-            $('#txtEstadoEditar').val(res.Estado);
+            $('#txtEstadoEditar').val(res.estados);
             $("#ModalActualizarCentroNegocio").modal("show"); 
         }
     });

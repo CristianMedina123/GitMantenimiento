@@ -1,7 +1,6 @@
 <?php
 session_start();
 include '../Modelo/conexion.php';
-
 $queryCentros = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado FROM centronegocio order by centronegocio ASC");
 $queryEstado = mysqli_query($conn, "SELECT IdEstadoTiempo, Estado FROM estadotiempo");
 $queryUsuario = mysqli_query($conn, "SELECT IdUsuario, Usuario, Nombre, ApellidoPat, ApellidoMat FROM usuario");
@@ -374,7 +373,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcusuarioReportePDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
 					<?php foreach($queryUsuario as $usuario){ ?>
-					<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo $usuario['Nombre'] ?> <?php echo $usuario['ApellidoPat'] ?> <?php echo $usuario['ApellidoPat'] ?></option>
+					<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -405,7 +404,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slccentroPDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 					<?php foreach($queryCentros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo $centro['CentroNegocio'] ?> / <?php echo $centro['Estado'] ?></option>
+					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
