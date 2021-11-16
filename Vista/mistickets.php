@@ -65,7 +65,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, tic
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo $datos['Nombre']?> <?php echo $datos['ApellidoPat']?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -73,7 +73,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, tic
 				<figure class="full-box">
 					<img src="./assets/img/LogoHome.png" alt="UserIcon">
 					<figcaption class="text-center text-titles">
-						<h5><?php echo $datos['Usuario']?></h5>
+						<h5><?php echo utf8_encode($datos['Usuario'])?></h5>
 					</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
@@ -357,7 +357,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, tic
 				<select class="form-control" id="slcEstadoEditarHecho">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione su Nuevo Estado de Ticket --</option>
 					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo $estado['EstadoTicket'] ?></option>
+					<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo utf8_encode($estado['EstadoTicket']) ?></option>
 				<?php } ?>
 				</select>
 			</div>
@@ -401,7 +401,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, tic
 				<select class="form-control" id="slcEstadoEditar">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione su Nuevo Estado de Ticket --</option>
 					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo $estado['EstadoTicket'] ?></option>
+					<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo utf8_encode($estado['EstadoTicket']) ?></option>
 				<?php } ?>
 				</select>
 			</div>
@@ -451,7 +451,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, tic
 				<select class="form-control" id="slcEstadoEditarProceso">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione su Nuevo Estado de Ticket --</option>
 					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo $estado['EstadoTicket'] ?></option>
+					<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo utf8_encode($estado['EstadoTicket']) ?></option>
 				<?php } ?>
 				</select>
 			</div>

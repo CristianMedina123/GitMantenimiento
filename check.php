@@ -57,7 +57,7 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 				<select class="form-control" id="slccentroCheck">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 					<?php foreach($queryCentros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo $centro['CentroNegocio'] ?> / <?php echo $centro['Estado'] ?></option>
+					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -79,7 +79,7 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 				<select class="form-control" id="slcestado">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione el Motivo de Asitencia --</option>
 					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo $estado['Estado'] ?></option>
+					<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo utf8_encode($estado['Estado']) ?></option>
 					<?php } ?>
 				</select>
 			</div>

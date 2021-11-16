@@ -60,7 +60,7 @@ $resultado = mysqli_query($conn,$query);
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo $datos['Nombre']?> <?php echo $datos['ApellidoPat']?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -68,7 +68,7 @@ $resultado = mysqli_query($conn,$query);
 				<figure class="full-box">
 					<img src="./assets/img/LogoHome.png" alt="UserIcon">
 					<figcaption class="text-center text-titles">
-						<h5><?php echo $datos['Usuario']?></h5>
+						<h5><?php echo utf8_encode($datos['Usuario'])?></h5>
 					</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
@@ -305,9 +305,9 @@ $resultado = mysqli_query($conn,$query);
 									<tbody>
 										<?php foreach($queryTabla as $tabla){?>
 										<tr>
-											<td><?php echo utf8_encode($tabla['Nombre']) ?> <?php echo $tabla['ApellidoPat'] ?> <?php echo $tabla['ApellidoMat'] ?></td>
+											<td><?php echo utf8_encode($tabla['Nombre']) ?> <?php echo utf8_encode($tabla['ApellidoPat']) ?> <?php echo utf8_encode($tabla['ApellidoMat'])?></td>
 											<td><?php echo utf8_encode($tabla['Fecha']) ?></td>
-											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?> / <?php echo $tabla['Estado'] ?></td>
+											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?> / <?php echo utf8_encode($tabla['Estado']) ?></td>
 											<td><?php echo utf8_encode($tabla['Tiempo']) ?></td>
 											<!-- <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 											<td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td> -->
@@ -462,7 +462,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slccentroAsistenciaPDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 					<?php foreach($queryCentros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo $centro['CentroNegocio'] ?> / <?php echo $centro['Estado'] ?></option>
+					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
