@@ -25,6 +25,7 @@ var fecha = d.getFullYear() + "-" +(d.getMonth()+1)  + "-"+ d.getDate() + " " + 
 document.getElementById("fechaAsis").value = fecha;
 function InsertarAsistencia2(){
     var user = $('#txtusuario').val();
+    var psw = $('#psw').val();
     var id = $('#slcusuarioCheck').val();
 
     var estado = $('#slcestado').val();
@@ -32,7 +33,7 @@ function InsertarAsistencia2(){
 
 
 
-    datos = 'user='+user+'&id='+id;
+    datos = 'user='+user+'&id='+id+'&psw='+psw;
     datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha;
 
         $.ajax({

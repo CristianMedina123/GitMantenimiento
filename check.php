@@ -5,7 +5,7 @@ include 'Modelo/conexion.php';
 $queryCentros = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado FROM centronegocio order by centronegocio ASC");
 $queryEstado = mysqli_query($conn, "SELECT IdEstadoTiempo, Estado FROM estadotiempo");
 $queryUsuario = mysqli_query($conn, "SELECT IdUsuario, Usuario, Nombre, ApellidoPat, ApellidoMat FROM usuario");
-$queryTabla = mysqli_query($conn, "SELECT controltiempo.IdControlTiempo, controltiempo.Fecha, estadotiempo.Estado AS Tiempo, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat, centronegocio.CentroNegocio, centronegocio.Estado FROM controltiempo
+$queryTabla = mysqli_query($conn, "SELECT controltiempo.IdControlTiempo, controltiempo.Fecha, estadotiempo.Estado AS Tiempo, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat, usuario.Password,centronegocio.CentroNegocio, centronegocio.Estado FROM controltiempo
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN centronegocio
@@ -104,6 +104,11 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 			</div>
 			<div class="col-md-1 col-sm-2"></div>
 			<div class="col-md-3 col-sm-4">
+
+			<div class="form-group label-floating">
+					<label class="control-label">Contraseña</label>
+					<input class="form-control" type="text" id="psw">
+				</div>
 				<p class="text-center">
 					<button type="button" onclick="InsertarAsistencia2()"  class="btn btn-danger btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Save</button>
 				</p>
