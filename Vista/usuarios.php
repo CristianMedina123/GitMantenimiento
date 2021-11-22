@@ -34,6 +34,7 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 	<title>Usuarios</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="shortcut icon" href="assets/img/iconweb.png">
 	<link rel="stylesheet" href="./css/main.css">
 	<!-- JavaScript -->
 	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
