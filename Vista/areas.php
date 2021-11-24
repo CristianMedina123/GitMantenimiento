@@ -212,7 +212,6 @@ $resultado = mysqli_query($conn,$query);
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 					  	<li class="active"><a href="#new" data-toggle="tab">Nueva Área</a></li>
 					  	<li><a href="#list" data-toggle="tab">Lista de las Áreas</a></li>
-						  <li><a href="../prueba.php" >PDF</a></li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">

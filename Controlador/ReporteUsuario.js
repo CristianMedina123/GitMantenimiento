@@ -16,11 +16,22 @@ $("#btnrptFechaAsistencia").on("click", function () {
 
 
   window.open(
-    "../Modelo/Reportes/ControlFecha.php?fecha=" +fecha+"&fecha2="+fecha2,
+    "../Modelo/Reportes/ControlFechas.php?fecha=" +fecha+"&fecha2="+fecha2,
     "_blank"
   );
 });
 
+
+$("#rptEntradasUsuarioMotivo").on("click", function () {
+  var usuario = $("#slcusuarioReportePDFMotivoUser").val();
+  var estado = $("#slcusuarioReportePDFMotivo").val();
+
+
+  window.open(
+    "../Modelo/Reportes/ControlMotivoIrComida.php?usuario=" +usuario+'&estado='+estado,
+    "_blank"
+  );
+});
 
 //POR CENTROS DE NEGOCIOS -------------------------------------------------
 

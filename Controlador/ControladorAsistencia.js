@@ -20,6 +20,16 @@ $( document ).ready(function() {
         });
     });
 
+    $("#slcCentroUsuarioPDFMotivo").change(function () {
+
+        $("#slcCentroUsuarioPDFMotivo option:selected").each(function () {
+            id_centro = $(this).val();
+            $.post("../Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){
+                $("#slcusuarioReportePDFMotivoUser").html(data);
+            });            
+        });
+    });
+
 
 });
 

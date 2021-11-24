@@ -12,18 +12,18 @@ function Header(){
     // Movernos a la derecha
     $this->Cell(60);
     // Título
-    $this->Cell(70,10,'Asistencias por Usuario',0,0,'C');
+    $this->Cell(70,10,'Asistencias por Ir a Comer',0,0,'C');
     // Salto de línea
     $this->SetFont('Arial','B',9);
     $this->Ln(20);
     $this->SetFillColor(19, 141, 117);
-    // $this->SetTextColor(144,30,30);
-    $this->Cell(30,10,'Fecha', 1, 0, 'C', 1);
     $this->Cell(30,10,'Estado', 1, 0, 'C', 1);
-    $this->Cell(25,10,utf8_decode('CN'), 1, 0, 'C', 1);
-    $this->Cell(40,10,'Nombre', 1, 0, 'C', 1);
+    $this->Cell(30,10,utf8_decode('Fecha'), 1, 0, 'C', 1);
+    $this->Cell(35,10,'CentroNegocio', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Nombre', 1, 0, 'C', 1);
     $this->Cell(30,10,'Apellido Pat', 1, 0, 'C', 1);
-    $this->Cell(30,10,'Apellido Mat', 1, 1, 'C', 1);
+    $this->Cell(35,10,'Apellido Mat', 1, 1, 'C', 1);
+
 
 }
 
@@ -39,17 +39,17 @@ function Footer(){
 }
 
 require '../conexion.php';
-// $usuario =  mysqli_real_escape_string($conn, utf8_decode($_POST['id']));
-$usuario = $_GET['usuario'];
+$usuario =  $_GET['usuario'];
+$estado =  $_GET['estado'];
 
-$query = mysqli_query($conn, "SELECT estadotiempo.Estado,controltiempo.Fecha, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM controltiempo 
+$query = mysqli_query($conn, "SELECT estadotiempo.Estado,estadotiempo.IdEstadoTiempo,controltiempo.Fecha, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM controltiempo 
 INNER JOIN centronegocio
 ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN estadotiempo
 ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo
-WHERE usuario.IdUsuario = $usuario ORDER BY controltiempo.Fecha DESC");
+WHERE usuario.IdUsuario = $usuario AND estadotiempo.IdEstadoTiempo = $estado ORDER BY controltiempo.Fecha DESC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -58,12 +58,14 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(30,8, $row['Fecha'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['Estado'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['CentroNegocio'], 1, 0, 'C', 0);
-    $pdf->Cell(40,8, $row['Nombre'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['Fecha'], 1, 0, 'C', 0);
+    $pdf->Cell(35,8, $row['CentroNegocio'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['Nombre'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['ApellidoPat'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoMat'], 1, 1, 'C', 0);
+    $pdf->Cell(35,8, $row['ApellidoMat'], 1, 1, 'C', 0);
+
+
 
 }
 

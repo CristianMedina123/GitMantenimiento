@@ -338,6 +338,15 @@ $resultado = mysqli_query($conn,$query);
 											<a data-toggle="modal" data-target="#ModalPdfFechaCNAsistencia" class="btn btn-success btn-raised ml-4"> <i class="zmdi zmdi-file-text"></i> Por Fecha y CN</a>
 										</div>
 									</div>
+									<!-- POR MOTIVOS DE CHECK-->
+									<div class="row">
+										<div class="col-md-6">
+											<a data-toggle="modal" data-target="#ModalPdfUsuarioIrComer" class="btn btn-success btn-raised ml-4"> <i class="zmdi zmdi-file-text"></i> Usuario y Motivo</a>
+										</div>
+										<div class="col-md-6">
+											<a data-toggle="modal" data-target="#ModalPdfFechaCNAsistencia" class="btn btn-success btn-raised ml-4"> <i class="zmdi zmdi-file-text"></i> Motivos</a>
+										</div>
+									</div>
 								</div>
 							<!-- </div> -->
 					  	</div>
@@ -483,6 +492,57 @@ $resultado = mysqli_query($conn,$query);
   </div>
 </div>
 
+
+
+<!-- Modal PDF por MOTIVO IR A COMER-->
+<div class="modal fade" id="ModalPdfUsuarioIrComer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Ir a Comer</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slcCentroUsuarioPDFMotivo">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
+					<?php foreach($queryCentros as $centro){ ?>
+					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado'])  ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+	  	<div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slcusuarioReportePDFMotivoUser">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
+					<?php foreach($queryUsuario as $usuario){ ?>
+					<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+		<div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slcusuarioReportePDFMotivo">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Motivo --</option>
+					<?php foreach($queryEstado as $estado){ ?>
+					<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo utf8_encode($estado['Estado']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptEntradasUsuarioMotivo" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 	<!--====== Scripts -->
 	<script src="./js/jquery-3.1.1.min.js"></script>
