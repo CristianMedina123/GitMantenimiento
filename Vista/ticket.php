@@ -148,7 +148,7 @@ $resultado = mysqli_query($conn,$query);
 						<i class="zmdi zmdi-card zmdi-hc-fw"></i> Tickets <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
 						<li>
 							<a href="ticket.php"> <i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Tickets</a>
 						</li>
@@ -216,7 +216,7 @@ $resultado = mysqli_query($conn,$query);
 			</ul>
 		</nav>
 		<!-- Content page -->
-		<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+		<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3' ){ ?>
 		<div class="container-fluid">
 			<div class="page-header">
 			  <h1 class="text-titles"><i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ticket <small>de ANLI</small></h1>
@@ -228,8 +228,10 @@ $resultado = mysqli_query($conn,$query);
 				<div class="col-xs-12">
 					<ul class="nav nav-tabs" style="margin-bottom: 15px;">
 					  	<li class="active"><a href="#new" data-toggle="tab">Nuevo Ticket</a></li>
-					  	<li><a href="#list" data-toggle="tab">Lista de Tickets</a></li>
-						<li><a href="#pdf" data-toggle="tab">PDF</a></li>
+						  <?php if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+					  		<li><a href="#list" data-toggle="tab">Lista de Tickets</a></li>
+							<li><a href="#pdf" data-toggle="tab">PDF</a></li>
+						  <?php } ?>	
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
@@ -498,15 +500,7 @@ $resultado = mysqli_query($conn,$query);
 </div>
 
 <?php } ?>
-<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-11 text-center">
-					<h2> No tienes acceso al contenido</h2>
-				</div>
-			</div>
-		</div>
-	<?php } ?>
+
 <?php } ?>
 	<!--====== Scripts -->
 	<script src="./js/jquery-3.1.1.min.js"></script>
