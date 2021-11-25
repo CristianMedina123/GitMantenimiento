@@ -344,7 +344,7 @@ $resultado = mysqli_query($conn,$query);
 											<a data-toggle="modal" data-target="#ModalPdfUsuarioIrComer" class="btn btn-success btn-raised ml-4"> <i class="zmdi zmdi-file-text"></i> Usuario y Motivo</a>
 										</div>
 										<div class="col-md-6">
-											<a data-toggle="modal" data-target="#ModalPdfFechaCNAsistencia" class="btn btn-success btn-raised ml-4"> <i class="zmdi zmdi-file-text"></i> Motivos</a>
+											<a data-toggle="modal" data-target="#ModalPdfUsuarioFechaCN" class="btn btn-success btn-raised ml-4"> <i class="zmdi zmdi-file-text"></i> Motivos</a>
 										</div>
 									</div>
 								</div>
@@ -543,6 +543,43 @@ $resultado = mysqli_query($conn,$query);
     </div>
   </div>
 </div>
+
+
+<!-- Modal PDF por MOTIVO IR A COMER-->
+<div class="modal fade" id="ModalPdfUsuarioFechaCN" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte de Motivo en CN</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group label-floating">
+	  <div class="form-group">
+				<select class="form-control" id="slcusuarioReportePDFMotivoMotivoCN">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Motivo --</option>
+					<?php foreach($queryEstado as $estado){ ?>
+					<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo utf8_encode($estado['Estado']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+		<div class="form-group label-floating">
+			<label>Este reporte genera una lista de asistencia por el día seleccionado</label>
+			<input type="date" id="idfechaasistenciarptasistenciaMotivoCN">
+			<input type="date" id="idfechaasistenciarpt2asistenciaMotivoCN">
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptEntradasUsuarioMotivoMotivoCN" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 	<!--====== Scripts -->
 	<script src="./js/jquery-3.1.1.min.js"></script>

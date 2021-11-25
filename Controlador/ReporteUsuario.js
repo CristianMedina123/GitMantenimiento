@@ -33,6 +33,17 @@ $("#rptEntradasUsuarioMotivo").on("click", function () {
   );
 });
 
+
+$("#rptEntradasUsuarioMotivoMotivoCN").on("click", function () {
+  var fecha = $("#idfechaasistenciarptasistenciaMotivoCN").val();
+  var fecha2 = $("#idfechaasistenciarpt2asistenciaMotivoCN").val();
+  var estado = $("#slcusuarioReportePDFMotivoMotivoCN").val();
+  window.open(
+    "../Modelo/Reportes/ControlFechaMotivo.php?fecha="+fecha+"&fecha2="+fecha2+"&estado="+estado,
+    "_blank"
+  );
+});
+
 //POR CENTROS DE NEGOCIOS -------------------------------------------------
 
 $("#rptEntradasCN").on("click", function () {
