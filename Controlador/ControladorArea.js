@@ -1,17 +1,17 @@
-function InsertarArea(){
+function InsertarArea(){//Se declara una función para insertar los datos
 
-    var area = $('#txtarea').val();
+    var area = $('#txtarea').val();//se recolecta los datos del input
     var centro = $('#slcCentros').val();
 
-    if(area.length == 0 || centro.length == 0){
+    if(area.length == 0 || centro.length == 0){// se valida los datos ingresados en los inputs
         alertify.alert('Ocurrió un error','No puede dejar campos vacíos', function(){ alertify.error('¡Error!'); }).set('closable', false);
     }else if(area.length > 60 || centro.length > 60){
         alertify.alert('Ocurrió un error','Los campos no deben ser mayores a 60 digitos', function(){ alertify.error('¡Error!'); }).set('closable', false);
     }else{
-        datos = 'area='+area+ '&centro='+centro; 
+        datos = 'area='+area+ '&centro='+centro; //se realiza la cadena de insercción
         $.ajax({
             type: "POST",
-            url: "../Modelo/InsertarArea.php",
+            url: "../Modelo/InsertarArea.php",//se manda los datos al modelo
             data: datos,
             success: function (res){
             if (res == 1) {
@@ -26,10 +26,10 @@ function InsertarArea(){
 }
 
 function EliminarArea(id) {
-    cadena = "id=" + id;
+    cadena = "id=" + id;//se toma el ID mediante la cadena
     $.ajax({
       type: "POST",
-      url: "../Modelo/EliminarArea.php",
+      url: "../Modelo/EliminarArea.php",//se manda a ejecutar el query con el id seleccionado
       data: cadena,
       success: function (res) {
         if (res == 1) {
