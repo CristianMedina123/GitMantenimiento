@@ -13,6 +13,10 @@
 	$topo = $_SESSION['IdUsuario'];
 	$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 	$resultado = mysqli_query($conn,$query);	
+
+	$topo2 = $_SESSION['IdUsuario'];
+	$query2 = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo2";
+	$resultado2 = mysqli_query($conn,$query2);	
 ?>
 
 <!DOCTYPE html>
@@ -164,6 +168,7 @@
 	<?php } ?>
 
 	<!-- Content page-->
+
 	<section class="full-box dashboard-contentPage">
 		<!-- NavBar -->
 		<nav class="full-box dashboard-Navbar">
@@ -174,6 +179,8 @@
 			</ul>
 		</nav>
 		<!-- Content page -->
+		<?php while($datos2 = mysqli_fetch_array($resultado2)){ ?>
+			<?php if($datos2['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
 		<div class="container-fluid">
 			<div class="page-header">
 			  <h1 class="text-titles">Sistema de <small>Mantenimientos de ANLI</small></h1>
@@ -229,7 +236,10 @@
 				</div>
 			</article>
 		</div>
-		
+		<?php }else{ ?>
+				<h1 class="text-center mt-3 display-3">Bienvenido al Sistema</h1>
+			<?php } ?>
+		<?php } ?>
 	<!--====== Scripts -->
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="./js/sweetalert2.min.js"></script>
