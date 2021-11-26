@@ -45,7 +45,7 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 </head>
 <body class="cover" style="background-image: url(Vista/assets/img/loginFondoAux.jpg);">
 
-	<form autocomplete="off" class="full-box logInFormCheck">
+	<form autocomplete="off" class="full-box logInFormCheck" id="formCheckPantalla">
 		<p class="text-center text-muted"><i class="zmdi zmdi-account-circle zmdi-hc-5x"></i></p>
 		<p class="text-center text-muted text-uppercase">Ingrese Usuario Para Asistencia</p>
 		<div class="form-group label-floating">
@@ -130,6 +130,7 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 	<script src="Vista/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="Vista/js/main.js"></script>
     <script src="Controlador/ControladorCheck.js"></script>
+	<script src="Controlador/PantallaCheck.js"></script>
 	<!-- <script src="Controlador/ControladorAsistencia.js"></script> -->
 	<script>
 		$.material.init();

@@ -76,7 +76,9 @@ body, html{
 .logInForm label{
 	color: #FFF;
 }
-
+.ocultarForm{
+	display: none;
+}
 .logInFormCheck{
 	position: absolute;
 	color: #fff;
