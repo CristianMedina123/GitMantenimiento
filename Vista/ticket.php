@@ -120,9 +120,6 @@ $resultado = mysqli_query($conn,$query);
 						 <li>
 							<a href="tipoestadoequipo.php"><i class="zmdi zmdi-flag"></i> Tipo Estado Equipo</a>
 						</li>
-						<!-- <li>
-							<a href="salon.html"><i class="zmdi zmdi-font zmdi-hc-fw"></i> Salon</a>
-						</li>  -->
 					</ul>
 				</li>
 				<li>
@@ -136,12 +133,6 @@ $resultado = mysqli_query($conn,$query);
 						<li>
 							<a href="tipousuarios.php"><i class="zmdi zmdi-accounts-add"></i> Tipo Usuarios</a>
 						</li>
-						<!-- <li>
-							<a href="student.html"><i class="zmdi zmdi-face zmdi-hc-fw"></i> Student</a>
-						</li>
-						<li>
-							<a href="representative.html"><i class="zmdi zmdi-male-female zmdi-hc-fw"></i> Representative</a>
-						</li> -->
 					</ul>
 				</li>
 				<?php } ?>
@@ -252,7 +243,19 @@ $resultado = mysqli_query($conn,$query);
 										<div class="form-group label-floating">
 											<input type="date" class="form-control" id="fecha" autocomplete="off">
 										</div>
-										
+										<div class="form-group">
+										    <label class="control-label">Estado de Ticket</label>
+										    <select class="form-control" id="slcestado">
+										        <option value="0" disabled="disabled" selected="true">-- Estado del Ticket --</option>
+										        <?php foreach($queryEstado as $estado){?>
+												<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo utf8_encode($estado['EstadoTicket']) ?></option>
+												<?php } ?>
+										    </select>
+										</div>
+										<br />
+										<p class="text-center">
+										    <button type="button" onclick="InsertarTicket()" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Save</button>
+										</p>
 									</div>
 									<div class="col-xs-12 col-md-6 ">
 										<div class="form-group">
@@ -299,18 +302,6 @@ $resultado = mysqli_query($conn,$query);
 												<?php } ?>
 										    </select>
 										</div>
-											<div class="form-group">
-										        <label class="control-label">Estado de Ticket</label>
-										        <select class="form-control" id="slcestado">
-										          	<option value="0" disabled="disabled" selected="true">-- Estado del Ticket --</option>
-										          	<?php foreach($queryEstado as $estado){?>
-												  	<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo utf8_encode($estado['EstadoTicket']) ?></option>
-												  	<?php } ?>
-										        </select>
-										    </div>
-										<p class="text-center">
-										    <button type="button" onclick="InsertarTicket()" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Save</button>
-										</p>
 									</div>
 								</div>
 							</div>
