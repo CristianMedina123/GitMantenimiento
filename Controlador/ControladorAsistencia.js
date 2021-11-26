@@ -1,17 +1,15 @@
 $( document ).ready(function() {
-   
-    $("#slccentro").change(function () {
-
-        $("#slccentro option:selected").each(function () {
+   //El siguiente código son para los select en cascada
+    $("#slccentro").change(function () {//Se toma el select Padre por su ID
+        $("#slccentro option:selected").each(function () {//Cuando se selecciona una opcion lo manda como parametro
             id_centro = $(this).val();
-            $.post("../Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){
-                $("#slcusuario").html(data);
+            $.post("../Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){//se realiza la consulta comprobando el parametro mandado
+                $("#slcusuario").html(data);//Se manda el select del query hijo
             });            
         });
     });
-
+    //Codigo en cascada en Reportes
     $("#slcCentroUsuarioPDF").change(function () {
-
         $("#slcCentroUsuarioPDF option:selected").each(function () {
             id_centro = $(this).val();
             $.post("../Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){
@@ -19,9 +17,8 @@ $( document ).ready(function() {
             });            
         });
     });
-
+    //Codigo en cascada en Reportes
     $("#slcCentroUsuarioPDFMotivo").change(function () {
-
         $("#slcCentroUsuarioPDFMotivo option:selected").each(function () {
             id_centro = $(this).val();
             $.post("../Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){
@@ -29,14 +26,8 @@ $( document ).ready(function() {
             });            
         });
     });
-
-
-});
-
-$( document ).ready(function() {
-   
+    //Codigo en cascada en Reportes
     $("#slccentroCheck").change(function () {
-
         $("#slccentroCheck option:selected").each(function () {
             id_centro = $(this).val();
             $.post("Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){
@@ -44,37 +35,37 @@ $( document ).ready(function() {
             });            
         });
     })
-
-
-
 });
 
-//fecha = new Date().toLocaleString();
+
+//Se extrae el formato de la fecha YYYY-MM-DD-HH-MM-SS
 var d = new Date();
 var fecha = d.getFullYear() + "-" +(d.getMonth()+1)  + "-"+ d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
 
+//Se captura en la fecha y se asigna a una variable
 document.getElementById("fechaAsis").value = fecha;
 function InsertarAsistencia2(){
+    //Se declaran las variables para extraer datos de los inputs
     var user = $('#txtusuario').val();
     var id = $('#slcusuario').val();
-
     var estado = $('#slcestado').val();
     var centro = $('#slccentro').val();
 
-
-
+    //Se declaran dos cadenas
+    //Cadena: Datos= Esta cadena extrae el usuario y lo manda como parametro para acceder a la siguiente consulta
+    //Cadena= DatosAsistencia= Esta cadena extrae todos los datos faltantes para insertar la Asistencia.
     datos = 'user='+user+'&id='+id;
     datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha;
 
         $.ajax({
             type: "POST",
-              url: "../Modelo/ValidarUsuarioAsistencia.php",
+              url: "../Modelo/ValidarUsuarioAsistencia.php",//Se manda la primera cadena 
               data: datos,
-              success: function (res){
+              success: function (res){//Si la consulta es correcta, se valida los datos para insercción
                 if (res != "null") {
                     $.ajax({
                         type: "POST",
-                          url: "../Modelo/InsertarAsistencia.php",
+                          url: "../Modelo/InsertarAsistencia.php",//Se inserta los datos con la segunda cadena
                           data: datosAsistencia,
                           success: function (res){
                             if (res == 1) {
@@ -92,7 +83,7 @@ function InsertarAsistencia2(){
         });
 }
 
-
+//CODIGO DEL DATATABLE
 $(document).ready(function () {
     $('#id_tabla_asistencia').DataTable({
         "order": [[ 1, "desc" ]],

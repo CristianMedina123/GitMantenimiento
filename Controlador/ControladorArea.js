@@ -13,10 +13,10 @@ function InsertarArea(){//Se declara una función para insertar los datos
             type: "POST",
             url: "../Modelo/InsertarArea.php",//se manda los datos al modelo
             data: datos,
-            success: function (res){
+            success: function (res){//si el JSON arroja algo se inserta
             if (res == 1) {
                 alertify.success('¡Se insertó el registro!');
-                setTimeout(function(){ location.reload(); }, 2000);
+                setTimeout(function(){ location.reload(); }, 2000);//se actualiza la página a los 2s.
               }else {
                 alertify.error('Ocurrió un error');
               }
@@ -31,7 +31,7 @@ function EliminarArea(id) {
       type: "POST",
       url: "../Modelo/EliminarArea.php",//se manda a ejecutar el query con el id seleccionado
       data: cadena,
-      success: function (res) {
+      success: function (res) {//si el JSON arroja resultado se elimina
         if (res == 1) {
           alertify.success('¡Se eliminó el registro!');
           setTimeout(function(){ location.reload(); }, 2000);
@@ -46,17 +46,17 @@ function EliminarArea(id) {
   function EditarArea(id) {
     // var titulo = document.getElementById('tipoIngredientetitle');
     
-    cadena = "id=" + id;
+    cadena = "id=" + id;//se extrae el id del formulario
     $.ajax({
       type: "POST",
-        url: "../Modelo/MostrarArea.php",
+        url: "../Modelo/MostrarArea.php",//se manda la petición al query
         dataType: "json",
         data: cadena,
-        success: function (res){
+        success: function (res){//si se arroja algo se extrae los datos
             //EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
             $('#txtIdAreaEditar').val(res.IdArea);
-            $('#txtAreaEditar').val(res.AreaNombre);
+            $('#txtAreaEditar').val(res.AreaNombre);//se extrae la información del json y se pone en el input
             $('#slcCentrosEditar').val(res.IdCentroNegocio);
             $("#ModalActualizarArea").modal("show"); 
         }
@@ -65,19 +65,18 @@ function EliminarArea(id) {
 
 function ActualizarArea() {
     var id = $("#txtIdAreaEditar").val();
-    var area = $("#txtAreaEditar").val();
+    var area = $("#txtAreaEditar").val();//se obtiene los datos del input
     var centro = $('#slcCentrosEditar').val();
 
     if(area.length < 3 || area.length === 0){
         alertify.alert('Ocurrió un error','No puede dejar campos vacíos', function(){ alertify.error('¡Error!'); }).set('closable', false);
     }else{
-        cadena = "id=" + id + "&area=" + area+'&centro='+centro;
+        cadena = "id=" + id + "&area=" + area+'&centro='+centro;//se extrae la cadena
         $.ajax({
         type: "POST",
-            url: "../Modelo/ActualizarArea.php",
+            url: "../Modelo/ActualizarArea.php",//se hace la petición al query
             data: cadena,
-            success: function (res)
-            {
+            success: function (res){//si la consulta es correta se actualiza
                 if (res == 1) {
                     $("#ModalActualizarArea").modal("hide");
                     alertify.success('¡Se actualizó el registro!'); 
@@ -90,7 +89,7 @@ function ActualizarArea() {
     }
 }
 
-
+//JS DEL DATATABLE
 
 $(document).ready(function () {
     $('#id_tabla_areas').DataTable({

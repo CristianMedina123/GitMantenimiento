@@ -7,7 +7,7 @@ $usuario = $_POST['UserAnli'];
 $psw = $_POST['pswAnli'];
 
 if ($usuario == null || $usuario == undefined || $usuario == 'null' || $usuario == 'undefined' || $psw == null || $psw == undefined || $psw == 'null' || $psw == 'undefined') {
-   header("location: ../index.html");
+  header("location: ../index.html");
 }
 else {
    //Hacer una consulta de comparacion para saber si es Administrador registrado

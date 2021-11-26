@@ -2,7 +2,7 @@
 session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$query_centros = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio FROM centronegocio");
+$query_centros = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado as lugar FROM centronegocio");
 $query_usuario = mysqli_query($conn, "SELECT IdUsuario,Nombre, ApellidoPat, ApellidoMat FROM Usuario ORDER BY usuario ASC");
 $query_equipo = mysqli_query($conn, "SELECT equipo.Equipo,equipo.Marca, equipo.Codigo, equipo.IdEquipo FROM equipo ORDER BY equipo ASC");
 $queryTabla = mysqli_query($conn, "SELECT mantenimiento.IdMantenimiento, mantenimiento.mantenimiento, mantenimiento.FechaMantenimiento,  mantenimiento.Descripcion, equipo.Codigo, equipo.Equipo, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat,centronegocio.IdCentroNegocio, centronegocio.CentroNegocio,centronegocio.Estado  FROM mantenimiento
@@ -369,7 +369,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcCentroPDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
 					<?php foreach($query_centros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?></option>
+					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['lugar']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -378,7 +378,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcEquipoPDF">
 					<option value="0" disabled="disabled" selected="true" >-- Seleccione un Equipo --</option>
 					<?php foreach($query_equipo as $equipo){ ?>
-					<option value="<?php echo $equipo['IdEquipo'] ?>"><?php echo utf8_encode($equipo['Equipo']) ?> <?php echo utf8_encode($equipo['Marca']) ?> <?php echo utf8_encode($equipo['Codigo']) ?></option>
+						<option value="<?php echo $equipo['IdEquipo'] ?>"><?php echo utf8_encode($equipo['Equipo']) ?> <?php echo utf8_encode($equipo['Marca']) ?> <?php echo utf8_encode($equipo['Codigo']) ?></option>
 					<?php } ?>
 				</select>
 			</div>

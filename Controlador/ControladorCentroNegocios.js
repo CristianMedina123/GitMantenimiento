@@ -1,4 +1,5 @@
 function InsertarCentroNegocio(){
+    //Se declaran las variables y se extrae los datos del input
     var centro = $('#txtCentro').val();
     var estado = $('#txtEstado').val();
 
@@ -7,17 +8,18 @@ function InsertarCentroNegocio(){
     }else if(centro.length > 60 || estado.length > 60){
         alertify.alert('Ocurrió un error','Los campos no deben ser mayores a 60 digitos', function(){ alertify.error('¡Error!'); });
     }else{
+        //La cadena de datos se declara
         datos = 'centro='+centro+ '&estado='+estado; 
         $.ajax({
             type: "POST",
-            url: "../Modelo/InsertarCentroNegocio.php",
+            url: "../Modelo/InsertarCentroNegocio.php",//Se manda la cadena al query
             data: datos,
-            success: function (res){
+            success: function (res){//Si el query es correto se inserta la cadena a la base datos.
             if (res == 1) {
                 alertify.success('¡Se insertó el registro!');
-                setTimeout(function(){ location.reload(); }, 2000);
+                setTimeout(function(){ location.reload(); }, 2000);//Si se insertó se actualiza la página en 2s.
               }else {
-                alertify.error('Ocurrió un error');
+                alertify.error('Ocurrió un error');//En caso de que el query es incorreto o devuelve null
               }
             },
         });
@@ -25,45 +27,45 @@ function InsertarCentroNegocio(){
 }
 
 function EliminarCentroNegocio(id) {
-    cadena = "id=" + id;
+    cadena = "id=" + id;//Se extrae el ID mediante el botón.
     $.ajax({
       type: "POST",
-      url: "../Modelo/EliminarCentroNegocio.php",
+      url: "../Modelo/EliminarCentroNegocio.php",//Se manda el ID para realizar el Query.
       data: cadena,
-      success: function (res) {
+      success: function (res) {//En caso de que el query es correcto.
         if (res == 1) {
           alertify.success('¡Se eliminó el registro!');
-          setTimeout(function(){ location.reload(); }, 2000);
+          setTimeout(function(){ location.reload(); }, 2000);//Se actualiza la página en 2s.
         } else {
-          alertify.error('Ocurrió un error');
+          alertify.error('Ocurrió un error');//En caso de error, es el query es incorrecto o devulve null.
         }
       },
     });
-  }
-
+}
 
 
 function EditarCentroNegocio(id) {
     // var titulo = document.getElementById('tipoIngredientetitle');
-    
+    //Se extrae la cadena para ejecutar el Query.
     cadena = "id=" + id;
     $.ajax({
       type: "POST",
-        url: "../Modelo/MostrarCentroNegocio.php",
+        url: "../Modelo/MostrarCentroNegocio.php",//Se manda la cadena al query.
         dataType: "json",
         data: cadena,
-        success: function (res){
+        success: function (res){//En caso de que el query es correcto se extraen los datos en JSON.
             // CentroNegocioObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
             $('#txtIdCentroNegocioEditar').val(res.IdCentroNegocio);
             $('#txtCentroNegocioEditar').val(res.CentroNegocio);
-            $('#txtEstadoEditar').val(res.estados);
+            $('#txtEstadoEditar').val(res.estados);//Se extraen los datos del JSON y se lo asignan al input
             $("#ModalActualizarCentroNegocio").modal("show"); 
         }
     });
 }
 
 function ActualizarCentroNegocio() {
+    //Se declaran variables para obtener los nuevos datos para actualizar.
     var id = $("#txtIdCentroNegocioEditar").val();
     var estado = $("#txtEstadoEditar").val();
     var centro = $("#txtCentroNegocioEditar").val();
@@ -72,19 +74,18 @@ function ActualizarCentroNegocio() {
         alertify.alert('Ocurrió un error','No puede dejar campos vacíos', function(){ alertify.error('¡Error!'); });
     }else{
 
-        cadena = "id=" + id + "&estado=" + estado+ '&centro='+centro;
+        cadena = "id=" + id + "&estado=" + estado+ '&centro='+centro;//Se extrae la cadena para ejecutar Query.
         $.ajax({
         type: "POST",
-            url: "../Modelo/ActualizarCentroNegocio.php",
+            url: "../Modelo/ActualizarCentroNegocio.php",//Se manda los datos para ejecutar el Query.
             data: cadena,
-            success: function (res)
-            {
+            success: function (res){//En caso de que el Query es correcto se ejecuta.
                 if (res == 1) {
                     $("#ModalActualizarCentroNegocio").modal("hide");
                     alertify.success('¡Se actualizó el registro!'); 
                     setTimeout(function(){ location.reload(); }, 2000);
                 } else {
-                    alertify.success('¡Ocurrió un error! Intentelo más tarde');
+                    alertify.success('¡Ocurrió un error! Intentelo más tarde');//En caso de un error, El query es incorrecto o devuelve Null.
                 }
             }
         });

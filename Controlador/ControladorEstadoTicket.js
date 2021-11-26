@@ -1,110 +1,85 @@
 function InsertarEstadoTicket(){
+    //Se declaran las variables para extraer información del input.
     var estado = $('#txtEstadoTicket').val();
-
     if(estado.length == 0){
         alertify.alert('Ocurrió un error','No puede dejar campos vacíos', function(){ alertify.error('¡Error!'); }).set('closable', false);
     }else{
-
-        datos = 'estado='+estado;
-
+        datos = 'estado='+estado;//Se manda la cadena para ejecutar el query
         $.ajax({
             type: "POST",
-              url: "../Modelo/InsertarEstadoTicket.php",
+              url: "../Modelo/InsertarEstadoTicket.php",//Se manda la cadena para la insercción del objeto
               data: datos,
-              success: function (res){
+              success: function (res){//En caso de que el Query se ejecute
                 if (res == 1) {
-                  alertify.success('¡Se insertó el registro!');
-                  setTimeout(function(){ location.reload(); }, 2000);
+                  alertify.success('¡Se insertó el registro!');//Se registra el objeto
+                  setTimeout(function(){ location.reload(); }, 2000);// Y se actualiza la página.
                 }else {
-                    alertify.error('Ocurrió un error');
+                    alertify.error('Ocurrió un error');//En caso de error, el query es incorrecto o lo devuelve Null.
                 }
               },
         });
-
     }
-}
-
-
-function ConfirmarEliminarEstadoTicket(id) {
-  Swal.fire({
-    title: "¿Éstas seguro?",
-    text: "El tipo de ingrediente registrado se borrrara",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    cancelButtonText: "Cancelar",
-    confirmButtonText: "Si, deseo eliminarlo",
-  }).then((willDelete) => {
-    if (willDelete.isConfirmed) {
-      EliminarTipoIngrediente(id);
-    }
-  });
 }
 
 function EliminarEstadoTicket(id) {
+    //Se extrae la cadena para ejecutar el Query.
   cadena = "id=" + id;
   $.ajax({
     type: "POST",
-    url: "../Modelo/EliminarEstadoTicket.php",
+    url: "../Modelo/EliminarEstadoTicket.php",//Se manda la cadena al query
     data: cadena,
-    success: function (res) {
+    success: function (res) {//En caso de que se ejecute
       if (res == 1) {
-        alertify.success('¡Se eliminó el registro!');
-        setTimeout(function(){ location.reload(); }, 2000);
+        alertify.success('¡Se eliminó el registro!');//Se elimina el registro
+        setTimeout(function(){ location.reload(); }, 2000);//Y se actualiza la página para mostrar cambios
       } else {
-        alertify.error('Ocurrió un error');
+        alertify.error('Ocurrió un error');//En caso de error, la consulta es Incorrecta o lo devuelve Null.
       }
     },
   });
 }
 
 function EditarEstadoTicket(id) {
-    // var titulo = document.getElementById('tipoIngredientetitle');
+    //Se extrae la cadena para editar el objeto.
     
     cadena = "id=" + id;
     $.ajax({
       type: "POST",
-        url: "../Modelo/MostrarEstadoTicket.php",
+        url: "../Modelo/MostrarEstadoTicket.php",//Se manda la cadena para ejecutar el Query.
         dataType: "json",
         data: cadena,
-        success: function (res){
+        success: function (res){//En caso de que el query se ejecute.
             //EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
             $('#txtidEstado').val(res.IdEstadoTicket);
-            $('#txtEstadoTicketEditar').val(res.EstadoTicket);
+            $('#txtEstadoTicketEditar').val(res.EstadoTicket);//Se extraen los datos del JSON y los extrae en el input.
             $("#ModalActualizarEstadoTicket").modal("show"); 
         }
     });
 }
 
 function ActualizarEstadoTicket() {
+    //Se declaran las variables que obtendran los nuevos datos del objeto.
     var id = $("#txtidEstado").val();
     var estado = $("#txtEstadoTicketEditar").val();
-
-
-    cadena = "id=" + id + "&estado=" + estado;
+    cadena = "id=" + id + "&estado=" + estado;//La cadena se extrae para ejecutar el query.
     $.ajax({
       type: "POST",
-        url: "../Modelo/ActualizarEstadoTicket.php",
+        url: "../Modelo/ActualizarEstadoTicket.php",//Se manda la cadena al query.
         data: cadena,
-        success: function (res)
-        {
+        success: function (res){//En caso de que la consulta sea correta
             if (res == 1) {
-                $("#ModalActualizarEstadoTicket").modal("hide");
-                alertify.success('¡Se actualizó el registro!'); 
-                setTimeout(function(){ location.reload(); }, 2000);
+                $("#ModalActualizarEstadoTicket").modal("hide");//Se oculta el modal
+                alertify.success('¡Se actualizó el registro!'); //Se actualiza el registro
+                setTimeout(function(){ location.reload(); }, 2000);//Se actualiza la página para mostrar resultados.
             } else {
-                alertify.success('¡Ocurrió un error! Intentelo más tarde');
+                alertify.success('¡Ocurrió un error! Intentelo más tarde');//En caso de error, el query es incorrecto o lo devuelve Null.
             }
         }
     });
 }
 
-
-
-
-
+//CODIGO DEL DATATABLE
 
 $(document).ready(function () {
   $('#id_tabla_estadoticket').DataTable({

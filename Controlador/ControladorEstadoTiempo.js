@@ -1,35 +1,33 @@
 function InsertarEstadoTiempo(){
+    //Se declaran la variables para inserccrón de los inputs
     var estadoTiempo = $('#txtEstadoTiempo').val();
-
     if(estadoTiempo.length == 0){
         alertify.alert('Ocurrió un error','No puede dejar campos vacíos', function(){ alertify.error('¡Error!'); }).set('closable', false);
     }else if( estadoTiempo.length > 60){
         alertify.alert('Ocurrió un error','El campo no debe ser mayor a 60 digitos', function(){ alertify.error('¡Error!'); }).set('closable', false);
     }else{
-
+        //Se extrae la cadena de los datos capturados
         datos = "estadoTiempo="+estadoTiempo;
-
         $.ajax({
             type: "POST",
-              url: "../Modelo/InsertarEstadoTiempo.php",
+              url: "../Modelo/InsertarEstadoTiempo.php",//Se manda la cadena al query.
               data: datos,
-              success: function (res)
-              {
-                if (res == 1) {
-                  alertify.success('¡Se insertó el registro!');
-                  setTimeout(function(){ location.reload(); }, 2000);
-              } else {
-                alertify.error('Ocurrió un error');
+              success: function (res){//En caso de que se ejecute el query
+                if(res == 1){
+                  alertify.success('¡Se insertó el registro!');//Se inserta el registro.
+                  setTimeout(function(){ location.reload(); }, 2000);//Se actualiza la pagina en 2s.
+              }else{
+                alertify.error('Ocurrió un error');//En caso de error, el query es incorrecto o se devuelve Null.
               }
             },
-          });
+        });
     }
 }
 
 
 
 function EliminarEstadoTiempo(id) {
-  cadena = "id=" + id;
+  cadena = "id=" + id;//Se toma la cadena para ejecutar el query.
   $.ajax({
     type: "POST",
     url: "../Modelo/EliminarEstadoTiempo.php",

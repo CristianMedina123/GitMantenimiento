@@ -1,17 +1,16 @@
 $( document ).ready(function() {
-   
+    //SELECTS EN CASCADA
+    //Se toma el Select padre
     $("#slccentro").change(function () {
-
-        $("#slccentro option:selected").each(function () {
+        $("#slccentro option:selected").each(function () {//Una vez que se selecciona el valor se toma como parametro
             id_centro = $(this).val();
-            $.post("../Modelo/SelectEquipo.php", { id_centro: id_centro }, function(data){
-                $("#slcarea").html(data);
+            $.post("../Modelo/SelectEquipo.php", { id_centro: id_centro }, function(data){//Se manda el parametro a la consulta hijo
+                $("#slcarea").html(data);//Se extrae el valor hijo
             });            
         });
     })
-
+    //Select en Cascada.
     $("#slcCentrosEditar").change(function () {
-
         $("#slcCentrosEditar option:selected").each(function () {
             id_centroEditar = $(this).val();
             $.post("../Modelo/SelectEquipoEditar.php", { id_centroEditar: id_centroEditar }, function(data){
@@ -19,13 +18,11 @@ $( document ).ready(function() {
             });            
         });
     })
-
-
 });
 
 
 function InsertarEquipo(){
-
+    //Se declaran las variables para extraer los datos de los inputs
     var codigo = $('#txtcodigo').val();
     var equipo = $('#txtequipo').val();
     var marca = $('#txtmarca').val();
@@ -55,21 +52,21 @@ function InsertarEquipo(){
         alertify.alert('Ocurrió un error','Se debe de elegir un Estado para el equipo', function(){ alertify.error('¡Error!'); }).set('closable', false);
     }else{
 
-
+        //Cadena: Datos= Es una cadena para tomar la información y ejecutar el Query.
         datos = "codigo="+codigo+"&equipo="+equipo+
         "&marca="+marca+"&modelo="+modelo+"&desc="+desc+
         "&centro="+centro+"&area="+area+"&estado="+estado;
         
         $.ajax({
             type: "POST",
-            url: "../Modelo/InsertarEquipo.php",
+            url: "../Modelo/InsertarEquipo.php",//Se manda la cadena al query
             data: datos,
-            success: function (res){
+            success: function (res){//Si se ejecuta el query
             if (res == 1) {
-                alertify.success('¡Se insertó el registro!');
+                alertify.success('¡Se insertó el registro!');//Se registra la información.
                 setTimeout(function(){ location.reload(); }, 2000);
               }else {
-                alertify.error('Ocurrió un error');
+                alertify.error('Ocurrió un error');//En caso de error, el query es Incorrecto o devuelve Null
               }
             },
         });
@@ -77,17 +74,17 @@ function InsertarEquipo(){
 }
 
 function EliminarEquipo(id) {
-    cadena = "id=" + id;
+    cadena = "id=" + id;//Se extrae la cadena ID.
     $.ajax({
       type: "POST",
-      url: "../Modelo/EliminarEquipo.php",
+      url: "../Modelo/EliminarEquipo.php",//Se manda el ID al query
       data: cadena,
-      success: function (res) {
+      success: function (res) {//Si se ejecuta corrtectamente el Query 
         if (res == 1) {
-          alertify.success('¡Se eliminó el registro!');
+          alertify.success('¡Se eliminó el registro!');//Se elimina el registro.
           setTimeout(function(){ location.reload(); }, 2000);
         } else {
-          alertify.error('Ocurrió un error');
+          alertify.error('Ocurrió un error');//En caso de error, el Query es incorrecto o devuelve Null.
         }
       },
     });
@@ -95,19 +92,18 @@ function EliminarEquipo(id) {
 
 
   function EditarEquipo(id) {
-    // var titulo = document.getElementById('tipoIngredientetitle');
-    
+    //Se extrae el ID en la cadena para mandarlo como parametro.
     cadena = "id=" + id;
     $.ajax({
       type: "POST",
-        url: "../Modelo/MostrarEquipo.php",
+        url: "../Modelo/MostrarEquipo.php",//Se manda la cadena para ejecutar el Query.
         dataType: "json",
         data: cadena,
-        success: function (res){
+        success: function (res){//En caso de que el query sea satisfactorio se extraen los datos en JSON.
             //EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
             $('#txtIdEquipoEditar').val(res.IdEquipo);
-            $('#txtCodigoEditar').val(res.Codigo);
+            $('#txtCodigoEditar').val(res.Codigo);//Se extraen los datos en el JSON y se muestra en los inputs
             $('#txtEquipoEditar').val(res.Equipo);
             $('#txtMarcaEditar').val(res.Marca);
             $('#txtModeloEditar').val(res.Modelo);
@@ -115,12 +111,13 @@ function EliminarEquipo(id) {
             $('#slcCentrosEditar').val(res.IdCentroNegocio);
             $('#slcAreaEditar').val(res.IdArea);
             $('#slcEstadoEditar').val(res.IdTipoEstado);
-            $("#ModalActualizarEquipo").modal("show"); 
+            $("#ModalActualizarEquipo").modal("show");
         }
     });
 }
 
 function ActualizarEquipo() {
+    //Se declaran las variables para extraer los nuevos valores del objeto.
     var id = $('#txtIdEquipoEditar').val();
     var codigo = $("#txtCodigoEditar").val();
     var equipo = $("#txtEquipoEditar").val();
@@ -131,30 +128,31 @@ function ActualizarEquipo() {
     var area = $("#slcAreaEditar").val();
     var estado = $('#slcEstadoEditar').val();
 
-
+    //Se extrae la cadena de los datos introducidos en los inputs
     cadena = "id=" + id + "&codigo=" +codigo+'&equipo='+equipo+'&marca='+marca
     +'&modelo='+modelo+'&descripcion='+descripcion+'&centro='+centro+'&area='+area+
     '&estado='+estado;
+
     $.ajax({
       type: "POST",
-        url: "../Modelo/ActualizarEquipo.php",
+        url: "../Modelo/ActualizarEquipo.php",//Se manda la cadena al query para ejecutarla
         data: cadena,
-        success: function (res)
-        {
+        success: function (res){ //En caso de que el Query sea correcto.
             if (res == 1) {
+                //Se oculta el modal
                 $("#ModalActualizarEquipo").modal("hide");
-                alertify.success('¡Se actualizó el registro!'); 
-                setTimeout(function(){ location.reload(); }, 2000);
+                alertify.success('¡Se actualizó el registro!'); //Se actualiza el registro
+                setTimeout(function(){ location.reload(); }, 2000);//Y se actualiza la página para ver el registro metido
             } else {
-                alertify.success('¡Ocurrió un error! Intentelo más tarde');
+                alertify.success('¡Ocurrió un error! Intentelo más tarde');//En caso de error, el Query es Incorrecto o lo devuelve Null.
             }
         }
     });
 }
-
+//CODIGO DEL DATATABLE
 $(document).ready(function () {
     $('#id_tabla_equipo').DataTable({
-        "order": [[ 1, "desc" ]],
+        "order": [[ 1, "desc" ]],//Se organiza la información por la segunda columna de forma Descendente.
         language: {
             aria: {
                 sortAscending: "Activar para ordenar la columna de manera ascendente",
@@ -293,6 +291,5 @@ $(document).ready(function () {
                 }
             }
         }
-    }
-    );
-  });
+    });
+});
