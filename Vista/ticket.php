@@ -1,12 +1,12 @@
 <?php
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
-
+//Query Usuarios
 $queryUsuario = mysqli_query($conn,"SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM usuario
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 WHERE usuario.CentroNegocio_idCentroNegocio = 1");
-
+//Query para extraer el estado del ticket
 $queryEstado = mysqli_query($conn, "SELECT IdEstadoTicket, EstadoTicket FROM EstadoTicket");
 
 $queryTabla = mysqli_query($conn, "SELECT a.Nombre, a.ApellidoPat,a.ApellidoMat, b.Nombre as asignado, b.ApellidoPat as asignadoape, b.ApellidoMat as asignadoape2, ticket.IdTicket,ticket.TicketNom, estadoticket.estadoticket, ticket.Descripcion, ticket.Fecha, ticket.ObservacionPendiente, ticket.ObservacionProceso, ticket.ObservacionCompletado FROM ticket
@@ -25,6 +25,9 @@ $queryCentroTepic = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Nombr
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 WHERE IdCentroNegocio = 1");
+
+$queryCN = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado FROM centronegocio");
+
 $varsesion = $_SESSION['IdUsuario'];
 
 if($varsesion == null || $varsesion = ''){
@@ -253,8 +256,19 @@ $resultado = mysqli_query($conn,$query);
 									</div>
 									<div class="col-xs-12 col-md-6 ">
 										<div class="form-group">
+										    <label class="control-label">Seleccione un CN responsable</label>
+										    <select class="form-control" id="slccnticket">
+										        <option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
+												<?php foreach($queryCN as $cn){ ?>
+										        <option value="<?php echo $cn['IdCentroNegocio']  ?>"><?php echo utf8_encode($cn['CentroNegocio']) ?> / <?php echo utf8_encode($cn['Estado']) ?></option>
+												<?php } ?>
+										    </select>
+										</div>
+									</div>	
+									<div class="col-xs-12 col-md-6 ">
+										<div class="form-group">
 										    <label class="control-label">Seleccione al Usuario</label>
-										    <select class="form-control" id="slcusuario">
+										    <select class="form-control" id="slcticketusuario">
 										        <option value="0" disabled="disabled" selected="true">-- Seleccione al Usuario responsable --</option>
 												<?php foreach($queryUsuario as $usuario){ ?>
 										        <option value="<?php echo $usuario['IdUsuario']  ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
@@ -265,6 +279,17 @@ $resultado = mysqli_query($conn,$query);
 											<label class="control-label">Observación</label>
 											<input type="text" class="form-control" id="txtobs" autocomplete="off">
 										</div> -->
+
+										<div class="form-group">
+										    <label class="control-label">Seleccione un CN Creador</label>
+										    <select class="form-control" id="slccnticketcreador">
+										        <option value="0" disabled="disabled" selected="true">-- Seleccione un CN Creador --</option>
+												<?php foreach($queryCN as $cn){ ?>
+										        <option value="<?php echo $cn['IdCentroNegocio']  ?>"><?php echo utf8_encode($cn['CentroNegocio']) ?> / <?php echo utf8_encode($cn['Estado']) ?></option>
+												<?php } ?>
+										    </select>
+										</div>
+
 										<div class="form-group">
 										    <label class="control-label">Seleccione al Usuario</label>
 										    <select class="form-control" id="slccreador">

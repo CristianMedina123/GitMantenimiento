@@ -1,9 +1,30 @@
+$("#slccnticket").change(function () {
+
+    $("#slccnticket option:selected").each(function () {
+        id_centro = $(this).val();
+        $.post("../Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){
+            $("#slcticketusuario").html(data);
+        });            
+    });
+})
+
+
+$("#slccnticketcreador").change(function () {
+
+    $("#slccnticketcreador option:selected").each(function () {
+        id_centro = $(this).val();
+        $.post("../Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){
+            $("#slccreador").html(data);
+        });            
+    });
+})
+
 function InsertarTicket(){
 
     var tituloTicket = $('#txtticket').val();
     var descripcion = $('#txtdesc').val();
     var fecha = $('#fecha').val();
-    var usuario = $('#slcusuario').val();
+    var usuario = $('#slcticketusuario').val();
     var estado = $('#slcestado').val();
     var creador = $('#slccreador').val();
 
