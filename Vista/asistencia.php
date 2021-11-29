@@ -1,17 +1,17 @@
 <?php
 session_start();
 include '../Modelo/conexion.php';
-$queryCentros = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado FROM centronegocio order by centronegocio ASC");
-$queryEstado = mysqli_query($conn, "SELECT IdEstadoTiempo, Estado FROM estadotiempo");
-$queryUsuario = mysqli_query($conn, "SELECT IdUsuario, Usuario, Nombre, ApellidoPat, ApellidoMat FROM usuario");
-$queryTabla = mysqli_query($conn, "SELECT controltiempo.IdControlTiempo, controltiempo.Fecha, estadotiempo.Estado AS Tiempo, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat, centronegocio.CentroNegocio, centronegocio.Estado FROM controltiempo
+$queryCentros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio order by centronegocio ASC");
+$queryEstado = mysqli_query($conn, "SELECT idestadotiempo, estadotiempo FROM estadotiempo");
+$queryUsuario = mysqli_query($conn, "SELECT idusuario, usuario, nombre, apellidopa, apellidoma FROM usuario");
+$queryTabla = mysqli_query($conn, "SELECT controltiempo.idcontroltiempo, controltiempo.fechatiempo, estadotiempo.estadotiempo, usuario.nombre, usuario.apellidopa, usuario.apellidoma, centronegocio.centronegocio, centronegocio.estadocn FROM controltiempo
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN centronegocio
 ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN estadotiempo
 ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo
-ORDER BY controltiempo.Fecha DESC");
+ORDER BY controltiempo.fechatiempo DESC");
 
 $varsesion = $_SESSION['IdUsuario'];
 
@@ -21,7 +21,7 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 $resultado = mysqli_query($conn,$query);
 ?>
 
@@ -62,7 +62,7 @@ $resultado = mysqli_query($conn,$query);
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -255,7 +255,7 @@ $resultado = mysqli_query($conn,$query);
 												<select class="form-control" id="slccentro">
 												  <option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 													<?php foreach($queryCentros as $centro){ ?>
-													<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado'])  ?></option>
+													<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn'])  ?></option>
 													<?php } ?>
 												</select>
 											</div>
@@ -264,7 +264,7 @@ $resultado = mysqli_query($conn,$query);
 												<select class="form-control" id="slcusuario">
 												  <option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
 													<?php foreach($queryUsuario as $usuario){ ?>
-													<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
+													<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
 													<?php } ?>
 												</select>
 											</div>
@@ -280,7 +280,7 @@ $resultado = mysqli_query($conn,$query);
 											<select class="form-control" id="slcestado">
 												<option value="0" disabled="disabled" selected="true">-- Seleccione el Motivo de Asitencia --</option>
 												<?php foreach($queryEstado as $estado){ ?>
-												<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo utf8_encode($estado['Estado']) ?></option>
+												<option value="<?php echo $estado['idestadotiempo'] ?>"><?php echo utf8_encode($estado['estadotiempo']) ?></option>
 												<?php } ?>
 											</select>
 										</div>
@@ -307,10 +307,10 @@ $resultado = mysqli_query($conn,$query);
 									<tbody>
 										<?php foreach($queryTabla as $tabla){?>
 										<tr>
-											<td><?php echo utf8_encode($tabla['Nombre']) ?> <?php echo utf8_encode($tabla['ApellidoPat']) ?> <?php echo utf8_encode($tabla['ApellidoMat'])?></td>
-											<td><?php echo utf8_encode($tabla['Fecha']) ?></td>
-											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?> / <?php echo utf8_encode($tabla['Estado']) ?></td>
-											<td><?php echo utf8_encode($tabla['Tiempo']) ?></td>
+											<td><?php echo utf8_encode($tabla['nombre']) ?> <?php echo utf8_encode($tabla['apellidopa']) ?> <?php echo utf8_encode($tabla['apellidoma'])?></td>
+											<td><?php echo utf8_encode($tabla['fechatiempo']) ?></td>
+											<td><?php echo utf8_encode($tabla['centronegocio']) ?> / <?php echo utf8_encode($tabla['estadocn']) ?></td>
+											<td><?php echo utf8_encode($tabla['estadotiempo']) ?></td>
 											<!-- <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 											<td><a href="#!" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td> -->
 										</tr>

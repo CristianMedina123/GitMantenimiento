@@ -11,7 +11,7 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 $resultado = mysqli_query($conn,$query);
 ?>
 <!DOCTYPE html>
@@ -53,7 +53,7 @@ $resultado = mysqli_query($conn,$query);
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->

@@ -51,15 +51,17 @@ function EditarCentroNegocio(id) {
     $.ajax({
       type: "POST",
         url: "../Modelo/MostrarCentroNegocio.php",//Se manda la cadena al query.
-        dataType: "json",
         data: cadena,
         success: function (res){//En caso de que el query es correcto se extraen los datos en JSON.
-            // CentroNegocioObject = JSON.parse(res);
+            centronegocioObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-            $('#txtIdCentroNegocioEditar').val(res.IdCentroNegocio);
-            $('#txtCentroNegocioEditar').val(res.CentroNegocio);
-            $('#txtEstadoEditar').val(res.estados);//Se extraen los datos del JSON y se lo asignan al input
+            $('#txtIdCentroNegocioEditar').val(centronegocioObject.idcentronegocio);
+            $('#txtCentroNegocioEditar').val(centronegocioObject.centronegocio);
+            $('#txtEstadoEditar').val(centronegocioObject.estadocn);//Se extraen los datos del JSON y se lo asignan al input
             $("#ModalActualizarCentroNegocio").modal("show"); 
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+           alert(errorThrown);
         }
     });
 }
@@ -70,7 +72,7 @@ function ActualizarCentroNegocio() {
     var estado = $("#txtEstadoEditar").val();
     var centro = $("#txtCentroNegocioEditar").val();
 
-    if(estado.length < 3 || estado.length === 0 || estado.length < 3 || estado.length === 0){
+    if(centro.length < 3 || estado.length === 0 || estado.length === 0){
         alertify.alert('Ocurrió un error','No puede dejar campos vacíos', function(){ alertify.error('¡Error!'); });
     }else{
 

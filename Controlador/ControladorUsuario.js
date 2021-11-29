@@ -1,17 +1,12 @@
-$( document ).ready(function() {
-   
-    $("#slccentro").change(function () {
-
-        $("#slccentro option:selected").each(function () {
-            id_centro = $(this).val();
-            $.post("../Modelo/SelectUsuario.php", { id_centro: id_centro }, function(data){
-                $("#slcArea").html(data);
-            });            
-        });
-    })
-
-
+$("#slccentro").change(function () {
+    $("#slccentro option:selected").each(function () {
+        id_centro = $(this).val();
+        $.post("../Modelo/SelectUsuario.php", { id_centro: id_centro }, function(data){
+            $("#slcArea").html(data);
+        });            
+    });
 });
+
 
 
 
@@ -41,8 +36,7 @@ function InsertarUsuario(){
 
         datos = 'usuario='+usuario+ '&psw='+psw+
         '&nombre='+nombre+ '&ape_pat='+ape_pat+ 
-        '&ape_mat='+ape_mat+'&centro='+centro+'&area='+area+ 
-        '&tipo='+tipo; 
+        '&ape_mat='+ape_mat+'&centro='+centro+'&area='+area+'&tipo='+tipo; 
 
         $.ajax({
             type: "POST",
@@ -85,21 +79,22 @@ function EliminarUsuario(id) {
     cadena = "id=" + id;
     $.ajax({
       type: "POST",
+      data: cadena,
         url: "../Modelo/MostrarUsuario.php",
-        dataType: "json",
-        data: cadena,
         success: function (res){
-            //EstadoTicketObject = JSON.parse(res);
+            var EstadoUsuariotObject = res;
+            console.log(EstadoUsuariotObject);
+            EstadoUsuariotObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-            $('#txtIdUsuarioEditar').val(res.IdUsuario);
-            $('#txtUsuarioEditar').val(res.Usuario);
-            $('#txtPswEditar').val(res.Password);
-            $('#txtNombreEditar').val(res.Nombre);
-            $('#txtApellidoPatEditar').val(res.ApellidoPat);
-            $('#txtApellidoMatEditar').val(res.ApellidoMat);
-            $('#slcCentrosEditar').val(res.IdCentroNegocio);
-            $('#slcAreaEditar').val(res.IdArea);
-            $('#slcEstadoEditar').val(res.IdTipoUsuario);
+            $('#txtIdUsuarioEditar').val(EstadoUsuariotObject.idusuario);
+            $('#txtUsuarioEditar').val(EstadoUsuariotObject.usuario);
+            $('#txtPswEditar').val(EstadoUsuariotObject.psw);
+            $('#txtNombreEditar').val(EstadoUsuariotObject.nombre);
+            $('#txtApellidoPatEditar').val(EstadoUsuariotObject.apellidopa);
+            $('#txtApellidoMatEditar').val(EstadoUsuariotObject.apellidoma);
+            $('#slcCentrosEditar').val(EstadoUsuariotObject.idcentronegocio);
+            $('#slcAreaEditar').val(EstadoUsuariotObject.idarea);
+            $('#slcEstadoEditar').val(EstadoUsuariotObject.idtipousuario);
             $("#ModalActualizarUsuario").modal("show"); 
         }
     });

@@ -2,7 +2,7 @@
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$query_SelectEstadoTiempo = mysqli_query($conn, "SELECT IdEstadoTiempo, Estado FROM estadotiempo");
+$query_SelectEstadoTiempo = mysqli_query($conn, "SELECT IdEstadoTiempo, EstadoTiempo FROM estadotiempo");
 
 $varsesion = $_SESSION['IdUsuario'];
 
@@ -12,7 +12,7 @@ $varsesion = $_SESSION['IdUsuario'];
     }
 
 	$topo = $_SESSION['IdUsuario'];
-	$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+	$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 	$resultado = mysqli_query($conn,$query);	
 ?>
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ $varsesion = $_SESSION['IdUsuario'];
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -239,7 +239,7 @@ $varsesion = $_SESSION['IdUsuario'];
 									<tbody>
 										<?php foreach($query_SelectEstadoTiempo as $fila){?>
 										<tr>
-											<td><?php echo utf8_encode($fila['Estado']) ?></td>
+											<td><?php echo utf8_encode($fila['EstadoTiempo']) ?></td>
 											<td><a onclick="EditarEstadoTiempo('<?php echo $fila['IdEstadoTiempo'] ?>')" data-toggle="modal" data-target="#ModalActualizarEstadoTiempo"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a>
 											<td><button type="button" onclick="EliminarEstadoTiempo(<?php echo $fila['IdEstadoTiempo'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 										</tr>
@@ -266,7 +266,6 @@ $varsesion = $_SESSION['IdUsuario'];
 			<div class="modal-body">
 				<div class="form-group label-floating">
 					<input type=hidden class="form-control" id="txtidEstadoTiempo">
-					<label class="control-label">Estado de Tiempo</label>
 					<input class="form-control" id="txtEstadoTiempoEditar" autocomplete="off">
 				</div>
 			</div>

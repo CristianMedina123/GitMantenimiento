@@ -2,14 +2,14 @@
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 //Query Usuarios
-$queryUsuario = mysqli_query($conn,"SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM usuario
+$queryUsuario = mysqli_query($conn,"SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMat FROM usuario
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 WHERE usuario.CentroNegocio_idCentroNegocio = 1");
 //Query para extraer el estado del ticket
 $queryEstado = mysqli_query($conn, "SELECT IdEstadoTicket, EstadoTicket FROM EstadoTicket");
 
-$queryTabla = mysqli_query($conn, "SELECT a.Nombre, a.ApellidoPat,a.ApellidoMat, b.Nombre as asignado, b.ApellidoPat as asignadoape, b.ApellidoMat as asignadoape2, ticket.IdTicket,ticket.TicketNom, estadoticket.estadoticket, ticket.Descripcion, ticket.Fecha, ticket.ObservacionPendiente, ticket.ObservacionProceso, ticket.ObservacionCompletado FROM ticket
+$queryTabla = mysqli_query($conn, "SELECT a.Nombre, a.ApellidoPa,a.ApellidoMa, b.Nombre as asignado, b.ApellidoPat as asignadoape, b.ApellidoMat as asignadoape2, ticket.IdTicket,ticket.TicketNom, estadoticket.estadoticket, ticket.Descripcion, ticket.Fecha, ticket.ObservacionPendiente, ticket.ObservacionProceso, ticket.ObservacionCompletado FROM ticket
 INNER JOIN usuario as a
 ON ticket.Usuario_IdUsuario = a.IdUsuario
 INNER JOIN usuario as b
@@ -21,12 +21,12 @@ $queryTablaAsignado = mysqli_query($conn,"SELECT ticket.IdTicket,ticket.UsuarioA
 INNER JOIN usuario
 ON ticket.UsuarioAsignado = usuario.IdUsuario");
 
-$queryCentroTepic = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM usuario
+$queryCentroTepic = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMat FROM usuario
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 WHERE IdCentroNegocio = 1");
 
-$queryCN = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado FROM centronegocio");
+$queryCN = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, EstadoCN FROM centronegocio");
 
 $varsesion = $_SESSION['IdUsuario'];
 
@@ -36,7 +36,7 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 $resultado = mysqli_query($conn,$query);
 
 ?>
@@ -77,7 +77,7 @@ $resultado = mysqli_query($conn,$query);
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->

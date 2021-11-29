@@ -13,9 +13,9 @@ $area = mysqli_real_escape_string($conn, utf8_decode($_POST['area']));
 $tipo = mysqli_real_escape_string($conn, utf8_decode($_POST['tipo']));
 
 
-$query = "INSERT INTO usuario (`Usuario`, `Password`, `Nombre`, `ApellidoPat`, `ApellidoMat`, `CentroNegocio_idCentroNegocio`, `Area_IdArea`, `TipoUsuario_IdTipoUsuario`) 
+$query = "INSERT INTO usuario (`Usuario`, `Psw`, `Nombre`, `ApellidoPa`, `ApellidoMa`,`Area_IdArea`, `TipoUsuario_IdTipoUsuario`, `CentroNegocio_IdCentroNegocio`) 
 VALUES 
-('$usuario', '$psw', '$nombre', '$ape_pat', '$ape_mat', '$centro', '$area', '$tipo')";
+('$usuario', '$psw', '$nombre', '$ape_pat', '$ape_mat', '$area', '$tipo', '$centro')";
 echo mysqli_query($conn,$query);
 mysqli_close($conn);
 

@@ -2,10 +2,10 @@
 session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$query_centros = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado as lugar FROM centronegocio");
-$query_usuario = mysqli_query($conn, "SELECT IdUsuario,Nombre, ApellidoPat, ApellidoMat FROM Usuario ORDER BY usuario ASC");
-$query_equipo = mysqli_query($conn, "SELECT equipo.Equipo,equipo.Marca, equipo.Codigo, equipo.IdEquipo FROM equipo ORDER BY equipo ASC");
-$queryTabla = mysqli_query($conn, "SELECT mantenimiento.IdMantenimiento, mantenimiento.mantenimiento, mantenimiento.FechaMantenimiento,  mantenimiento.Descripcion, equipo.Codigo, equipo.Equipo, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat,centronegocio.IdCentroNegocio, centronegocio.CentroNegocio,centronegocio.Estado  FROM mantenimiento
+$query_centros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio");
+$query_usuario = mysqli_query($conn, "SELECT idusuario ,nombre, apellidopa, apellidoma FROM Usuario ORDER BY usuario ASC");
+$query_equipo = mysqli_query($conn, "SELECT equipo.equipo,equipo.marca, equipo.codigo, equipo.idequipo FROM equipo ORDER BY equipo ASC");
+$queryTabla = mysqli_query($conn, "SELECT mantenimiento.idmantenimiento, mantenimiento.mantenimiento, mantenimiento.fechamantenimiento,  mantenimiento.descripcion, equipo.codigo, equipo.equipo, usuario.nombre, usuario.apellidopa, usuario.apellidoma,centronegocio.idcentronegocio, centronegocio.centronegocio,centronegocio.estadocn  FROM mantenimiento
 INNER JOIN equipo
 ON mantenimiento.Equipo_idEquipo = equipo.IdEquipo
 INNER JOIN usuario
@@ -23,7 +23,7 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 $resultado = mysqli_query($conn,$query);	
 ?>
 <!DOCTYPE html>
@@ -64,7 +64,7 @@ $resultado = mysqli_query($conn,$query);
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -231,7 +231,7 @@ $resultado = mysqli_query($conn,$query);
 												  <select class="form-control" id="slcCentro">
 													<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
 													<?php foreach($query_centros as $centro){ ?>
-													<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?></option>
+													<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
 													<?php } ?>
 												  </select>
 											  </div>
@@ -240,7 +240,7 @@ $resultado = mysqli_query($conn,$query);
 												  <select class="form-control" id="slcEquipo">
 													<option value="0" disabled="disabled" selected="true" >-- Seleccione un Equipo --</option>
 													<?php foreach($query_equipo as $equipo){ ?>
-														<option value="<?php echo $equipo['IdEquipo'] ?>"><?php echo utf8_encode($equipo['Equipo']) ?> <?php echo utf8_encode($equipo['Marca']) ?> <?php echo utf8_encode($equipo['Codigo']) ?></option>
+														<option value="<?php echo $equipo['idequipo'] ?>"><?php echo utf8_encode($equipo['equipo']) ?> / <?php echo utf8_encode($equipo['marca']) ?> / <?php echo utf8_encode($equipo['codigo']) ?></option>
 													<?php } ?>
 												  </select>
 											  </div>
@@ -272,7 +272,7 @@ $resultado = mysqli_query($conn,$query);
 											<select class="form-control" id="slcusuario">
 												<option value="0" disabled="disabled" selected="true">-- Seleccione el Usuario que Hizo Mantenimiento --</option>
 												<?php foreach($query_usuario as $usuario){ ?>
-												<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
+												<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
 												<?php } ?>
 											</select>
 										</div>
@@ -302,15 +302,15 @@ $resultado = mysqli_query($conn,$query);
 									<tbody>
 										<?php foreach($queryTabla as $tabla){ ?>
 										<tr>
-											<td><?php echo utf8_encode($tabla['Equipo']) ?></td>
-											<td><?php echo utf8_encode($tabla['Codigo']) ?></td>
+											<td><?php echo utf8_encode($tabla['equipo']) ?></td>
+											<td><?php echo utf8_encode($tabla['codigo']) ?></td>
 											<td><?php echo utf8_encode($tabla['mantenimiento']) ?></td>
-											<td><?php echo utf8_encode($tabla['Descripcion']) ?></td>
-											<td><?php echo utf8_encode($tabla['FechaMantenimiento']) ?></td>
-											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?> / <?php echo $tabla['Estado'] ?></td>
-											<td><?php echo utf8_encode($tabla['Nombre']) ?> <?php echo utf8_encode($tabla['ApellidoPat']) ?> <?php echo utf8_encode($tabla['ApellidoMat']) ?></td>
-											<td><a onclick="EditarMantenimiento('<?php echo $tabla['IdMantenimiento'] ?>')" data-toggle="modal" data-target="#ModalActualizarMantenimiento"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-											<td><button type="button" onclick="EliminarMantenimiento(<?php echo $tabla['IdMantenimiento'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
+											<td><?php echo utf8_encode($tabla['descripcion']) ?></td>
+											<td><?php echo utf8_encode($tabla['fechamantenimiento']) ?></td>
+											<td><?php echo utf8_encode($tabla['centronegocio']) ?> / <?php echo $tabla['estadocn'] ?></td>
+											<td><?php echo utf8_encode($tabla['nombre']) ?> <?php echo utf8_encode($tabla['apellidopa']) ?> <?php echo utf8_encode($tabla['apellidoma']) ?></td>
+											<td><a onclick="EditarMantenimiento('<?php echo $tabla['idmantenimiento'] ?>')" data-toggle="modal" data-target="#ModalActualizarMantenimiento"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td><button type="button" onclick="EliminarMantenimiento(<?php echo $tabla['idmantenimiento'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 										</tr>
 										<?php } ?>
 									</tbody>
@@ -369,7 +369,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcCentroPDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
 					<?php foreach($query_centros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['lugar']) ?></option>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -378,7 +378,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcEquipoPDF">
 					<option value="0" disabled="disabled" selected="true" >-- Seleccione un Equipo --</option>
 					<?php foreach($query_equipo as $equipo){ ?>
-						<option value="<?php echo $equipo['IdEquipo'] ?>"><?php echo utf8_encode($equipo['Equipo']) ?> <?php echo utf8_encode($equipo['Marca']) ?> <?php echo utf8_encode($equipo['Codigo']) ?></option>
+						<option value="<?php echo $equipo['idequipo'] ?>"><?php echo utf8_encode($equipo['equipo']) ?> <?php echo utf8_encode($equipo['marca']) ?> <?php echo utf8_encode($equipo['codigo']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -410,7 +410,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcCNPDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
 					<?php foreach($query_centros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?></option>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -546,7 +546,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcCentroEditar">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 					<?php foreach($query_centros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?></option>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
 				<?php } ?>
 				</select>
 			</div>
@@ -555,7 +555,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcEquipoEditar">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione Nuevo Equipo --</option>
 					<?php foreach($query_equipo as $equipo){ ?>
-					<option value="<?php echo $equipo['IdEquipo'] ?>"><?php echo utf8_encode($equipo['Equipo']) ?> <?php echo utf8_encode($equipo['Marca']) ?> <?php echo utf8_encode($equipo['Codigo']) ?></option>
+					<option value="<?php echo $equipo['idequipo'] ?>"><?php echo utf8_encode($equipo['equipo']) ?> <?php echo utf8_encode($equipo['marca']) ?> <?php echo utf8_encode($equipo['codigo']) ?></option>
 				<?php } ?>
 				</select>
 			</div>
@@ -564,7 +564,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcUsuarioEditar">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario--</option>
 					<?php foreach($query_usuario as $usuario){ ?>
-					<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
+					<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
 				<?php } ?>
 				</select>
 			</div>

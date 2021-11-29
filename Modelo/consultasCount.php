@@ -1,7 +1,7 @@
 <?php
 
 include 'conexion.php';
-
+mysqli_set_charset( $conn, "utf8" );
 
 //CONSULTA CONTABLE PARA LOS EQUIPOS REGISTRADOS
 $query_countEquipos = "SELECT COUNT(*) as NumEquipos FROM equipo";

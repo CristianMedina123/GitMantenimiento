@@ -1,7 +1,7 @@
 <?php 
 
 include 'conexion.php';
-
+mysqli_set_charset( $conn, "utf8" );
 $centro = $_POST['id_centroEditar'];
 
 $querySelectCascada = mysqli_query($conn, 

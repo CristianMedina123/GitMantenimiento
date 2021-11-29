@@ -1,7 +1,7 @@
 <?php
 
 include 'conexion.php';
-
+mysqli_set_charset( $conn, "utf8" );
 $codigo = mysqli_real_escape_string($conn, utf8_decode($_POST['codigo']));
 $equipo = mysqli_real_escape_string($conn, utf8_decode($_POST['equipo']));
 $marca = mysqli_real_escape_string($conn, utf8_decode($_POST['marca']));

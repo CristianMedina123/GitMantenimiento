@@ -1,7 +1,7 @@
 <?php 
 
 include 'conexion.php';
-
+mysqli_set_charset( $conn, "utf8" );
 
 $titulo = mysqli_real_escape_string($conn, utf8_decode($_POST['tituloTicket']));
 $desc = mysqli_real_escape_string($conn, utf8_decode($_POST['descripcion']));

@@ -57,8 +57,8 @@ function EditarEstadoTiempo(id) {
         success: function (res){
             //EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-            $('#txtidEstadoTiempo').val(res.IdEstadoTiempo);
-            $('#txtEstadoTiempoEditar').val(res.Estado);
+            $('#txtidEstadoTiempo').val(res.idestadotiempo);
+            $('#txtEstadoTiempoEditar').val(res.estadotiempo);
             $("#ModalActualizarEstadoTiempo").modal("show"); 
         }
     });

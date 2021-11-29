@@ -102,15 +102,15 @@ function EliminarEquipo(id) {
         success: function (res){//En caso de que el query sea satisfactorio se extraen los datos en JSON.
             //EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-            $('#txtIdEquipoEditar').val(res.IdEquipo);
-            $('#txtCodigoEditar').val(res.Codigo);//Se extraen los datos en el JSON y se muestra en los inputs
-            $('#txtEquipoEditar').val(res.Equipo);
-            $('#txtMarcaEditar').val(res.Marca);
-            $('#txtModeloEditar').val(res.Modelo);
-            $('#txtDescripcionEditar').val(res.Descripcion);
-            $('#slcCentrosEditar').val(res.IdCentroNegocio);
-            $('#slcAreaEditar').val(res.IdArea);
-            $('#slcEstadoEditar').val(res.IdTipoEstado);
+            $('#txtIdEquipoEditar').val(res.idequipo);
+            $('#txtCodigoEditar').val(res.codigo);//Se extraen los datos en el JSON y se muestra en los inputs
+            $('#txtEquipoEditar').val(res.equipo);
+            $('#txtMarcaEditar').val(res.marca);
+            $('#txtModeloEditar').val(res.modelo);
+            $('#txtDescripcionEditar').val(res.descripcion);
+            $('#slcCentrosEditar').val(res.idcentronegocio);
+            $('#slcAreaEditar').val(res.idarea);
+            $('#slcEstadoEditar').val(res.idtipoestado);
             $("#ModalActualizarEquipo").modal("show");
         }
     });

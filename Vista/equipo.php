@@ -2,7 +2,7 @@
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$queryCentro = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado FROM CentroNegocio");
+$queryCentro = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM CentroNegocio");
 $queryArea = mysqli_query($conn, "SELECT IdArea, AreaNombre FROM Area");
 $queryEstado = mysqli_query($conn, "SELECT IdTipoEstado, TipoEstado FROM TipoEstado");
 
@@ -23,7 +23,7 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 $resultado = mysqli_query($conn,$query);
 
 ?>
@@ -64,7 +64,7 @@ $resultado = mysqli_query($conn,$query);
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -270,7 +270,7 @@ $resultado = mysqli_query($conn,$query);
 											<select class="form-control" id="slccentro">
 												<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 												<?php foreach($queryCentro as $centro){ ?>
-												<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode( $centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado']) ?></option>
+												<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode( $centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
 												<?php } ?>
 											</select>
 										</div>
@@ -372,7 +372,7 @@ $resultado = mysqli_query($conn,$query);
 						<select class="form-control" id="slcCentrosEditar">
 							<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 							<?php foreach($queryCentro as $centro){ ?>
-							<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?></option>
+							<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
 						<?php } ?>
 						</select>
 					</div>

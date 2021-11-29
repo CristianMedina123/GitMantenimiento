@@ -1,13 +1,13 @@
 <?php 
 include 'conexion.php';
-
+mysqli_set_charset( $conn, "utf8" );
 $id = mysqli_real_escape_string($conn, utf8_decode($_POST['id']));
 
 
-$query = mysqli_query($conn, "SELECT equipo.IdEquipo, equipo.Codigo, equipo.Equipo, equipo.Marca, 
-equipo.Modelo, equipo.Descripcion, equipo.CentroNegocio_IdCentroNegocio, equipo.Area_IdArea, 
-equipo.TipoEstado_IdTipoEstado, centronegocio.IdCentroNegocio ,centronegocio.CentroNegocio, 
-centronegocio.Estado, area.IdArea, area.AreaNombre, tipoestado.IdTipoEstado, tipoestado.TipoEstado  
+$query = mysqli_query($conn, "SELECT equipo.idequipo, equipo.codigo, equipo.equipo, equipo.marca, 
+equipo.modelo, equipo.descripcion, equipo.centronegocio_idcentronegocio, equipo.area_idarea, 
+equipo.tipoestado_idtipoestado, centronegocio.idcentronegocio ,centronegocio.centronegocio, 
+centronegocio.estadocn, area.idarea, area.areanombre, tipoestado.idtipoestado, tipoestado.tipoestado  
 FROM equipo
 INNER JOIN centronegocio
 ON equipo.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio

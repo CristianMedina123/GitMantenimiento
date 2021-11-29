@@ -11,14 +11,14 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 $resultado = mysqli_query($conn,$query);
 
-$queryCentro = mysqli_query($conn,"SELECT IdCentroNegocio, CentroNegocio, Estado FROM centronegocio");
+$queryCentro = mysqli_query($conn,"SELECT IdCentroNegocio, CentroNegocio, EstadoCN FROM centronegocio");
 $queryArea = mysqli_query($conn, "SELECT IdArea, AreaNombre FROM area");
 $queryTipo = mysqli_query($conn, "SELECT IdTipoUsuario, TipoUsuario FROM tipousuario");
 
-$queryTabla = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat, usuario.Usuario, usuario.Password, centronegocio.CentroNegocio, centronegocio.Estado, area.AreaNombre, tipousuario.TipoUsuario FROM usuario
+$queryTabla = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa, usuario.Usuario, usuario.Psw, centronegocio.CentroNegocio, centronegocio.EstadoCN, area.AreaNombre, tipousuario.TipoUsuario FROM usuario
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN area
@@ -65,7 +65,7 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -254,7 +254,7 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 											<select class="form-control" id="slccentro">
 												<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 												<?php foreach($queryCentro as $centro){ ?>
-												<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio'])?> / <?php echo utf8_encode($centro['Estado']) ?></option>
+												<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio'])?> / <?php echo utf8_encode($centro['EstadoCN']) ?></option>
 												<?php } ?>
 											</select>
 										</div>
@@ -303,10 +303,10 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 										<?php  foreach($queryTabla as $tabla){ ?>
 										<tr>
 											<td><?php echo utf8_encode($tabla['Nombre']) ?></td>
-											<td><?php echo utf8_encode($tabla['ApellidoPat']) ?> <?php echo utf8_encode( $tabla['ApellidoMat']) ?></td>
+											<td><?php echo utf8_encode($tabla['ApellidoPa']) ?> <?php echo utf8_encode( $tabla['ApellidoMa']) ?></td>
 											<td><?php echo utf8_encode($tabla['Usuario']) ?></td>
-											<td><?php echo utf8_encode($tabla['Password']) ?></td>
-											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?> / <?php echo $tabla['Estado'] ?></td>
+											<td><?php echo utf8_encode($tabla['Psw']) ?></td>
+											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?> / <?php echo $tabla['EstadoCN'] ?></td>
 											<td><?php echo utf8_encode($tabla['AreaNombre']) ?></td>
 											<td><?php echo utf8_encode($tabla['TipoUsuario']) ?></td>
 											<td><a onclick="EditarUsuario('<?php echo $tabla['IdUsuario'] ?>')" data-toggle="modal" data-target="#ModalActualizarUsuario"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
@@ -333,22 +333,6 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 		</div>
 	<?php } ?>
 <?php } ?>
-
-	<!--====== Scripts -->
-	<script src="./js/jquery-3.1.1.min.js"></script>
-	<script src="./js/sweetalert2.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
-	<script src="./js/material.min.js"></script>
-	<script src="./js/ripples.min.js"></script>
-	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script src="../Controlador/ControladorUsuario.js"></script>
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-	<script src="./js/main.js"></script>
-	<script>
-		$.material.init();
-	</script>
-</body>
-</html>
 
 
 <!-- Modal -->
@@ -386,9 +370,9 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 				<h4><b>Apellido Materno</b></h4>
 				<input type="text" class="form-control" id="txtApellidoMatEditar" autocomplete="off">
 			</div>
-			<h4><b>Seleccione su Nuevo Centro de Negocios</b></h4>
+
 			<div class="form-group">
-				<label class="control-label">Seleccione el Nuevo Centro de Negocios</label>
+				<h4>CN</h4>
 				<select class="form-control" id="slcCentrosEditar">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 					<?php foreach($queryCentro as $centro){ ?>
@@ -396,9 +380,9 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 				<?php } ?>
 				</select>
 			</div>
-			<h4><b>Seleccione la Nueva Area</b></h4>
+
 			<div class="form-group">
-				<label class="control-label">Seleccione Nueva Area</label>
+			<h4>Area</h4>
 				<select class="form-control" id="slcAreaEditar">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione una Area --</option>
 					<?php foreach($queryArea as $area){ ?>
@@ -406,9 +390,9 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 				<?php } ?>
 				</select>
 			</div>
-			<h4><b>Selecione el Tipo de Usuario</b></h4>
+
 			<div class="form-group">
-				<label class="control-label">Seleccione el tipo</label>
+			<h4>Tipo Usuario</h4>
 				<select class="form-control" id="slcEstadoEditar">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un tipo de usuario --</option>
 					<?php foreach($queryTipo as $tipo){ ?>
@@ -425,3 +409,18 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
     </div>
   </div>
 </div>
+	<!--====== Scripts -->
+	<script src="./js/jquery-3.1.1.min.js"></script>
+	<script src="./js/sweetalert2.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/material.min.js"></script>
+	<script src="./js/ripples.min.js"></script>
+	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="../Controlador/ControladorUsuario.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+	<script src="./js/main.js"></script>
+	<script>
+		$.material.init();
+	</script>
+</body>
+</html>

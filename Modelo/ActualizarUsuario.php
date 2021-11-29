@@ -14,10 +14,10 @@ $tipo = mysqli_real_escape_string($conn, utf8_decode($_POST['tipo']));
 
 $query = "UPDATE usuario SET 
 Usuario = '$usuario', 
-Password = '$psw',
+Psw = '$psw',
 Nombre = '$nombre',
-ApellidoPat = '$apepat',
-ApellidoMat = '$apemat',
+ApellidoPa = '$apepat',
+ApellidoMa = '$apemat',
 CentroNegocio_idCentroNegocio = $centro,
 Area_IdArea = $area,
 TipoUsuario_IdTipoUsuario = $tipo

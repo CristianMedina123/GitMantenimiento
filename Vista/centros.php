@@ -2,7 +2,7 @@
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$querySelectCentrosNegocio = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado FROM CentroNegocio");
+$querySelectCentrosNegocio = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, EstadoCN FROM CentroNegocio");
 
 $varsesion = $_SESSION['IdUsuario'];
 
@@ -12,7 +12,7 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPat ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 $resultado = mysqli_query($conn,$query);
 ?>
 
@@ -53,7 +53,7 @@ $resultado = mysqli_query($conn,$query);
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPat'])?></h4>
+				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -81,7 +81,7 @@ $resultado = mysqli_query($conn,$query);
 					</a>
 				</li>
 				<?php } ?>
-				<?php  if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+				<?php if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Mantenimiento <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -247,7 +247,7 @@ $resultado = mysqli_query($conn,$query);
 										<?php foreach($querySelectCentrosNegocio as $fila){?>
 										<tr>
 											<td><?php echo utf8_encode($fila['CentroNegocio']) ?></td>
-											<td><?php echo utf8_encode($fila['Estado']) ?></td>
+											<td><?php echo utf8_encode($fila['EstadoCN']) ?></td>
 											<td><a onclick="EditarCentroNegocio('<?php echo $fila['IdCentroNegocio'] ?>')" data-toggle="modal" data-target="#ModalActualizarCentroNegocio"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 											<td><button type="button" onclick="EliminarCentroNegocio(<?php echo $fila['IdCentroNegocio'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></a></td>
 										</tr>
@@ -312,7 +312,7 @@ $resultado = mysqli_query($conn,$query);
 	<script src="./js/main.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 	<script src="../Controlador/ControladorCentroNegocios.js"></script>
-	<script src="../Controlador/Prueba.js"></script>
+	<!-- <script src="../Controlador/Prueba.js"></script> -->
 	<script>
 		$.material.init();
 	</script>

@@ -7,7 +7,7 @@ function InsertarTipoUsuario() {
   }else{//EN CASO DE QUE EL CAMPO NO ESTÉ VACIO, INSERTE EL DATO POR CADENA AJAX
 
     var datos = 'tipo='+ tipo; //CADENA QUE SE PASA A AJAX
-
+    console.log(tipo);
     $.ajax({
       type: "POST",
         url: "../Modelo/InsertarTipoUsuario.php",

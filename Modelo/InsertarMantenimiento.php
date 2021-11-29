@@ -1,7 +1,7 @@
 <?php
 
 include 'conexion.php';
-
+mysqli_set_charset( $conn, "utf8" );
 $mantenimiento = mysqli_real_escape_string($conn, utf8_decode($_POST['mant']));
 $fecha = mysqli_real_escape_string($conn, utf8_decode($_POST['fecha']));
 $desc = mysqli_real_escape_string($conn, utf8_decode($_POST['desc']));

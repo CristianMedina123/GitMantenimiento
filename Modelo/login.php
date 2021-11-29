@@ -11,7 +11,7 @@ if ($usuario == null || $usuario == undefined || $usuario == 'null' || $usuario 
 }
 else {
    //Hacer una consulta de comparacion para saber si es Administrador registrado
-   $query = "SELECT IdUsuario, TipoUsuario_IdTipoUsuario FROM usuario WHERE Usuario = '$usuario' AND Password = '$psw'";
+   $query = "SELECT IdUsuario, TipoUsuario_IdTipoUsuario FROM usuario WHERE Usuario = '$usuario' AND Psw = '$psw'";
    $sql = mysqli_query($conn,$query); //Ejecutar consulta
    $array = mysqli_fetch_array($sql); //guardar los datos de la consulta en un array
 

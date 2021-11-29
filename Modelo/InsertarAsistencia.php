@@ -11,7 +11,7 @@ $centro = mysqli_real_escape_string($conn, utf8_decode($_POST['centro']));
 
 
 
-$query = "INSERT INTO controltiempo (Fecha, EstadoTiempo_IdEstadoTiempo, Usuario_IdUsuario, CentroNegocio_IdCentroNegocio) VALUES ('$fecha', '$estado', '$id', '$centro')";
+$query = "INSERT INTO controltiempo (fechatiempo, EstadoTiempo_IdEstadoTiempo, Usuario_IdUsuario, CentroNegocio_IdCentroNegocio) VALUES ('$fecha', '$estado', '$id', '$centro')";
 echo mysqli_query($conn,$query);
 mysqli_close($conn);
 
