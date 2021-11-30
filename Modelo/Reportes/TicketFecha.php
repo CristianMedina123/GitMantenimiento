@@ -40,12 +40,12 @@ require '../conexion.php';
 $fecha =  $_GET['fecha'];
 $fecha2 =  $_GET['fecha2'];
 
-$query = mysqli_query($conn, "SELECT ticket.TicketNom,ticket.Fecha,estadoticket, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM ticket
+$query = mysqli_query($conn, "SELECT ticket.Ticket,ticket.FechaTicket,estadoticket, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM ticket
 INNER JOIN usuario
 ON ticket.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN estadoticket
 ON ticket.EstadoTicket_IdEstadoTicket = estadoticket.IdEstadoTicket
-WHERE Fecha BETWEEN '$fecha%' AND '$fecha2%'");
+WHERE FechaTicket BETWEEN '$fecha%' AND '$fecha2%'");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -54,12 +54,12 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',10);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(55,8, $row['TicketNom'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['Fecha'], 1, 0, 'C', 0);
+    $pdf->Cell(55,8, $row['Ticket'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['FechaTicket'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['estadoticket'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['Nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoPat'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoMat'], 1, 1, 'C', 0);
+    $pdf->Cell(30,8, $row['ApellidoPa'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['ApellidoMa'], 1, 1, 'C', 0);
 }
 
 

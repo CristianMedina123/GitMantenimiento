@@ -2,31 +2,31 @@
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 //Query Usuarios
-$queryUsuario = mysqli_query($conn,"SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMat FROM usuario
+$queryUsuario = mysqli_query($conn,"SELECT usuario.idusuario, usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM usuario
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 WHERE usuario.CentroNegocio_idCentroNegocio = 1");
 //Query para extraer el estado del ticket
-$queryEstado = mysqli_query($conn, "SELECT IdEstadoTicket, EstadoTicket FROM EstadoTicket");
+$queryEstado = mysqli_query($conn, "SELECT idestadoticket, estadoticket FROM estadoticket");
 
-$queryTabla = mysqli_query($conn, "SELECT a.Nombre, a.ApellidoPa,a.ApellidoMa, b.Nombre as asignado, b.ApellidoPat as asignadoape, b.ApellidoMat as asignadoape2, ticket.IdTicket,ticket.TicketNom, estadoticket.estadoticket, ticket.Descripcion, ticket.Fecha, ticket.ObservacionPendiente, ticket.ObservacionProceso, ticket.ObservacionCompletado FROM ticket
+$queryTabla = mysqli_query($conn, "SELECT a.nombre, a.apellidopa,a.apellidoma, b.nombre as asignado, b.apellidopa as asignadoape, b.apellidoma as asignadoape2, ticket.idticket,ticket.ticket, estadoticket.estadoticket, ticket.descripcion, ticket.fechaticket, ticket.observacionpendiente, ticket.observacionproceso, ticket.observacioncompleto FROM ticket
 INNER JOIN usuario as a
 ON ticket.Usuario_IdUsuario = a.IdUsuario
 INNER JOIN usuario as b
 ON ticket.UsuarioAsignado = b.IdUsuario
 INNER JOIN estadoticket
-ON ticket.EstadoTicket_IdEstadoTicket = estadoticket.IdEstadoTicket ORDER BY ticket.Fecha DESC");
+ON ticket.EstadoTicket_IdEstadoTicket = estadoticket.IdEstadoTicket ORDER BY ticket.fechaticket DESC");
 
-$queryTablaAsignado = mysqli_query($conn,"SELECT ticket.IdTicket,ticket.UsuarioAsignado, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM ticket
+$queryTablaAsignado = mysqli_query($conn,"SELECT ticket.idticket,ticket.usuarioasignado, usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM ticket
 INNER JOIN usuario
 ON ticket.UsuarioAsignado = usuario.IdUsuario");
 
-$queryCentroTepic = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMat FROM usuario
+$queryCentroTepic = mysqli_query($conn, "SELECT usuario.idusuario, usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM usuario
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 WHERE IdCentroNegocio = 1");
 
-$queryCN = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, EstadoCN FROM centronegocio");
+$queryCN = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio");
 
 $varsesion = $_SESSION['IdUsuario'];
 
@@ -248,7 +248,7 @@ $resultado = mysqli_query($conn,$query);
 										    <select class="form-control" id="slcestado">
 										        <option value="0" disabled="disabled" selected="true">-- Estado del Ticket --</option>
 										        <?php foreach($queryEstado as $estado){?>
-												<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo utf8_encode($estado['EstadoTicket']) ?></option>
+												<option value="<?php echo $estado['idestadoticket'] ?>"><?php echo utf8_encode($estado['estadoticket']) ?></option>
 												<?php } ?>
 										    </select>
 										</div>
@@ -263,7 +263,7 @@ $resultado = mysqli_query($conn,$query);
 										    <select class="form-control" id="slccnticket">
 										        <option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
 												<?php foreach($queryCN as $cn){ ?>
-										        <option value="<?php echo $cn['IdCentroNegocio']  ?>"><?php echo utf8_encode($cn['CentroNegocio']) ?> / <?php echo utf8_encode($cn['Estado']) ?></option>
+										        <option value="<?php echo $cn['idcentronegocio']  ?>"><?php echo utf8_encode($cn['centronegocio']) ?> / <?php echo utf8_encode($cn['estadocn']) ?></option>
 												<?php } ?>
 										    </select>
 										</div>
@@ -274,7 +274,7 @@ $resultado = mysqli_query($conn,$query);
 										    <select class="form-control" id="slcticketusuario">
 										        <option value="0" disabled="disabled" selected="true">-- Seleccione al Usuario responsable --</option>
 												<?php foreach($queryUsuario as $usuario){ ?>
-										        <option value="<?php echo $usuario['IdUsuario']  ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
+										        <option value="<?php echo $usuario['idusuario']  ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
 												<?php } ?>
 										    </select>
 										</div>
@@ -288,7 +288,7 @@ $resultado = mysqli_query($conn,$query);
 										    <select class="form-control" id="slccnticketcreador">
 										        <option value="0" disabled="disabled" selected="true">-- Seleccione un CN Creador --</option>
 												<?php foreach($queryCN as $cn){ ?>
-										        <option value="<?php echo $cn['IdCentroNegocio']  ?>"><?php echo utf8_encode($cn['CentroNegocio']) ?> / <?php echo utf8_encode($cn['Estado']) ?></option>
+										        <option value="<?php echo $cn['idcentronegocio']  ?>"><?php echo utf8_encode($cn['centronegocio']) ?> / <?php echo utf8_encode($cn['estadocn']) ?></option>
 												<?php } ?>
 										    </select>
 										</div>
@@ -298,7 +298,7 @@ $resultado = mysqli_query($conn,$query);
 										    <select class="form-control" id="slccreador">
 										        <option value="0" disabled="disabled" selected="true">-- Seleccione al Usuario Creador Ticket --</option>
 												<?php foreach($queryUsuario as $usuario){ ?>
-										        <option value="<?php echo $usuario['IdUsuario']  ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
+										        <option value="<?php echo $usuario['idusuario']  ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
 												<?php } ?>
 										    </select>
 										</div>
@@ -326,16 +326,16 @@ $resultado = mysqli_query($conn,$query);
 									<tbody>
 										<?php foreach($queryTabla as $tabla){ ?>
 										<tr>
-											<td><?php echo utf8_encode( $tabla['Nombre'] ) ?> <?php echo utf8_encode( $tabla['ApellidoPat']) ?> <?php echo utf8_encode( $tabla['ApellidoMat']) ?></td>
-											<td><?php echo utf8_encode( $tabla['TicketNom']) ?></td>
+											<td><?php echo utf8_encode( $tabla['nombre'] ) ?> <?php echo utf8_encode( $tabla['apellidopa']) ?> <?php echo utf8_encode( $tabla['apellidoma']) ?></td>
+											<td><?php echo utf8_encode( $tabla['ticket']) ?></td>
 											<td><?php echo utf8_encode( $tabla['estadoticket']) ?></td>
-											<td><?php echo utf8_encode( $tabla['Descripcion']) ?></td>
-											<td><?php echo utf8_encode( $tabla['Fecha']) ?></td>
+											<td><?php echo utf8_encode( $tabla['descripcion']) ?></td>
+											<td><?php echo utf8_encode( $tabla['fechaticket']) ?></td>
 											<td><?php echo utf8_encode( $tabla['asignado']) ?> <?php echo utf8_encode( $tabla['asignadoape']) ?> <?php echo utf8_encode( $tabla['asignadoape2']) ?></td>
-											<td><?php echo utf8_encode( $tabla['ObservacionPendiente']) ?></td>
-											<td><?php echo utf8_encode( $tabla['ObservacionProceso']) ?></td>
-											<td><?php echo utf8_encode( $tabla['ObservacionCompletado']) ?></td>
-										<td ><button type="button" onclick="EliminarTicket(<?php echo $tabla['IdTicket'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
+											<td><?php echo utf8_encode( $tabla['observacionpendiente']) ?></td>
+											<td><?php echo utf8_encode( $tabla['observacionproceso']) ?></td>
+											<td><?php echo utf8_encode( $tabla['observacioncomplet']) ?></td>
+										<td ><button type="button" onclick="EliminarTicket(<?php echo $tabla['idticket'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 										</tr>
 										<?php } ?>
 									</tbody>
@@ -455,7 +455,7 @@ $resultado = mysqli_query($conn,$query);
 			<select class="form-control" id="slcusuarioPDF">
 				<option value="0" disabled="disabled" selected="true">-- Seleccione al Usuario responsable --</option>
 				<?php foreach($queryCentroTepic as $usuario){ ?>
-				<option value="<?php echo $usuario['IdUsuario']  ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
+				<option value="<?php echo $usuario['idusuario']  ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
 				<?php } ?>
 			</select>
 		</div>

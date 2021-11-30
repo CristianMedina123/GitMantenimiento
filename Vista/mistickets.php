@@ -20,12 +20,12 @@ if($varsesion == null || $varsesion = ''){
 $topo = $_SESSION['IdUsuario'];
 $query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 $resultado = mysqli_query($conn,$query);
-$queryPendiente = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, ticket.Fecha, ticket.UsuarioAsignado, ticket.Descripcion, EstadoTicket 
+$queryPendiente = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket.FechaTicket, ticket.UsuarioAsignado, ticket.Descripcion, EstadoTicket 
 FROM ticket 
 INNER JOIN estadoticket
 ON ticket.EstadoTicket_IdEstadoTicket = estadoticket.IdEstadoTicket WHERE UsuarioAsignado = $topo AND EstadoTicket_IdEstadoTicket = 1");
-$queryProceso = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, ticket.Fecha, ticket.UsuarioAsignado, ticket.Descripcion, ticket.ObservacionPendiente FROM ticket WHERE UsuarioAsignado = $topo AND EstadoTicket_IdEstadoTicket = 2");
-$queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, ticket.Fecha, ticket.UsuarioAsignado, ticket.Descripcion, ticket.ObservacionPendiente, ticket.ObservacionProceso FROM ticket WHERE UsuarioAsignado = $topo AND EstadoTicket_IdEstadoTicket = 3");
+$queryProceso = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket.FechaTicket, ticket.UsuarioAsignado, ticket.Descripcion, ticket.ObservacionPendiente FROM ticket WHERE UsuarioAsignado = $topo AND EstadoTicket_IdEstadoTicket = 2");
+$queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket.FechaTicket, ticket.UsuarioAsignado, ticket.Descripcion, ticket.ObservacionPendiente, ticket.ObservacionProceso FROM ticket WHERE UsuarioAsignado = $topo AND EstadoTicket_IdEstadoTicket = 3");
 
 ?>
 <!DOCTYPE html>
@@ -238,8 +238,8 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, tic
 													<?php foreach($queryPendiente as $tabla){?>
 													<tr>
 														<td style="width: 10%"><?php echo utf8_encode($tabla['IdTicket']) ?></td>
-														<td style="width: 20%"><?php echo utf8_encode($tabla['TicketNom']) ?></td>
-														<td style="width: 10%"><?php echo utf8_encode($tabla['Fecha']) ?></td>
+														<td style="width: 20%"><?php echo utf8_encode($tabla['Ticket']) ?></td>
+														<td style="width: 10%"><?php echo utf8_encode($tabla['FechaTicket']) ?></td>
 														<td style="width: 40%"><?php echo utf8_encode($tabla['Descripcion']) ?></td>
 														<td style="width: 40%"><?php echo utf8_encode($tabla['EstadoTicket']) ?></td>
 														<td style="width: 10%"><a onclick="EditarMisTickets('<?php echo $tabla['IdTicket'] ?>')" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
@@ -271,8 +271,8 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, tic
 									<?php foreach($queryProceso as $tabla){?>
 									<tr>
 										<td style="width: 10%"><?php echo utf8_encode($tabla['IdTicket']) ?></td>
-										<td style="width: 20%"><?php echo utf8_encode($tabla['TicketNom']) ?></td>
-										<td style="width: 10%"><?php echo utf8_encode($tabla['Fecha']) ?></td>
+										<td style="width: 20%"><?php echo utf8_encode($tabla['Ticket']) ?></td>
+										<td style="width: 10%"><?php echo utf8_encode($tabla['FechaTicket']) ?></td>
 										<td style="width: 30%"><?php echo utf8_encode($tabla['Descripcion']) ?></td>
 										<td style="width: 30%"><?php echo utf8_encode($tabla['ObservacionPendiente']) ?></td>
 										<td style="width: 10%"><a onclick="EditarMisTicketsProceso('<?php echo $tabla['IdTicket'] ?>')" data-toggle="modal" data-target="#ModalActualizarProcesoTickets"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
@@ -302,8 +302,8 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, tic
 									<?php foreach($queryHecho as $tabla){?>
 									<tr>
 										<td style="width: 10%"><?php echo $tabla['IdTicket'] ?></td>
-										<td style="width: 20%"><?php echo utf8_encode($tabla['TicketNom']) ?></td>
-										<td style="width: 10%"><?php echo utf8_encode($tabla['Fecha']) ?></td>
+										<td style="width: 20%"><?php echo utf8_encode($tabla['Ticket']) ?></td>
+										<td style="width: 10%"><?php echo utf8_encode($tabla['FechaTicket']) ?></td>
 										<td style="width: 30%"><?php echo utf8_encode($tabla['Descripcion']) ?></td>
 										<td style="width: 30%"><?php echo utf8_encode($tabla['ObservacionPendiente']) ?></td>
 										<td style="width: 30%"><?php echo utf8_encode($tabla['ObservacionProceso']) ?></td>

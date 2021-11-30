@@ -374,7 +374,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcCentroUsuarioPDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
 					<?php foreach($queryCentros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado'])  ?></option>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn'])  ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -415,7 +415,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slccentroPDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 					<?php foreach($queryCentros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado']) ?></option>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -473,7 +473,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slccentroAsistenciaPDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 					<?php foreach($queryCentros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado']) ?></option>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
 					<?php } ?>
 				</select>
 			</div>

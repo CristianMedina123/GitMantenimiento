@@ -42,7 +42,7 @@ function Footer(){
 require '../conexion.php';
 
 
-$query = mysqli_query($conn, "SELECT equipo.Codigo, equipo.Codigo, equipo.Equipo, equipo.Marca, equipo.Modelo, equipo.Descripcion,mantenimiento.Descripcion,mantenimiento.FechaMantenimiento,centronegocio.CentroNegocio,centronegocio.Estado,tipoestado.tipoestado
+$query = mysqli_query($conn, "SELECT equipo.Codigo, equipo.Codigo, equipo.Equipo, equipo.Marca, equipo.Modelo, equipo.Descripcion,mantenimiento.Descripcion,mantenimiento.FechaMantenimiento,centronegocio.CentroNegocio,centronegocio.EstadoCN,tipoestado.tipoestado
 FROM equipo
 INNER JOIN tipoestado
 ON equipo.TipoEstado_IdTipoEstado = tipoestado.IdTipoEstado
@@ -64,7 +64,7 @@ while($row = $query->fetch_assoc()){
     $pdf->Cell(25,8, $row['Marca'], 1, 0, 'C', 0);
     $pdf->Cell(20,8, $row['Modelo'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['CentroNegocio'], 1, 0, 'C', 0);
-    $pdf->Cell(20,8, $row['Estado'], 1, 0, 'C', 0);
+    $pdf->Cell(20,8, $row['EstadoCN'], 1, 0, 'C', 0);
     $pdf->Cell(20,8, $row['FechaMantenimiento'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['tipoestado'], 1, 1, 'C', 0);
 }

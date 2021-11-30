@@ -8,7 +8,7 @@ function EditarMisTickets(id) {
         success: function (res){
             EstadoTicketObject = JSON.parse(res);
             $('#txtIdTicketEditar').val(EstadoTicketObject.IdTicket);
-            $('#txtTicketNom1Editar').val(EstadoTicketObject.TicketNom);
+            $('#txtTicketNom1Editar').val(EstadoTicketObject.Ticket);
             $('#slcEstadoEditar').val(EstadoTicketObject.EstadoTicket_IdEstadoTicket);
             $("#ModalActualizarMisTickets").modal("show"); 
         }                    
@@ -57,7 +57,7 @@ function EditarMisTicketsProceso(id) {
             EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
             $('#txtIdTicketEditarProceso').val(EstadoTicketObject.IdTicket);
-            $('#txtTicketEditarProceso').val(EstadoTicketObject.TicketNom);
+            $('#txtTicketEditarProceso').val(EstadoTicketObject.Ticket);
             $('#txtObsPendienteEditarProceso').val(EstadoTicketObject.ObservacionPendiente);
             $('#txtObsPendienteProcesoEditarProceso').val(EstadoTicketObject.ObservacionProceso);
             $('#slcEstadoEditarProceso').val(EstadoTicketObject.EstadoTicket_IdEstadoTicket);
@@ -109,7 +109,7 @@ function EditarMisTicketsHecho(id) {
             EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
             $('#txtIdTicketEditarProcesoHecho').val(EstadoTicketObject.IdTicket);
-            $('#txtTicketEditarProcesoHecho').val(EstadoTicketObject.TicketNom);
+            $('#txtTicketEditarProcesoHecho').val(EstadoTicketObject.Ticket);
             $('#txtObsPendienteEditarProcesoHecho').val(EstadoTicketObject.ObservacionPendiente);
             $('#txtObsPendienteProcesoEditarProcesoHecho').val(EstadoTicketObject.ObservacionProceso);
             $('#txtObsPendienteHechosEditarProceso').val(EstadoTicketObject.ObservacionCompletado);

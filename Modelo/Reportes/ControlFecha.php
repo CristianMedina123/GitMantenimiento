@@ -41,12 +41,12 @@ require '../conexion.php';
 $fecha = $_GET['fecha'];
 $fecha2 = $_GET['fecha2'];
 
-$query = mysqli_query($conn, "SELECT controltiempo.Fecha, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM controltiempo 
+$query = mysqli_query($conn, "SELECT controltiempo.FechaTiempo, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM controltiempo 
 INNER JOIN centronegocio
 ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
-WHERE Fecha BETWEEN '$fecha%' AND '$fecha2%' ORDER BY controltiempo.Fecha DESC");
+WHERE FechaTiempo BETWEEN '$fecha%' AND '$fecha2%' ORDER BY controltiempo.FechaTiempo DESC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -55,11 +55,11 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(30,8, $row['Fecha'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['FechaTiempo'], 1, 0, 'C', 0);
     $pdf->Cell(40,8, $row['CentroNegocio'], 1, 0, 'C', 0);
     $pdf->Cell(40,8, $row['Nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(40,8, $row['ApellidoPat'], 1, 0, 'C', 0);
-    $pdf->Cell(40,8, $row['ApellidoMat'], 1, 1, 'C', 0);
+    $pdf->Cell(40,8, $row['ApellidoPa'], 1, 0, 'C', 0);
+    $pdf->Cell(40,8, $row['ApellidoMa'], 1, 1, 'C', 0);
 
 }
 

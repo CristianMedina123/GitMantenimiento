@@ -42,14 +42,14 @@ require '../conexion.php';
 // $usuario =  mysqli_real_escape_string($conn, utf8_decode($_POST['id']));
 $usuario = $_GET['usuario'];
 
-$query = mysqli_query($conn, "SELECT estadotiempo.Estado,controltiempo.Fecha, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM controltiempo 
+$query = mysqli_query($conn, "SELECT estadotiempo.EstadoTiempo,controltiempo.FechaTiempo, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM controltiempo 
 INNER JOIN centronegocio
 ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN estadotiempo
 ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo
-WHERE usuario.IdUsuario = $usuario ORDER BY controltiempo.Fecha DESC");
+WHERE usuario.IdUsuario = $usuario ORDER BY controltiempo.FechaTiempo DESC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -58,12 +58,12 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(30,8, $row['Fecha'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['Estado'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['FechaTiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['EstadoTiempo'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['CentroNegocio'], 1, 0, 'C', 0);
     $pdf->Cell(40,8, $row['Nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoPat'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoMat'], 1, 1, 'C', 0);
+    $pdf->Cell(30,8, $row['ApellidoPa'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['ApellidoMa'], 1, 1, 'C', 0);
 
 }
 

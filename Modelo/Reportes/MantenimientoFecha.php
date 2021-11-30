@@ -43,7 +43,7 @@ require '../conexion.php';
 $fecha =  $_GET['fecha'];
 $fecha2 =  $_GET['fecha2'];
 
-$query = mysqli_query($conn, "SELECT equipo.Equipo, equipo.Codigo, equipo.Modelo,centronegocio.CentroNegocio, centronegocio.Estado, mantenimiento.FechaMantenimiento, mantenimiento.Descripcion, mantenimiento.Mantenimiento FROM mantenimiento
+$query = mysqli_query($conn, "SELECT equipo.Equipo, equipo.Codigo, equipo.Modelo,centronegocio.CentroNegocio, centronegocio.EstadoCN, mantenimiento.FechaMantenimiento, mantenimiento.Descripcion, mantenimiento.Mantenimiento FROM mantenimiento
 INNER JOIN equipo
 ON mantenimiento.Equipo_idEquipo = equipo.IdEquipo
 INNER JOIN centronegocio
@@ -63,7 +63,7 @@ while($row = $query->fetch_assoc()){
     $pdf->Cell(35,8, $row['Descripcion'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['Mantenimiento'], 1, 0, 'C', 0);
     $pdf->Cell(20,8, $row['CentroNegocio'], 1, 0, 'C', 0);
-    $pdf->Cell(20,8, $row['Estado'], 1, 0, 'C', 0);
+    $pdf->Cell(20,8, $row['EstadoCN'], 1, 0, 'C', 0);
     $pdf->Cell(20,8, $row['FechaMantenimiento'], 1, 1, 'C', 0);
 }
 
