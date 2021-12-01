@@ -360,6 +360,11 @@ $resultado = mysqli_query($conn,$query);
 											<a data-toggle="modal" data-target="#ModalPdfUsuarioFechaCN" class="btn btn-success btn-raised ml-4"> <i class="zmdi zmdi-file-text"></i> Motivos</a>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<a data-toggle="modal" data-target="#ModalCumple" class="btn btn-success btn-raised ml-4"> <i class="zmdi zmdi-file-text"></i> Cumpleaños</a>
+										</div>
+									</div>
 								</div>
 							<!-- </div> -->
 					  	</div>
@@ -406,6 +411,45 @@ $resultado = mysqli_query($conn,$query);
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <button type="button" id="rptEntradasUsuario" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PDF por Usuario-->
+<div class="modal fade" id="ModalCumple" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Cumpleaños</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slccumple">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un mes --</option>
+					<option value="1">Enero</option>
+					<option value="2">Febrero</option>
+					<option value="3">Marzo</option>
+					<option value="4">Abril</option>
+					<option value="5">Mayo</option>
+					<option value="6">Junio</option>
+					<option value="7">Julio</option>
+					<option value="8">Agosto</option>
+					<option value="9">Septiembre</option>
+					<option value="10">Octubre</option>
+					<option value="11">Noviembre</option>
+					<option value="12">Diciembre</option>
+				</select>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnrptcumple" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
       </div>
     </div>
   </div>

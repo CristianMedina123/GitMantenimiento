@@ -10,6 +10,8 @@ $("#slccentro").change(function () {
 
 
 
+
+
 function InsertarUsuario(){
     var usuario = $('#txtusuario').val();
     var psw = $('#txtpsw').val();
@@ -104,7 +106,14 @@ function EliminarUsuario(id) {
         }
     });
   }
-  
+  $("#slcCentrosEditar").change(function () {
+    $("#slcCentrosEditar option:selected").each(function () {
+        id_centro = $(this).val();
+        $.post("../Modelo/SelectUsuario.php", { id_centro: id_centro }, function(data){
+            $("#slcAreaEditar").html(data);
+        });            
+    });
+});
   function ActualizarUsuario() {
     var id = $("#txtIdUsuarioEditar").val();
     var usuario = $("#txtUsuarioEditar").val();

@@ -10,6 +10,17 @@ $("#rptEntradasUsuario").on("click", function () {
   );
 });
 
+
+$("#btnrptcumple").on("click", function () {
+  var cumple = $("#slccumple").val();
+
+
+  window.open(
+    "../Modelo/Reportes/ControlCumple.php?cumple=" +cumple,
+    "_blank"
+  );
+});
+
 $("#btnrptFechaAsistencia").on("click", function () {
   var fecha = $("#idfechaasistenciarpt2fecha").val();
   var fecha2 = $("#idfechaasistenciarpt2fecha2").val();
