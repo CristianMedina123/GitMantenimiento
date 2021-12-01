@@ -11,6 +11,8 @@ $apemat = mysqli_real_escape_string($conn, utf8_decode($_POST['ape_mat']));
 $centro = mysqli_real_escape_string($conn, utf8_decode($_POST['centros']));
 $area = mysqli_real_escape_string($conn, utf8_decode($_POST['area']));
 $tipo = mysqli_real_escape_string($conn, utf8_decode($_POST['tipo']));
+$ingreso = mysqli_real_escape_string($conn, utf8_decode($_POST['ingreso']));
+$cumple = mysqli_real_escape_string($conn, utf8_decode($_POST['cumple']));
 
 $query = "UPDATE usuario SET 
 Usuario = '$usuario', 
@@ -18,6 +20,8 @@ Psw = '$psw',
 Nombre = '$nombre',
 ApellidoPa = '$apepat',
 ApellidoMa = '$apemat',
+FechaIngreso = '$ingreso',
+FechaCumple = '$cumple',
 CentroNegocio_idCentroNegocio = $centro,
 Area_IdArea = $area,
 TipoUsuario_IdTipoUsuario = $tipo

@@ -510,7 +510,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcCentroUsuarioPDFMotivo">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
 					<?php foreach($queryCentros as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado'])  ?></option>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn'])  ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -520,7 +520,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcusuarioReportePDFMotivoUser">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
 					<?php foreach($queryUsuario as $usuario){ ?>
-					<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
+					<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -530,7 +530,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcusuarioReportePDFMotivo">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Motivo --</option>
 					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo utf8_encode($estado['Estado']) ?></option>
+					<option value="<?php echo $estado['idestadotiempo'] ?>"><?php echo utf8_encode($estado['estadotiempo']) ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -561,7 +561,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcusuarioReportePDFMotivoMotivoCN">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Motivo --</option>
 					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo utf8_encode($estado['Estado']) ?></option>
+					<option value="<?php echo $estado['idestadotiempo'] ?>"><?php echo utf8_encode($estado['estadotiempo']) ?></option>
 					<?php } ?>
 				</select>
 			</div>

@@ -18,7 +18,7 @@ $queryCentro = mysqli_query($conn,"SELECT IdCentroNegocio, CentroNegocio, Estado
 $queryArea = mysqli_query($conn, "SELECT IdArea, AreaNombre FROM area");
 $queryTipo = mysqli_query($conn, "SELECT IdTipoUsuario, TipoUsuario FROM tipousuario");
 
-$queryTabla = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa, usuario.Usuario, usuario.Psw, centronegocio.CentroNegocio, centronegocio.EstadoCN, area.AreaNombre, tipousuario.TipoUsuario FROM usuario
+$queryTabla = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa, usuario.Usuario, usuario.Psw, usuario.FechaIngreso, usuario.FechaCumple, centronegocio.CentroNegocio, centronegocio.EstadoCN, area.AreaNombre, tipousuario.TipoUsuario FROM usuario
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN area
@@ -247,8 +247,16 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 											  <label class="control-label">Contraseña</label>
 											  <input class="form-control" type="text" id="txtpsw" autocomplete="off">
 											</div>
+											<h5>Fecha de Ingreso</h5>
+											<div class="form-group label-floating">
+											  <input class="form-control" type="date" id="txtfechaingreso" autocomplete="off">
+											</div>
 									</div>
 									<div class="col-xs-12 col-md-6">
+										<h5>Fecha de Cumpleaño</h5>
+										<div class="form-group label-floating">
+											  <input class="form-control" type="date" id="txtfechacumple" autocomplete="off">
+										</div>
 										<div class="form-group">
 											<label class="control-label">Seleccione el Centro de Negocios</label>
 											<select class="form-control" id="slccentro">
@@ -295,6 +303,8 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 											<th class="text-center">Centro Negocio</th>
 											<th class="text-center">Área</th>
 											<th class="text-center">Tipo Usuario</th>
+											<th class="text-center">F. Ingreso</th>
+											<th class="text-center">F. Cumpleaños</th>
 											<th class="text-center">Editar</th>
 											<th class="text-center">Eliminar</th>
 										</tr>
@@ -309,6 +319,8 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?> / <?php echo $tabla['EstadoCN'] ?></td>
 											<td><?php echo utf8_encode($tabla['AreaNombre']) ?></td>
 											<td><?php echo utf8_encode($tabla['TipoUsuario']) ?></td>
+											<td><?php echo utf8_encode($tabla['FechaIngreso']) ?></td>
+											<td><?php echo utf8_encode($tabla['FechaCumple']) ?></td>
 											<td><a onclick="EditarUsuario('<?php echo $tabla['IdUsuario'] ?>')" data-toggle="modal" data-target="#ModalActualizarUsuario"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 											<td><button type="button" onclick="EliminarUsuario(<?php echo $tabla['IdUsuario'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 										</tr>
@@ -349,57 +361,104 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 	  	<div class="form-group label-floating">
 		  	<!-- <label class="control-label">ID</label> -->
 		  	<input type="hidden"  class="form-control"  id="txtIdUsuarioEditar">
-			  
-	  		<div class="form-group">
-				  <h4><b>Usuario</b></h4>
-			  <input type="text" class="form-control" id="txtUsuarioEditar" autocomplete="off">
-			</div>
-			<div class="form-group">
-				<h4><b>Contraseña</b></h4>
-				<input type="text" class="form-control" id="txtPswEditar" autocomplete="off">
-			</div>
-			<div class="form-group">
-				<h4><b>Nombre (s).</b></h4>
-				<input type="text" class="form-control" id="txtNombreEditar" autocomplete="off">
-			</div>
-			<div class="form-group">
-				<h4><b>Apellido Paterno</b></h4>
-				<input type="text" class="form-control" id="txtApellidoPatEditar" autocomplete="off">
-			</div>
-			<div class="form-group">
-				<h4><b>Apellido Materno</b></h4>
-				<input type="text" class="form-control" id="txtApellidoMatEditar" autocomplete="off">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Usuario</b></h4>
+							<input type="text" class="form-control" id="txtUsuarioEditar" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Contraseña</b></h4>
+							<input type="text" class="form-control" id="txtPswEditar" autocomplete="off">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Nombre (s).</b></h4>
+							<input type="text" class="form-control" id="txtNombreEditar" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Tipo Usuario</b></h4>
+							<select class="form-control" id="slcEstadoEditar">
+								<option value="0" disabled="disabled" selected="true">-- Seleccione un tipo de usuario --</option>
+								<?php foreach($queryTipo as $tipo){ ?>
+								<option value="<?php echo $tipo['IdTipoUsuario'] ?>"><?php echo utf8_encode($tipo['TipoUsuario']) ?></option>
+								<?php } ?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Apellido Paterno</b></h4>
+							<input type="text" class="form-control" id="txtApellidoPatEditar" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Apellido Materno</b></h4>
+							<input type="text" class="form-control" id="txtApellidoMatEditar" autocomplete="off">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Fecha Ingreso</b></h4>
+							<input type="date" class="form-control" id="txtfechaingresoEditar" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Fecha Cumpleaños</b></h4>
+							<input type="date" class="form-control" id="txtfechacumpleEditar" autocomplete="off">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>CN</b></h4>
+							<select class="form-control" id="slcCentrosEditar">
+								<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
+								<?php foreach($queryCentro as $centro){ ?>
+								<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?></option>
+								<?php } ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Area</b></h4>
+							<select class="form-control" id="slcAreaEditar">
+								<option value="0" disabled="disabled" selected="true">-- Seleccione una Area --</option>
+								<?php foreach($queryArea as $area){ ?>
+								<option value="<?php echo $area['IdArea'] ?>"><?php echo utf8_encode($area['AreaNombre']) ?></option>
+								<?php } ?>
+							</select>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<div class="form-group">
-				<h4>CN</h4>
-				<select class="form-control" id="slcCentrosEditar">
-					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
-					<?php foreach($queryCentro as $centro){ ?>
-					<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?></option>
-				<?php } ?>
-				</select>
-			</div>
 
-			<div class="form-group">
-			<h4>Area</h4>
-				<select class="form-control" id="slcAreaEditar">
-					<option value="0" disabled="disabled" selected="true">-- Seleccione una Area --</option>
-					<?php foreach($queryArea as $area){ ?>
-					<option value="<?php echo $area['IdArea'] ?>"><?php echo utf8_encode($area['AreaNombre']) ?></option>
-				<?php } ?>
-				</select>
-			</div>
 
-			<div class="form-group">
-			<h4>Tipo Usuario</h4>
-				<select class="form-control" id="slcEstadoEditar">
-					<option value="0" disabled="disabled" selected="true">-- Seleccione un tipo de usuario --</option>
-					<?php foreach($queryTipo as $tipo){ ?>
-					<option value="<?php echo $tipo['IdTipoUsuario'] ?>"><?php echo utf8_encode($tipo['TipoUsuario']) ?></option>
-				<?php } ?>
-				</select>
-			</div>
+
+
+
 		</div>
       </div>
       <div class="modal-footer">

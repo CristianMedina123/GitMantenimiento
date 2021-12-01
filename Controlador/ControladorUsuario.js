@@ -19,6 +19,8 @@ function InsertarUsuario(){
     var centro = $('#slccentro').val();
     var area = $('#slcArea').val();
     var tipo = $('#stlUsuario').val();
+    var ingreso = $('#txtfechaingreso').val();
+    var cumple = $('#txtfechacumple').val();
 
     if(usuario.length == 0 || psw.length == 0 || nombre.length == 0 || ape_pat.length == 0 || ape_mat.length == 0 || centro.length == 0 || area.length == 0 || tipo.length == 0){
         alertify.alert('Ocurrió un error','No puede dejar campos vacíos', function(){ alertify.error('¡Error!'); }).set('closable', false);
@@ -36,7 +38,8 @@ function InsertarUsuario(){
 
         datos = 'usuario='+usuario+ '&psw='+psw+
         '&nombre='+nombre+ '&ape_pat='+ape_pat+ 
-        '&ape_mat='+ape_mat+'&centro='+centro+'&area='+area+'&tipo='+tipo; 
+        '&ape_mat='+ape_mat+'&centro='+centro+'&area='+area+'&tipo='+tipo+'&ingreso='+ingreso
+        +'&cumple='+cumple; 
 
         $.ajax({
             type: "POST",
@@ -92,6 +95,8 @@ function EliminarUsuario(id) {
             $('#txtNombreEditar').val(EstadoUsuariotObject.nombre);
             $('#txtApellidoPatEditar').val(EstadoUsuariotObject.apellidopa);
             $('#txtApellidoMatEditar').val(EstadoUsuariotObject.apellidoma);
+            $('#txtfechaingresoEditar').val(EstadoUsuariotObject.fechaingreso);
+            $('#txtfechacumpleEditar').val(EstadoUsuariotObject.fechacumple);
             $('#slcCentrosEditar').val(EstadoUsuariotObject.idcentronegocio);
             $('#slcAreaEditar').val(EstadoUsuariotObject.idarea);
             $('#slcEstadoEditar').val(EstadoUsuariotObject.idtipousuario);
@@ -110,6 +115,8 @@ function EliminarUsuario(id) {
     var centros = $("#slcCentrosEditar").val();
     var area = $("#slcAreaEditar").val();
     var tipo = $("#slcEstadoEditar").val();
+    var ingreso = $("#txtfechaingresoEditar").val();
+    var cumple = $("#txtfechacumpleEditar").val();
   
   if(usuario.length < 3 || usuario.length === 0 || psw.length < 3 || psw.length === 0 
     || nombre.length < 3 || nombre.length === 0 || ape_pat.length < 3 || ape_pat.length === 0
@@ -117,7 +124,7 @@ function EliminarUsuario(id) {
         alertify.success('No debe haber campos vacios');
   }else {
         cadena = "id=" + id + "&usuario=" + usuario+ '&psw='+psw+'&nombre='+nombre+'&ape_pat='+ape_pat+
-        '&ape_mat='+ape_mat+ '&centros='+centros+'&area='+area+'&tipo='+tipo;
+        '&ape_mat='+ape_mat+ '&centros='+centros+'&area='+area+'&tipo='+tipo+'&ingreso='+ingreso+'&cumple='+cumple;
         
         $.ajax({
         type: "POST",

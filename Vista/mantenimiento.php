@@ -528,46 +528,69 @@ $resultado = mysqli_query($conn,$query);
 	  	<div class="form-group label-floating">
 		  	<!-- <label class="control-label">ID</label> -->
 		  	<input type="hidden"  class="form-control"  id="txtIdMantenimientoEditar">
-			  
-	  		<div class="form-group">
-				  <h4><b>Mantenimiento</b></h4>
-			  <input type="text" class="form-control" id="txtMantenimientoEditar" autocomplete="off">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Mantenimiento</b></h4>
+							<input type="text" class="form-control" id="txtMantenimientoEditar" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Fecha Mantenimiento</b></h4>
+							<input type="date" class="form-control" id="txtFechaEditar" autocomplete="off">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Descripción</b></h4>
+							<input type="text" class="form-control" id="txtDescripcionEditar" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<h4><b>CN</b></h4>
+						<div class="form-group">
+							<select class="form-control" id="slcCentroEditar">
+								<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
+								<?php foreach($query_centros as $centro){ ?>
+								<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
+								<?php } ?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<h4><b>Equipo</b></h4>
+						<div class="form-group">
+							<select class="form-control" id="slcEquipoEditar">
+								<option value="0" disabled="disabled" selected="true">-- Seleccione Nuevo Equipo --</option>
+								<?php foreach($query_equipo as $equipo){ ?>
+								<option value="<?php echo $equipo['idequipo'] ?>"><?php echo utf8_encode($equipo['equipo']) ?> <?php echo utf8_encode($equipo['marca']) ?> <?php echo utf8_encode($equipo['codigo']) ?></option>
+							<?php } ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<h4><b>Usuario Mantenimiento</b></h4>
+						<div class="form-group">
+							<select class="form-control" id="slcUsuarioEditar">
+								<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario--</option>
+								<?php foreach($query_usuario as $usuario){ ?>
+								<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
+							<?php } ?>
+							</select>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="form-group">
-				<h4><b>Fecha del Mantenimiento</b></h4>
-				<input type="date" class="form-control" id="txtFechaEditar" autocomplete="off">
-			</div>
-			<div class="form-group">
-				<h4><b>Descripción del Mantenimiento</b></h4>
-				<input type="text" class="form-control" id="txtDescripcionEditar" autocomplete="off">
-			</div>
-			<h4><b>Seleccione su Nuevo Centro de Negocios</b></h4>
-			<div class="form-group">
-				<select class="form-control" id="slcCentroEditar">
-					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
-					<?php foreach($query_centros as $centro){ ?>
-					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
-				<?php } ?>
-				</select>
-			</div>
-			<h4><b>Equipo</b></h4>
-			<div class="form-group">
-				<select class="form-control" id="slcEquipoEditar">
-					<option value="0" disabled="disabled" selected="true">-- Seleccione Nuevo Equipo --</option>
-					<?php foreach($query_equipo as $equipo){ ?>
-					<option value="<?php echo $equipo['idequipo'] ?>"><?php echo utf8_encode($equipo['equipo']) ?> <?php echo utf8_encode($equipo['marca']) ?> <?php echo utf8_encode($equipo['codigo']) ?></option>
-				<?php } ?>
-				</select>
-			</div>
-			<h4><b>Usuario Quien Realizó Mantenimiento</b></h4>
-			<div class="form-group">
-				<select class="form-control" id="slcUsuarioEditar">
-					<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario--</option>
-					<?php foreach($query_usuario as $usuario){ ?>
-					<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
-				<?php } ?>
-				</select>
-			</div>
+
 		</div>
       </div>
       <div class="modal-footer">

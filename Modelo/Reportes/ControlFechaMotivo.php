@@ -12,7 +12,7 @@ function Header(){
     // Movernos a la derecha
     $this->Cell(60);
     // Título
-    $this->Cell(70,10,'Asistencias por Fechas',0,0,'C');
+    $this->Cell(70,10,'Asistencias por Fechas y Motivo',0,0,'C');
     // Salto de línea
     $this->SetFont('Arial','B',9);
     $this->Ln(20);
@@ -44,7 +44,7 @@ $fecha =  $_GET['fecha'];
 $fecha2 =  $_GET['fecha2'];
 $estado =  $_GET['estado'];
 
-$query = mysqli_query($conn, "SELECT controltiempo.Fecha,estadotiempo.IdEstadoTiempo ,estadotiempo.Estado as motivo,centronegocio.Estado, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat 
+$query = mysqli_query($conn, "SELECT controltiempo.FechaTiempo,estadotiempo.IdEstadoTiempo ,estadotiempo.EstadoTiempo as motivo,centronegocio.EstadoCN, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa 
 FROM controltiempo  
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
@@ -52,7 +52,7 @@ INNER JOIN centronegocio
 ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN estadotiempo
 ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo
-WHERE IdEstadoTiempo = $estado AND Fecha  BETWEEN '$fecha%' AND '$fecha2%'");
+WHERE IdEstadoTiempo = $estado AND FechaTiempo  BETWEEN '$fecha%' AND '$fecha2%'");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -61,13 +61,13 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(35,8, $row['Fecha'], 1, 0, 'C', 0);
+    $pdf->Cell(35,8, $row['FechaTiempo'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['motivo'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['Nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['ApellidoPat'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['ApellidoMat'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['ApellidoPa'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['ApellidoMa'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['CentroNegocio'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['Estado'], 1, 1, 'C', 0);
+    $pdf->Cell(25,8, $row['EstadoCN'], 1, 1, 'C', 0);
 }
 
 

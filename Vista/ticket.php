@@ -334,7 +334,7 @@ $resultado = mysqli_query($conn,$query);
 											<td><?php echo utf8_encode( $tabla['asignado']) ?> <?php echo utf8_encode( $tabla['asignadoape']) ?> <?php echo utf8_encode( $tabla['asignadoape2']) ?></td>
 											<td><?php echo utf8_encode( $tabla['observacionpendiente']) ?></td>
 											<td><?php echo utf8_encode( $tabla['observacionproceso']) ?></td>
-											<td><?php echo utf8_encode( $tabla['observacioncomplet']) ?></td>
+											<td><?php echo utf8_encode( $tabla['observacioncompleto']) ?></td>
 										<td ><button type="button" onclick="EliminarTicket(<?php echo $tabla['idticket'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 										</tr>
 										<?php } ?>

@@ -11,11 +11,12 @@ $ape_mat = mysqli_real_escape_string($conn, utf8_decode($_POST['ape_mat']));;
 $centro = mysqli_real_escape_string($conn, utf8_decode($_POST['centro']));
 $area = mysqli_real_escape_string($conn, utf8_decode($_POST['area']));
 $tipo = mysqli_real_escape_string($conn, utf8_decode($_POST['tipo']));
+$ingreso = mysqli_real_escape_string($conn, utf8_decode($_POST['ingreso']));
+$cumple = mysqli_real_escape_string($conn, utf8_decode($_POST['cumple']));
 
-
-$query = "INSERT INTO usuario (`Usuario`, `Psw`, `Nombre`, `ApellidoPa`, `ApellidoMa`,`Area_IdArea`, `TipoUsuario_IdTipoUsuario`, `CentroNegocio_IdCentroNegocio`) 
+$query = "INSERT INTO usuario (`Usuario`, `Psw`, `Nombre`, `ApellidoPa`, `ApellidoMa`, `FechaIngreso`, `FechaCumple`,`Area_IdArea`, `TipoUsuario_IdTipoUsuario`, `CentroNegocio_IdCentroNegocio`) 
 VALUES 
-('$usuario', '$psw', '$nombre', '$ape_pat', '$ape_mat', '$area', '$tipo', '$centro')";
+('$usuario', '$psw', '$nombre', '$ape_pat', '$ape_mat', '$ingreso', '$cumple', '$area', '$tipo', '$centro')";
 echo mysqli_query($conn,$query);
 mysqli_close($conn);
 

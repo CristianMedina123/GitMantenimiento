@@ -22,7 +22,7 @@ function Header(){
     $this->Cell(35,10,'CentroNegocio', 1, 0, 'C', 1);
     $this->Cell(30,10,'Nombre', 1, 0, 'C', 1);
     $this->Cell(30,10,'Apellido Pat', 1, 0, 'C', 1);
-    $this->Cell(35,10,'Apellido Mat', 1, 1, 'C', 1);
+    $this->Cell(30,10,'Apellido Mat', 1, 1, 'C', 1);
 
 
 }
@@ -42,14 +42,14 @@ require '../conexion.php';
 $usuario =  $_GET['usuario'];
 $estado =  $_GET['estado'];
 
-$query = mysqli_query($conn, "SELECT estadotiempo.Estado,estadotiempo.IdEstadoTiempo,controltiempo.Fecha, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat FROM controltiempo 
+$query = mysqli_query($conn, "SELECT estadotiempo.EstadoTiempo,estadotiempo.IdEstadoTiempo,controltiempo.FechaTiempo, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM controltiempo 
 INNER JOIN centronegocio
 ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN estadotiempo
 ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo
-WHERE usuario.IdUsuario = $usuario AND estadotiempo.IdEstadoTiempo = $estado ORDER BY controltiempo.Fecha DESC");
+WHERE usuario.IdUsuario = $usuario AND estadotiempo.IdEstadoTiempo = $estado ORDER BY controltiempo.FechaTiempo DESC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -58,12 +58,12 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(30,8, $row['Estado'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['Fecha'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['EstadoTiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['FechaTiempo'], 1, 0, 'C', 0);
     $pdf->Cell(35,8, $row['CentroNegocio'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['Nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoPat'], 1, 0, 'C', 0);
-    $pdf->Cell(35,8, $row['ApellidoMat'], 1, 1, 'C', 0);
+    $pdf->Cell(30,8, $row['ApellidoPa'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['ApellidoMa'], 1, 1, 'C', 0);
 
 
 

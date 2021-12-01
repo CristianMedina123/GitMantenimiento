@@ -346,54 +346,91 @@ $resultado = mysqli_query($conn,$query);
 				<div class="form-group label-floating">
 					<!-- <label class="control-label">ID</label> -->
 					<input type="hidden"  class="form-control"  id="txtIdEquipoEditar">
-					
-					<div class="form-group">
-						<h4><b>Código del Equipo</b></h4>
-					<input type="text" class="form-control" id="txtCodigoEditar" autocomplete="off">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-2">
+								<div class="form-group">
+									<h4><b>Código del Equipo</b></h4>
+									<input type="text" class="form-control" id="txtCodigoEditar" autocomplete="off">
+								</div>
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<h4><b>Equipo</b></h4>
+									<input type="text" class="form-control" id="txtEquipoEditar" autocomplete="off">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<div class="form-group">
+									<h4><b>Marca del Equipo</b></h4>
+									<input type="text" class="form-control" id="txtMarcaEditar" autocomplete="off">
+								</div>
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<h4><b>Modelo del Equipo</b></h4>
+									<input type="text" class="form-control" id="txtModeloEditar" autocomplete="off">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<div class="form-group">
+									<h4><b>Descripción del Equipo</b></h4>
+									<input type="text" class="form-control" id="txtDescripcionEditar" autocomplete="off">
+								</div>
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-2">
+								<h4><b>Estado</b></h4>
+								<div class="form-group">
+									<select class="form-control" id="slcEstadoEditar">
+										<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado --</option>
+										<?php foreach($queryEstado as $estado){ ?>
+										<option value="<?php echo $estado['IdTipoEstado'] ?>"><?php echo utf8_encode($estado['TipoEstado']) ?></option>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2">
+								<h4><b>CN</b></h4>
+								<div class="form-group">
+								<select class="form-control" id="slcCentrosEditar">
+									<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
+									<?php foreach($queryCentro as $centro){ ?>
+									<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
+									<?php } ?>
+								</select>
+							</div>
+							</div>
+							<div class="col-md-1"></div>
+							<div class="col-md-2">
+								<h4><b>Area</b></h4>
+								<div class="form-group">
+									<select class="form-control" id="slcAreaEditar">
+										<option value="0" disabled="disabled" selected="true">-- Seleccione una Area --</option>
+										<?php foreach($queryArea as $area){ ?>
+										<option value="<?php echo $area['IdArea'] ?>"><?php echo utf8_encode($area['AreaNombre']) ?></option>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="form-group">
-						<h4><b>Equipo</b></h4>
-						<input type="text" class="form-control" id="txtEquipoEditar" autocomplete="off">
-					</div>
-					<div class="form-group">
-						<h4><b>Marca del Equipo</b></h4>
-						<input type="text" class="form-control" id="txtMarcaEditar" autocomplete="off">
-					</div>
-					<div class="form-group">
-						<h4><b>Modelo del Equipo</b></h4>
-						<input type="text" class="form-control" id="txtModeloEditar" autocomplete="off">
-					</div>
-					<div class="form-group">
-						<h4><b>Descripción del Equipo</b></h4>
-						<input type="text" class="form-control" id="txtDescripcionEditar" autocomplete="off">
-					</div>
-					<h4><b>Seleccione su Nuevo Centro de Negocios</b></h4>
-					<div class="form-group">
-						<select class="form-control" id="slcCentrosEditar">
-							<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
-							<?php foreach($queryCentro as $centro){ ?>
-							<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
-						<?php } ?>
-						</select>
-					</div>
-					<h4><b>Seleccione la Nueva Area</b></h4>
-					<div class="form-group">
-						<select class="form-control" id="slcAreaEditar">
-							<option value="0" disabled="disabled" selected="true">-- Seleccione una Area --</option>
-							<?php foreach($queryArea as $area){ ?>
-							<option value="<?php echo $area['IdArea'] ?>"><?php echo utf8_encode($area['AreaNombre']) ?></option>
-						<?php } ?>
-						</select>
-					</div>
-					<h4><b>Selecione el Nuevo Estado</b></h4>
-					<div class="form-group">
-						<select class="form-control" id="slcEstadoEditar">
-							<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado --</option>
-							<?php foreach($queryEstado as $estado){ ?>
-							<option value="<?php echo $estado['IdTipoEstado'] ?>"><?php echo utf8_encode($estado['TipoEstado']) ?></option>
-						<?php } ?>
-						</select>
-					</div>
+
+
+
+
+
+
+
+
 				</div>
 			</div>
 			<div class="modal-footer">

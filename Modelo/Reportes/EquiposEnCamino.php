@@ -17,13 +17,13 @@ function Header(){
     $this->SetFont('Arial','B',9);
     $this->Ln(20);
     $this->SetFillColor(19, 141, 117);
+
     $this->Cell(25,10,'Equipo', 1, 0, 'C', 1);
     $this->Cell(20,10,utf8_decode('Código'), 1, 0, 'C', 1);
     $this->Cell(25,10,utf8_decode('Marca'), 1, 0, 'C', 1);
-    $this->Cell(20,10,'Modelo', 1, 0, 'C', 1);
+    $this->Cell(25,10,'Modelo', 1, 0, 'C', 1);
     $this->Cell(25,10,'CN', 1, 0, 'C', 1);
-    $this->Cell(20,10,'Estado', 1, 0, 'C', 1);
-    $this->Cell(20,10,'Fecha', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Estado', 1, 0, 'C', 1);
     $this->Cell(30,10,'Estatus', 1, 1, 'C', 1);
 
 }
@@ -42,14 +42,12 @@ function Footer(){
 require '../conexion.php';
 
 
-$query = mysqli_query($conn, "SELECT equipo.Codigo, equipo.Codigo, equipo.Equipo, equipo.Marca, equipo.Modelo, equipo.Descripcion,mantenimiento.Descripcion,mantenimiento.FechaMantenimiento,centronegocio.CentroNegocio,centronegocio.EstadoCN,tipoestado.tipoestado
+$query = mysqli_query($conn, "SELECT equipo.Codigo, equipo.Equipo, equipo.Marca, equipo.Modelo, equipo.Descripcion,centronegocio.CentroNegocio,centronegocio.EstadoCN,tipoestado.tipoestado
 FROM equipo
 INNER JOIN tipoestado
 ON equipo.TipoEstado_IdTipoEstado = tipoestado.IdTipoEstado
 INNER JOIN centronegocio
 ON equipo.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
-INNER JOIN mantenimiento
-ON equipo.IdEquipo = mantenimiento.Equipo_idEquipo
 WHERE TipoEstado_IdTipoEstado = 3 ORDER BY CentroNegocio_idCentroNegocio DESC");
 
 // $pdf = new PDF('L','mm','A4');
@@ -62,10 +60,9 @@ while($row = $query->fetch_assoc()){
     $pdf->Cell(25,8, $row['Equipo'], 1, 0, 'C', 0);
     $pdf->Cell(20,8, $row['Codigo'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['Marca'], 1, 0, 'C', 0);
-    $pdf->Cell(20,8, $row['Modelo'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['Modelo'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['CentroNegocio'], 1, 0, 'C', 0);
-    $pdf->Cell(20,8, $row['EstadoCN'], 1, 0, 'C', 0);
-    $pdf->Cell(20,8, $row['FechaMantenimiento'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['EstadoCN'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['tipoestado'], 1, 1, 'C', 0);
 }
 
