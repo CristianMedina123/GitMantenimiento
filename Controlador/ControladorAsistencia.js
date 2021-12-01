@@ -40,10 +40,10 @@ $( document ).ready(function() {
 
 //Se extrae el formato de la fecha YYYY-MM-DD-HH-MM-SS
 var d = new Date();
-var fecha = d.getFullYear() + "-" +(d.getMonth()+1)  + "-"+ d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
-
-//Se captura en la fecha y se asigna a una variable
+var fecha = d.getFullYear() + "-" +(d.getMonth()+1)  + "-"+ d.getDate();
 document.getElementById("fechaAsis").value = fecha;
+var hoy = new Date();
+var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
 function InsertarAsistencia2(){
     //Se declaran las variables para extraer datos de los inputs
     var user = $('#txtusuario').val();
@@ -56,7 +56,7 @@ function InsertarAsistencia2(){
     //Cadena: Datos= Esta cadena extrae el usuario y lo manda como parametro para acceder a la siguiente consulta
     //Cadena= DatosAsistencia= Esta cadena extrae todos los datos faltantes para insertar la Asistencia.
     datos = 'user='+user+'&id='+id+'&psw='+psw;
-    datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha;
+    datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha+'&hora='+hora;
 
         $.ajax({
             type: "POST",

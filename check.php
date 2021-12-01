@@ -56,6 +56,7 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 				<div class="form-group label-floating">
 					<label class="control-label">Fecha y Hora</label>
 					<input class="form-control" readonly type="text" id="fechaAsis">
+					<input class="form-control" type="hidden" id="horaAsis">
 				</div>
 			</div>
 			<div class="col-md-1 col-sm-2"></div>

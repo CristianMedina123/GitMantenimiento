@@ -18,7 +18,8 @@ function Header(){
     $this->Ln(20);
     $this->SetFillColor(19, 141, 117);
     // $this->SetTextColor(144,30,30);
-    $this->Cell(30,10,'Fecha', 1, 0, 'C', 1);
+    $this->Cell(15,10,'Fecha', 1, 0, 'C', 1);
+    $this->Cell(15,10,'Hora', 1, 0, 'C', 1);
     $this->Cell(30,10,'Estado', 1, 0, 'C', 1);
     $this->Cell(25,10,utf8_decode('CN'), 1, 0, 'C', 1);
     $this->Cell(40,10,'Nombre', 1, 0, 'C', 1);
@@ -42,7 +43,7 @@ require '../conexion.php';
 // $usuario =  mysqli_real_escape_string($conn, utf8_decode($_POST['id']));
 $usuario = $_GET['usuario'];
 
-$query = mysqli_query($conn, "SELECT estadotiempo.EstadoTiempo,controltiempo.FechaTiempo, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM controltiempo 
+$query = mysqli_query($conn, "SELECT estadotiempo.EstadoTiempo,controltiempo.FechaTiempo,controltiempo.HoraTiempo, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM controltiempo 
 INNER JOIN centronegocio
 ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN usuario
@@ -58,7 +59,8 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(30,8, $row['FechaTiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(15,8, $row['FechaTiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(15,8, $row['HoraTiempo'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['EstadoTiempo'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['CentroNegocio'], 1, 0, 'C', 0);
     $pdf->Cell(40,8, $row['Nombre'], 1, 0, 'C', 0);
