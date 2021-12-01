@@ -18,6 +18,7 @@ function Header(){
     $this->Ln(20);
     $this->SetFillColor(19, 141, 117);
     $this->Cell(30,10,'Fecha', 1, 0, 'C', 1);
+    $this->Cell(30,10,'Hora', 1, 0, 'C', 1);
     $this->Cell(40,10,utf8_decode('CN'), 1, 0, 'C', 1);
     $this->Cell(40,10,'Nombre', 1, 0, 'C', 1);
     $this->Cell(40,10,'Apellido Pat', 1, 0, 'C', 1);
@@ -41,7 +42,7 @@ require '../conexion.php';
 $fecha = $_GET['fecha'];
 $fecha2 = $_GET['fecha2'];
 
-$query = mysqli_query($conn, "SELECT controltiempo.FechaTiempo, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM controltiempo 
+$query = mysqli_query($conn, "SELECT controltiempo.FechaTiempo, controltiempo.HoraTiempo ,controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM controltiempo 
 INNER JOIN centronegocio
 ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN usuario
@@ -56,6 +57,7 @@ $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
     $pdf->Cell(30,8, $row['FechaTiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['HoraTiempo'], 1, 0, 'C', 0);
     $pdf->Cell(40,8, $row['CentroNegocio'], 1, 0, 'C', 0);
     $pdf->Cell(40,8, $row['Nombre'], 1, 0, 'C', 0);
     $pdf->Cell(40,8, $row['ApellidoPa'], 1, 0, 'C', 0);

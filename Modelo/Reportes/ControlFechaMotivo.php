@@ -17,7 +17,8 @@ function Header(){
     $this->SetFont('Arial','B',9);
     $this->Ln(20);
     $this->SetFillColor(19, 141, 117);
-    $this->Cell(35,10,'Fecha', 1, 0, 'C', 1);
+    $this->Cell(15,10,'Fecha', 1, 0, 'C', 1);
+    $this->Cell(15,10,'Hora', 1, 0, 'C', 1);
     $this->Cell(30,10,utf8_decode('Motivo'), 1, 0, 'C', 1);
     $this->Cell(25,10,'Nombre', 1, 0, 'C', 1);
     $this->Cell(25,10,'Apellido Pat', 1, 0, 'C', 1);
@@ -44,7 +45,7 @@ $fecha =  $_GET['fecha'];
 $fecha2 =  $_GET['fecha2'];
 $estado =  $_GET['estado'];
 
-$query = mysqli_query($conn, "SELECT controltiempo.FechaTiempo,estadotiempo.IdEstadoTiempo ,estadotiempo.EstadoTiempo as motivo,centronegocio.EstadoCN, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa 
+$query = mysqli_query($conn, "SELECT controltiempo.FechaTiempo,controltiempo.HoraTiempo,estadotiempo.IdEstadoTiempo ,estadotiempo.EstadoTiempo as motivo,centronegocio.EstadoCN, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa 
 FROM controltiempo  
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
@@ -61,7 +62,8 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(35,8, $row['FechaTiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(15,8, $row['FechaTiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(15,8, $row['HoraTiempo'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['motivo'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['Nombre'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['ApellidoPa'], 1, 0, 'C', 0);
