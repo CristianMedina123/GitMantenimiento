@@ -50,11 +50,12 @@ function InsertarAsistencia2(){
     var id = $('#slcusuario').val();
     var estado = $('#slcestado').val();
     var centro = $('#slccentro').val();
+    var psw = $('#txtpsw').val();
 
     //Se declaran dos cadenas
     //Cadena: Datos= Esta cadena extrae el usuario y lo manda como parametro para acceder a la siguiente consulta
     //Cadena= DatosAsistencia= Esta cadena extrae todos los datos faltantes para insertar la Asistencia.
-    datos = 'user='+user+'&id='+id;
+    datos = 'user='+user+'&id='+id+'&psw='+psw;
     datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha;
 
         $.ajax({

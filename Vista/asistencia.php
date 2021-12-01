@@ -238,43 +238,16 @@ $resultado = mysqli_query($conn,$query);
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade active in" id="new">
 							<div class="container-fluid">
+							<fieldset class="text-center">Asistencias de ANLI</fieldset>
 								<div class="row">
-								<fieldset class="text-center">Asistencias de ANLI</fieldset>
-								<div class="col-xs-12 col-md-4"></div>
-									<div class="col-xs-12 col-md-4">
-									    	<div class="form-group label-floating">
-											  <label class="control-label">Fecha y Hora</label>
-											  <input class="form-control" readonly type="text" id="fechaAsis">
-											</div>
-									</div>
-									<div class="col-xs-12 col-md-4"></div>
-									<div class="col-xs-12 col-md-6">
-
-											<div class="form-group">
-												<!-- <label class="control-label">Centro de Negocios</label> -->
-												<select class="form-control" id="slccentro">
-												  <option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
-													<?php foreach($queryCentros as $centro){ ?>
-													<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn'])  ?></option>
-													<?php } ?>
-												</select>
-											</div>
-											<div class="form-group">
-												<!-- <label class="control-label">Usuario</label> -->
-												<select class="form-control" id="slcusuario">
-												  <option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
-													<?php foreach($queryUsuario as $usuario){ ?>
-													<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
-													<?php } ?>
-												</select>
-											</div>
-
-									</div>
-									<div class="col-xs-12 col-md-6">
+									<div class="col-md-4">
 										<div class="form-group label-floating">
-											  <label class="control-label">Ingresa tu Usuario</label>
-											  <input class="form-control" type="text" id="txtusuario" autocomplete="off">
+											<label class="control-label">Fecha y Hora</label>
+											<input class="form-control" readonly type="text" id="fechaAsis">
 										</div>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-4">
 										<div class="form-group">
 											<!-- <label class="control-label">Asistencia: </label> -->
 											<select class="form-control" id="slcestado">
@@ -284,11 +257,51 @@ $resultado = mysqli_query($conn,$query);
 												<?php } ?>
 											</select>
 										</div>
-										<p class="text-center">
-										    <button type="button" onclick="InsertarAsistencia2()"  class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Save</button>
-										</p>
 									</div>
 								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+												<!-- <label class="control-label">Centro de Negocios</label> -->
+											<select class="form-control" id="slccentro">
+												<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
+												<?php foreach($queryCentros as $centro){ ?>
+												<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn'])  ?></option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-4">
+										<div class="form-group">
+												<!-- <label class="control-label">Usuario</label> -->
+											<select class="form-control" id="slcusuario">
+												  <option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
+													<?php foreach($queryUsuario as $usuario){ ?>
+													<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
+													<?php } ?>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group label-floating">
+											  <label class="control-label">Ingresa tu Usuario</label>
+											  <input class="form-control" type="text" id="txtusuario" autocomplete="off">
+										</div>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-4">
+										<div class="form-group label-floating">
+											  <label class="control-label">Ingresa tu Contraseña</label>
+											  <input class="form-control" type="text" id="txtpsw" autocomplete="off">
+										</div>
+									</div>
+								</div>
+								<p class="text-center">
+									<button type="button" onclick="InsertarAsistencia2()"  class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Save</button>
+								</p>
 							</div>
 						</div>
 					  	<div class="tab-pane fade" id="list">

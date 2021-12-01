@@ -2,10 +2,10 @@
 
 include 'Modelo/conexion.php';
 
-$queryCentros = mysqli_query($conn, "SELECT IdCentroNegocio, CentroNegocio, Estado FROM centronegocio order by centronegocio ASC");
-$queryEstado = mysqli_query($conn, "SELECT IdEstadoTiempo, Estado FROM estadotiempo");
-$queryUsuario = mysqli_query($conn, "SELECT IdUsuario, Usuario, Nombre, ApellidoPat, ApellidoMat FROM usuario");
-$queryTabla = mysqli_query($conn, "SELECT controltiempo.IdControlTiempo, controltiempo.Fecha, estadotiempo.Estado AS Tiempo, usuario.Nombre, usuario.ApellidoPat, usuario.ApellidoMat, usuario.Password,centronegocio.CentroNegocio, centronegocio.Estado FROM controltiempo
+$queryCentros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio order by centronegocio ASC");
+$queryEstado = mysqli_query($conn, "SELECT idestadotiempo, estadotiempo FROM estadotiempo");
+$queryUsuario = mysqli_query($conn, "SELECT idusuario, usuario, nombre, apellidopa, apellidoma FROM usuario");
+$queryTabla = mysqli_query($conn, "SELECT controltiempo.idcontroltiempo, controltiempo.fechatiempo, estadotiempo.estadotiempo AS Tiempo, usuario.nombre, usuario.apellidopa, usuario.apellidoma, usuario.psw,centronegocio.centronegocio, centronegocio.estadocn FROM controltiempo
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN centronegocio
@@ -60,45 +60,25 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 			</div>
 			<div class="col-md-1 col-sm-2"></div>
 			<div class="col-md-3 col-sm-4">
+			<div class="form-group">
+					<label class="control-label">Asistencia: </label>
+					<select class="form-control" id="slcestado">
+						<option value="0" disabled="disabled" selected="true">-- Seleccione el Motivo de Asitencia --</option>
+						<?php foreach($queryEstado as $estado){ ?>
+						<option value="<?php echo $estado['idestadotiempo'] ?>"><?php echo utf8_encode($estado['estadotiempo']) ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3 col-sm-4">
 				<div class="form-group">
 					<label class="control-label">Centro de Negocios</label>
 					<select class="form-control" id="slccentroCheck">
 						<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
 						<?php foreach($queryCentros as $centro){ ?>
-						<option value="<?php echo $centro['IdCentroNegocio'] ?>"><?php echo utf8_encode($centro['CentroNegocio']) ?> / <?php echo utf8_encode($centro['Estado']) ?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3 col-sm-4">
-				<div class="form-group">
-					<label class="control-label">Usuario</label>
-					<select class="form-control" id="slcusuarioCheck">
-						<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
-						<?php foreach($queryUsuario as $usuario){ ?>
-						<option value="<?php echo $usuario['IdUsuario'] ?>"><?php echo utf8_encode($usuario['Nombre']) ?> <?php echo utf8_encode($usuario['ApellidoPat']) ?> <?php echo utf8_encode($usuario['ApellidoMat']) ?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-1 col-sm-2"></div>
-			<div class="col-md-3 col-sm-4">
-				<div class="form-group label-floating">
-					<label class="control-label">Ingresa tu Usuario</label>
-					<input class="form-control" type="text" id="txtusuario" autocomplete="off">
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3 col-sm-4">
-				<div class="form-group">
-					<label class="control-label">Asistencia: </label>
-					<select class="form-control" id="slcestado">
-						<option value="0" disabled="disabled" selected="true">-- Seleccione el Motivo de Asitencia --</option>
-						<?php foreach($queryEstado as $estado){ ?>
-						<option value="<?php echo $estado['IdEstadoTiempo'] ?>"><?php echo utf8_encode($estado['Estado']) ?></option>
+						<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
 						<?php } ?>
 					</select>
 				</div>
@@ -106,6 +86,27 @@ ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
 			<div class="col-md-1 col-sm-2"></div>
 			<div class="col-md-3 col-sm-4">
 
+			<div class="form-group">
+				<label class="control-label">Usuario</label>
+					<select class="form-control" id="slcusuarioCheck">
+						<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
+						<?php foreach($queryUsuario as $usuario){ ?>
+						<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3 col-sm-4">
+			<div class="form-group label-floating">
+					<label class="control-label">Ingresa tu Usuario</label>
+					<input class="form-control" type="text" id="txtusuario" autocomplete="off">
+				</div>
+			</div>
+			<div class="col-md-1 col-sm-2"></div>
+			<div class="col-md-3 col-sm-4">
 			<div class="form-group label-floating">
 					<label class="control-label">Contraseña</label>
 					<input class="form-control" type="text" id="psw">
