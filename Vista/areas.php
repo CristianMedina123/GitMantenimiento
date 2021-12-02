@@ -2,10 +2,10 @@
 session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$querySelectAreas = mysqli_query($conn, "SELECT IdArea, AreaNombre, CentroNegocio_IdCentroNegocio, centronegocio FROM area INNER JOIN centronegocio ON area.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio");
-$queryCentros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio");
+$querySelectAreas = mysqli_query($conn, "SELECT IdArea, AreaNombre, CentroNegocio_IdCentroNegocio, centronegocio FROM area INNER JOIN centronegocio ON area.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio ORDER BY areanombre ASC");
+$queryCentros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
 $queryTabla = mysqli_query($conn, "SELECT area.IdArea, area.AreaNombre, centronegocio.CentroNegocio FROM area
-INNER JOIN centronegocio ON area.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio");
+INNER JOIN centronegocio ON area.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio ORDER BY centronegocio ASC");
 
 $varsesion = $_SESSION['IdUsuario'];
 

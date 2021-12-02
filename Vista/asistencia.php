@@ -2,8 +2,8 @@
 session_start();
 include '../Modelo/conexion.php';
 $queryCentros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio order by centronegocio ASC");
-$queryEstado = mysqli_query($conn, "SELECT idestadotiempo, estadotiempo FROM estadotiempo");
-$queryUsuario = mysqli_query($conn, "SELECT idusuario, usuario, nombre, apellidopa, apellidoma FROM usuario");
+$queryEstado = mysqli_query($conn, "SELECT idestadotiempo, estadotiempo FROM estadotiempo ORDER BY estadotiempo ASC");
+$queryUsuario = mysqli_query($conn, "SELECT idusuario, usuario, nombre, apellidopa, apellidoma FROM usuario ORDER BY nombre ASC");
 $queryTabla = mysqli_query($conn, "SELECT controltiempo.idcontroltiempo, controltiempo.fechatiempo, estadotiempo.estadotiempo, usuario.nombre, usuario.apellidopa, usuario.apellidoma, centronegocio.centronegocio, centronegocio.estadocn FROM controltiempo
 INNER JOIN usuario
 ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario

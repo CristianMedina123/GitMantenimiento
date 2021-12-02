@@ -2,9 +2,9 @@
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$queryCentro = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM CentroNegocio");
-$queryArea = mysqli_query($conn, "SELECT IdArea, AreaNombre FROM Area");
-$queryEstado = mysqli_query($conn, "SELECT IdTipoEstado, TipoEstado FROM TipoEstado");
+$queryCentro = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM CentroNegocio ORDER BY centronegocio ASC");
+$queryArea = mysqli_query($conn, "SELECT IdArea, AreaNombre FROM Area ORDER BY AreaNombre ASC");
+$queryEstado = mysqli_query($conn, "SELECT IdTipoEstado, TipoEstado FROM TipoEstado ORDER BY TipoEstado ASC");
 
 
 $queryTabla = mysqli_query($conn, "SELECT equipo.IdEquipo, equipo.Codigo, equipo.Equipo, equipo.Marca, equipo.Modelo, equipo.Descripcion, centronegocio.CentroNegocio, area.AreaNombre, tipoestado.TipoEstado FROM equipo

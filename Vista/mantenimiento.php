@@ -2,9 +2,9 @@
 session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$query_centros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio");
-$query_usuario = mysqli_query($conn, "SELECT idusuario ,nombre, apellidopa, apellidoma FROM Usuario ORDER BY usuario ASC");
-$query_equipo = mysqli_query($conn, "SELECT equipo.equipo,equipo.marca, equipo.codigo, equipo.idequipo FROM equipo ORDER BY equipo ASC");
+$query_centros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
+$query_usuario = mysqli_query($conn, "SELECT idusuario ,nombre, apellidopa, apellidoma FROM Usuario WHERE Area_IdArea = 1 ORDER BY nombre ASC");
+$query_equipo = mysqli_query($conn, "SELECT equipo.equipo,equipo.marca, equipo.codigo, equipo.idequipo FROM equipo ORDER BY codigo ASC");
 $queryTabla = mysqli_query($conn, "SELECT mantenimiento.idmantenimiento, mantenimiento.mantenimiento, mantenimiento.fechamantenimiento,  mantenimiento.descripcion, equipo.codigo, equipo.equipo, usuario.nombre, usuario.apellidopa, usuario.apellidoma,centronegocio.idcentronegocio, centronegocio.centronegocio,centronegocio.estadocn  FROM mantenimiento
 INNER JOIN equipo
 ON mantenimiento.Equipo_idEquipo = equipo.IdEquipo
@@ -12,7 +12,7 @@ INNER JOIN usuario
 ON mantenimiento.Usuario_IdUsuario = usuario.IdUsuario
 INNER JOIN centronegocio
 ON equipo.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
-ORDER BY mantenimiento.FechaMantenimiento DESC");
+ORDER BY mantenimiento.FechaMantenimiento ASC");
 
 
 $varsesion = $_SESSION['IdUsuario'];

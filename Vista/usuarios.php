@@ -14,9 +14,9 @@ $topo = $_SESSION['IdUsuario'];
 $query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
 $resultado = mysqli_query($conn,$query);
 
-$queryCentro = mysqli_query($conn,"SELECT IdCentroNegocio, CentroNegocio, EstadoCN FROM centronegocio");
-$queryArea = mysqli_query($conn, "SELECT IdArea, AreaNombre FROM area");
-$queryTipo = mysqli_query($conn, "SELECT IdTipoUsuario, TipoUsuario FROM tipousuario");
+$queryCentro = mysqli_query($conn,"SELECT IdCentroNegocio, CentroNegocio, EstadoCN FROM centronegocio ORDER BY centronegocio ASC");
+$queryArea = mysqli_query($conn, "SELECT IdArea, AreaNombre FROM area ORDER BY AreaNombre ASC");
+$queryTipo = mysqli_query($conn, "SELECT IdTipoUsuario, TipoUsuario FROM tipousuario ORDER BY TipoUsuario ASC");
 
 $queryTabla = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa, usuario.Usuario, usuario.Psw, usuario.FechaIngreso, usuario.FechaCumple, centronegocio.CentroNegocio, centronegocio.EstadoCN, area.AreaNombre, tipousuario.TipoUsuario FROM usuario
 INNER JOIN centronegocio
@@ -24,7 +24,8 @@ ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN area
 ON usuario.Area_IdArea = area.IdArea
 INNER JOIN tipousuario
-ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
+ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario
+ORDER BY Nombre ASC");
 
 
 ?>
@@ -316,7 +317,7 @@ ON usuario.TipoUsuario_IdTipoUsuario = tipousuario.IdTipoUsuario");
 											<td><?php echo utf8_encode($tabla['ApellidoPa']) ?> <?php echo utf8_encode( $tabla['ApellidoMa']) ?></td>
 											<td><?php echo utf8_encode($tabla['Usuario']) ?></td>
 											<td><?php echo utf8_encode($tabla['Psw']) ?></td>
-											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?> / <?php echo $tabla['EstadoCN'] ?></td>
+											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?> / <?php echo utf8_encode($tabla['EstadoCN']) ?></td>
 											<td><?php echo utf8_encode($tabla['AreaNombre']) ?></td>
 											<td><?php echo utf8_encode($tabla['TipoUsuario']) ?></td>
 											<td><?php echo utf8_encode($tabla['FechaIngreso']) ?></td>

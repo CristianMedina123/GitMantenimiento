@@ -5,9 +5,9 @@ include '../Modelo/conexion.php';
 $queryUsuario = mysqli_query($conn,"SELECT usuario.idusuario, usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM usuario
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
-WHERE usuario.CentroNegocio_idCentroNegocio = 1");
+WHERE usuario.CentroNegocio_idCentroNegocio = 1 ORDER BY nombre ASC");
 //Query para extraer el estado del ticket
-$queryEstado = mysqli_query($conn, "SELECT idestadoticket, estadoticket FROM estadoticket");
+$queryEstado = mysqli_query($conn, "SELECT idestadoticket, estadoticket FROM estadoticket ORDER BY estadoticket ASC");
 
 $queryTabla = mysqli_query($conn, "SELECT a.nombre, a.apellidopa,a.apellidoma, b.nombre as asignado, b.apellidopa as asignadoape, b.apellidoma as asignadoape2, ticket.idticket,ticket.ticket, estadoticket.estadoticket, ticket.descripcion, ticket.fechaticket, ticket.observacionpendiente, ticket.observacionproceso, ticket.observacioncompleto FROM ticket
 INNER JOIN usuario as a
@@ -26,7 +26,7 @@ INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 WHERE IdCentroNegocio = 1");
 
-$queryCN = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio");
+$queryCN = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
 
 $varsesion = $_SESSION['IdUsuario'];
 
