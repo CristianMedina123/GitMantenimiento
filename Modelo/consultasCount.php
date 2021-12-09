@@ -4,12 +4,12 @@ include 'conexion.php';
 mysqli_set_charset( $conn, "utf8" );
 
 //CONSULTA CONTABLE PARA LOS EQUIPOS REGISTRADOS
-$query_countEquipos = "SELECT COUNT(*) as NumEquipos FROM equipo";
+$query_countEquipos = "SELECT COUNT(*) as numequipos FROM equipo";
 $resultadoCountEquipos = mysqli_query($conn , $query_countEquipos);
 $fila = mysqli_fetch_assoc($resultadoCountEquipos);
 
 //CONSULTA CONTABLE PARA LOS CENTROS DE NEGOCIOS
-$query_countCentros = "SELECT COUNT(*) AS NumCentros FROM centronegocio";
+$query_countCentros = "SELECT COUNT(*) AS numcentros FROM centronegocio";
 $resultadoCountCentros = mysqli_query($conn, $query_countCentros);
 $filaCentro = mysqli_fetch_assoc($resultadoCountCentros);
 

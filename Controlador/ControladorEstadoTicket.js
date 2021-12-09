@@ -51,8 +51,8 @@ function EditarEstadoTicket(id) {
         success: function (res){//En caso de que el query se ejecute.
             //EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-            $('#txtidEstado').val(res.IdEstadoTicket);
-            $('#txtEstadoTicketEditar').val(res.EstadoTicket);//Se extraen los datos del JSON y los extrae en el input.
+            $('#txtidestadoticket').val(res.idestadoticket);
+            $('#txtestadoticketeditar').val(res.estadoticket);//Se extraen los datos del JSON y los extrae en el input.
             $("#ModalActualizarEstadoTicket").modal("show"); 
         }
     });
@@ -60,8 +60,8 @@ function EditarEstadoTicket(id) {
 
 function ActualizarEstadoTicket() {
     //Se declaran las variables que obtendran los nuevos datos del objeto.
-    var id = $("#txtidEstado").val();
-    var estado = $("#txtEstadoTicketEditar").val();
+    var id = $("#txtidestadoticket").val();
+    var estado = $("#txtestadoticketeditar").val();
     cadena = "id=" + id + "&estado=" + estado;//La cadena se extrae para ejecutar el query.
     $.ajax({
       type: "POST",

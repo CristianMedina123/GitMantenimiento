@@ -99,13 +99,13 @@ function EliminarMantenimiento(id) {
         success: function (res){
             //EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-            $('#txtIdMantenimientoEditar').val(res.IdMantenimiento);
-            $('#txtMantenimientoEditar').val(res.Mantenimiento);
-            $('#txtFechaEditar').val(res.FechaMantenimiento);
-            $('#txtDescripcionEditar').val(res.Descripcion);
-            $('#slcCentroEditar').val(res.IdCentroNegocio);
-            $('#slcEquipoEditar').val(res.IdEquipo);
-            $('#slcUsuarioEditar').val(res.IdUsuario);
+            $('#txtIdMantenimientoEditar').val(res.idmantenimiento);
+            $('#txtMantenimientoEditar').val(res.mantenimiento);
+            $('#txtFechaEditar').val(res.fechamantenimiento);
+            $('#txtDescripcionEditar').val(res.descripcion);
+            $('#slcCentroEditar').val(res.idcentronegocio);
+            $('#slcEquipoEditar').val(res.idequipo);
+            $('#slcUsuarioEditar').val(res.idusuario);
             $("#ModalActualizarMantenimiento").modal("show"); 
         }
     });

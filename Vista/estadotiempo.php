@@ -2,7 +2,7 @@
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$query_SelectEstadoTiempo = mysqli_query($conn, "SELECT IdEstadoTiempo, EstadoTiempo FROM estadotiempo");
+$query_SelectEstadoTiempo = mysqli_query($conn, "SELECT idestadotiempo, estadotiempo FROM estadotiempo");
 
 $varsesion = $_SESSION['IdUsuario'];
 
@@ -12,7 +12,7 @@ $varsesion = $_SESSION['IdUsuario'];
     }
 
 	$topo = $_SESSION['IdUsuario'];
-	$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+	$query = "SELECT idusuario, usuario, nombre, apellidopa ,tipousuario_idtipousuario FROM usuario WHERE idusuario = $topo";
 	$resultado = mysqli_query($conn,$query);	
 ?>
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ $varsesion = $_SESSION['IdUsuario'];
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
+				<h4><?php echo utf8_encode($datos['nombre'])?> <?php echo utf8_encode($datos['apellidopa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -60,7 +60,7 @@ $varsesion = $_SESSION['IdUsuario'];
 				<figure class="full-box">
 					<img src="./assets/img/LogoHome.png" alt="UserIcon">
 					<figcaption class="text-center text-titles">
-						<h5><?php echo utf8_encode($datos['Usuario'])?></h5>
+						<h5><?php echo utf8_encode($datos['usuario'])?></h5>
 					</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
@@ -73,14 +73,14 @@ $varsesion = $_SESSION['IdUsuario'];
 			</div>
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-			    <?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+			    <?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="home.php">
 						<i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
 					</a>
 				</li>
 				<?php } ?>
-				<?php  if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+				<?php  if($datos['tipousuario_idtipousuario'] == '1'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Mantenimiento <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -120,18 +120,18 @@ $varsesion = $_SESSION['IdUsuario'];
 					</ul>
 				</li>
 				<?php } ?>
-				<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-card zmdi-hc-fw"></i> Tickets <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 						<li>
 							<a href="ticket.php"> <i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Tickets</a>
 						</li>
 						<?php } ?>
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 						<li>
 							<a href="mistickets.php"> <i class="zmdi zmdi-notifications"></i> Mis Tickets</a>
 						</li>
@@ -144,7 +144,7 @@ $varsesion = $_SESSION['IdUsuario'];
 					</ul>
 				</li>
 				<?php } ?>
-				<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-store"></i> Centros de Negocios <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -159,18 +159,18 @@ $varsesion = $_SESSION['IdUsuario'];
 					</ul>
 				</li>	
 				<?php } ?>
-				<?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+				<?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-time"></i> Asistencias <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-					    <?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+					    <?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 						<li>
 							<a href="asistencia.php"><i class="zmdi zmdi-calendar-check"></i> Lista de Asistencias</a>
 						</li>
 						<?php } ?>
-						<?php if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>	
+						<?php if($datos['tipousuario_idtipousuario'] == '1'){ ?>	
 						<li>
 							<a href="estadotiempo.php"><i class="zmdi zmdi-memory"></i> Estados Tiempo</a>
 						</li>
@@ -194,7 +194,7 @@ $varsesion = $_SESSION['IdUsuario'];
 			</ul>
 		</nav>
 		<!-- Content page -->
-		<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+		<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 		<div class="container-fluid">
 			<div class="page-header">
 			  <h1 class="text-titles"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Estados de <small>Los Tiempos ANLI</small></h1>
@@ -239,9 +239,9 @@ $varsesion = $_SESSION['IdUsuario'];
 									<tbody>
 										<?php foreach($query_SelectEstadoTiempo as $fila){?>
 										<tr>
-											<td><?php echo utf8_encode($fila['EstadoTiempo']) ?></td>
-											<td><a onclick="EditarEstadoTiempo('<?php echo $fila['IdEstadoTiempo'] ?>')" data-toggle="modal" data-target="#ModalActualizarEstadoTiempo"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a>
-											<td><button type="button" onclick="EliminarEstadoTiempo(<?php echo $fila['IdEstadoTiempo'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
+											<td><?php echo utf8_encode($fila['estadotiempo']) ?></td>
+											<td><a onclick="EditarEstadoTiempo('<?php echo $fila['idestadotiempo'] ?>')" data-toggle="modal" data-target="#ModalActualizarEstadoTiempo"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a>
+											<td><button type="button" onclick="EliminarEstadoTiempo(<?php echo $fila['idestadotiempo'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 										</tr>
 										<?php } ?>
 									</tbody>
@@ -277,7 +277,7 @@ $varsesion = $_SESSION['IdUsuario'];
 		</div>
 		</div>
 	<?php } ?>
-	<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+	<?php if( $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-11 text-center">

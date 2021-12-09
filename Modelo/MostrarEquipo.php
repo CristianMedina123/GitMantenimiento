@@ -10,12 +10,12 @@ equipo.tipoestado_idtipoestado, centronegocio.idcentronegocio ,centronegocio.cen
 centronegocio.estadocn, area.idarea, area.areanombre, tipoestado.idtipoestado, tipoestado.tipoestado  
 FROM equipo
 INNER JOIN centronegocio
-ON equipo.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
+ON equipo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
 INNER JOIN area
-ON equipo.Area_IdArea = area.IdArea
+ON equipo.area_idarea = area.idarea
 INNER JOIN tipoestado
-ON equipo.TipoEstado_IdTipoEstado = tipoestado.IdTipoEstado
-WHERE IdEquipo = '$id'");
+ON equipo.tipoestado_idtipoestado = tipoestado.idtipoestado
+WHERE idequipo = '$id'");
 echo json_encode(mysqli_fetch_assoc($query)); 
 
 

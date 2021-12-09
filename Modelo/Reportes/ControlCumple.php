@@ -47,7 +47,7 @@ INNER JOIN area
 ON usuario.Area_IdArea = area.IdArea
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
-WHERE MONTH(fechaCumple) = $cumple");
+WHERE MONTH(fechaCumple) = $cumple ORDER BY nombre ASC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();

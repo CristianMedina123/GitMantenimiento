@@ -4,14 +4,14 @@ include 'conexion.php';
 mysqli_set_charset( $conn, "utf8" );
 $id = mysqli_real_escape_string($conn, utf8_decode($_POST['id']));
 
-$query = mysqli_query($conn, "SELECT mantenimiento.IdMantenimiento, mantenimiento.Mantenimiento, mantenimiento.FechaMantenimiento, mantenimiento.Descripcion, equipo.IdEquipo, equipo.Equipo, equipo.Marca, equipo.Codigo, usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa,centronegocio.IdCentroNegocio, centronegocio.CentroNegocio, centronegocio.Estadocn FROM mantenimiento
+$query = mysqli_query($conn, "SELECT mantenimiento.idmantenimiento, mantenimiento.mantenimiento, mantenimiento.fechamantenimiento, mantenimiento.descripcion, equipo.idequipo, equipo.equipo, equipo.marca, equipo.codigo, usuario.idusuario, usuario.nombre, usuario.apellidopa, usuario.apellidoma,centronegocio.idcentronegocio, centronegocio.centronegocio, centronegocio.estadocn FROM mantenimiento
 INNER JOIN equipo
-ON mantenimiento.Equipo_idEquipo = equipo.IdEquipo
+ON mantenimiento.equipo_idequipo = equipo.idequipo
 INNER JOIN centronegocio
-ON equipo.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
+ON equipo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
 INNER JOIN usuario
-ON mantenimiento.Usuario_IdUsuario = usuario.IdUsuario
-WHERE IdMantenimiento = '$id'");
+ON mantenimiento.usuario_idusuario = usuario.idusuario
+WHERE idmantenimiento = '$id'");
 
 echo json_encode(mysqli_fetch_assoc($query)); 
 mysqli_close($conn);

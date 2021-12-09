@@ -2,18 +2,18 @@
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$queryCentro = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM CentroNegocio ORDER BY centronegocio ASC");
-$queryArea = mysqli_query($conn, "SELECT IdArea, AreaNombre FROM Area ORDER BY AreaNombre ASC");
-$queryEstado = mysqli_query($conn, "SELECT IdTipoEstado, TipoEstado FROM TipoEstado ORDER BY TipoEstado ASC");
+$queryCentro = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
+$queryArea = mysqli_query($conn, "SELECT idarea, areanombre FROM area ORDER BY areanombre ASC");
+$queryEstado = mysqli_query($conn, "SELECT idtipoestado, tipoestado FROM tipoestado ORDER BY tipoestado ASC");
 
 
-$queryTabla = mysqli_query($conn, "SELECT equipo.IdEquipo, equipo.Codigo, equipo.Equipo, equipo.Marca, equipo.Modelo, equipo.Descripcion, centronegocio.CentroNegocio, area.AreaNombre, tipoestado.TipoEstado FROM equipo
+$queryTabla = mysqli_query($conn, "SELECT equipo.idequipo, equipo.codigo, equipo.equipo, equipo.marca, equipo.modelo, equipo.descripcion, centronegocio.centronegocio, area.areanombre, tipoestado.tipoestado FROM equipo
 INNER JOIN centronegocio
-ON equipo.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
+ON equipo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
 INNER JOIN area
-ON equipo.Area_IdArea = area.IdArea
+ON equipo.area_idarea = area.idarea
 INNER JOIN tipoestado
-ON equipo.TipoEstado_IdTipoEstado = tipoestado.IdTipoEstado");
+ON equipo.tipoestado_idtipoestado = tipoestado.idtipoestado");
 
 $varsesion = $_SESSION['IdUsuario'];
 
@@ -23,7 +23,7 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT idusuario, usuario, nombre, apellidopa ,tipousuario_idtipousuario FROM usuario WHERE idusuario = $topo";
 $resultado = mysqli_query($conn,$query);
 
 ?>
@@ -64,7 +64,7 @@ $resultado = mysqli_query($conn,$query);
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
+				<h4><?php echo utf8_encode($datos['nombre'])?> <?php echo utf8_encode($datos['apellidopa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -72,7 +72,7 @@ $resultado = mysqli_query($conn,$query);
 				<figure class="full-box">
 					<img src="./assets/img/LogoHome.png" alt="UserIcon">
 					<figcaption class="text-center text-titles">
-						<h5><?php echo utf8_encode($datos['Usuario'])?></h5>
+						<h5><?php echo utf8_encode($datos['usuario'])?></h5>
 					</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
@@ -85,14 +85,14 @@ $resultado = mysqli_query($conn,$query);
 			</div>
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-			    <?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+			    <?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="home.php">
 						<i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
 					</a>
 				</li>
 				<?php } ?>
-				<?php  if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+				<?php  if($datos['tipousuario_idtipousuario'] == '1'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Mantenimiento <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -132,23 +132,23 @@ $resultado = mysqli_query($conn,$query);
 					</ul>
 				</li>
 				<?php } ?>
-				<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-card zmdi-hc-fw"></i> Tickets <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 						<li>
 							<a href="ticket.php"> <i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Tickets</a>
 						</li>
 						<?php } ?>
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 						<li>
 							<a href="mistickets.php"> <i class="zmdi zmdi-notifications"></i> Mis Tickets</a>
 						</li>
 						<?php } ?>
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 						<li>
 							<a href="estadoticket.php"> <i class="zmdi zmdi-label"></i> Estado de Tickets</a>
 						</li>
@@ -156,7 +156,7 @@ $resultado = mysqli_query($conn,$query);
 					</ul>
 				</li>
 				<?php } ?>
-				<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-store"></i> Centros de Negocios <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -171,18 +171,18 @@ $resultado = mysqli_query($conn,$query);
 					</ul>
 				</li>	
 				<?php } ?>
-				<?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+				<?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-time"></i> Asistencias <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-					    <?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+					    <?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 						<li>
 							<a href="asistencia.php"><i class="zmdi zmdi-calendar-check"></i> Lista de Asistencias</a>
 						</li>
 						<?php } ?>
-						<?php if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>	
+						<?php if($datos['tipousuario_idtipousuario'] == '1'){ ?>	
 						<li>
 							<a href="estadotiempo.php"><i class="zmdi zmdi-memory"></i> Estados Tiempo</a>
 						</li>
@@ -206,7 +206,7 @@ $resultado = mysqli_query($conn,$query);
 			</ul>
 		</nav>
 		<!-- Content page -->
-		<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+		<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 		<div class="container-fluid">
 			<div class="page-header">
 			  <h1 class="text-titles"><i class="zmdi zmdi-book zmdi-hc-fw"></i> Equipos en<small> ANLI</small></h1>
@@ -261,7 +261,7 @@ $resultado = mysqli_query($conn,$query);
 										        <select class="form-control" id="slcestado">
 													<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado del Equipo --</option>
 													<?php foreach($queryEstado as $estado){ ?>
-										        	<option value="<?php echo $estado['IdTipoEstado'] ?>"><?php echo utf8_encode($estado['TipoEstado']) ?></option>
+										        	<option value="<?php echo $estado['idtipoestado'] ?>"><?php echo utf8_encode($estado['tipoestado']) ?></option>
 										        	<?php } ?>
 										    	</select>
 											</div>
@@ -279,7 +279,7 @@ $resultado = mysqli_query($conn,$query);
 											<select  class="form-control" id="slcarea">
 												<option value="0" disabled="disabled" selected="true">-- Seleccione un Área --</option>
 												<?php foreach($queryArea as $area){ ?>
-												<option value="<?php echo $area['IdArea'] ?>"><?php echo utf8_encode($area['AreaNombre']) ?></option>
+												<option value="<?php echo $area['idarea'] ?>"><?php echo utf8_encode($area['areanombre']) ?></option>
 												<?php } ?>
 											</select>
 										</div>
@@ -310,16 +310,16 @@ $resultado = mysqli_query($conn,$query);
 									<tbody>
 										<?php foreach($queryTabla as $tabla){ ?>
 										<tr>
-											<td><?php echo utf8_encode($tabla['Codigo']) ?></td>
-											<td><?php echo utf8_encode($tabla['Equipo']) ?></td>
-											<td><?php echo utf8_encode($tabla['Marca']) ?></td>
-											<td><?php echo utf8_encode($tabla['Modelo']) ?></td>
-											<td><?php echo utf8_encode($tabla['Descripcion']) ?></td>
-											<td><?php echo utf8_encode($tabla['CentroNegocio']) ?></td>
-											<td><?php echo utf8_encode($tabla['AreaNombre']) ?></td>
-											<td><?php echo utf8_encode($tabla['TipoEstado']) ?></td>
-											<td><a onclick="EditarEquipo('<?php echo $tabla['IdEquipo'] ?>')" data-toggle="modal" data-target="#ModalActualizarEquipo"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-											<td><button type="button" onclick="EliminarEquipo(<?php echo $tabla['IdEquipo'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
+											<td><?php echo utf8_encode($tabla['codigo']) ?></td>
+											<td><?php echo utf8_encode($tabla['equipo']) ?></td>
+											<td><?php echo utf8_encode($tabla['marca']) ?></td>
+											<td><?php echo utf8_encode($tabla['modelo']) ?></td>
+											<td><?php echo utf8_encode($tabla['descripcion']) ?></td>
+											<td><?php echo utf8_encode($tabla['centronegocio']) ?></td>
+											<td><?php echo utf8_encode($tabla['areanombre']) ?></td>
+											<td><?php echo utf8_encode($tabla['tipoestado']) ?></td>
+											<td><a onclick="EditarEquipo('<?php echo $tabla['idequipo'] ?>')" data-toggle="modal" data-target="#ModalActualizarEquipo"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+											<td><button type="button" onclick="EliminarEquipo(<?php echo $tabla['idequipo'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 										</tr>
 										<?php } ?>
 									</tbody>
@@ -391,7 +391,7 @@ $resultado = mysqli_query($conn,$query);
 									<select class="form-control" id="slcEstadoEditar">
 										<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado --</option>
 										<?php foreach($queryEstado as $estado){ ?>
-										<option value="<?php echo $estado['IdTipoEstado'] ?>"><?php echo utf8_encode($estado['TipoEstado']) ?></option>
+										<option value="<?php echo $estado['idtipoestado'] ?>"><?php echo utf8_encode($estado['tipoestado']) ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -416,7 +416,7 @@ $resultado = mysqli_query($conn,$query);
 									<select class="form-control" id="slcAreaEditar">
 										<option value="0" disabled="disabled" selected="true">-- Seleccione una Area --</option>
 										<?php foreach($queryArea as $area){ ?>
-										<option value="<?php echo $area['IdArea'] ?>"><?php echo utf8_encode($area['AreaNombre']) ?></option>
+										<option value="<?php echo $area['idarea'] ?>"><?php echo utf8_encode($area['areanombre']) ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -441,7 +441,7 @@ $resultado = mysqli_query($conn,$query);
 		</div>
 		</div>
 <?php } ?>	
-<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+<?php if( $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-11 text-center">

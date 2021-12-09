@@ -1,18 +1,19 @@
 <?php 
 
 include 'conexion.php';
-mysqli_set_charset( $conn, "utf8" );
+//mysqli_set_charset( $conn, "utf8" );
+mb_internal_encoding('UTF-8');
 $centro = $_POST['id_centro'];
 
 $querySelectCascada = mysqli_query($conn, 
-    "SELECT centronegocio.IdCentroNegocio, centronegocio.CentroNegocio, usuario.IdUsuario, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM centronegocio
+    "SELECT centronegocio.idcentronegocio, centronegocio.centronegocio, usuario.idusuario, usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM centronegocio
     INNER JOIN usuario
-    ON centronegocio.IdCentroNegocio = usuario.CentroNegocio_idCentroNegocio
-    WHERE usuario.CentroNegocio_idCentroNegocio = '$centro' order by usuario ASC");
+    ON centronegocio.idcentronegocio = usuario.centronegocio_idcentronegocio
+    WHERE usuario.centronegocio_idcentronegocio = '$centro' order by nombre ASC");
 
     foreach($querySelectCascada as $row)
 	{
-		$html.= "<option value='".$row['IdUsuario']."'>".utf8_encode($row['Nombre'])." ".utf8_encode($row['ApellidoPa'])." ".utf8_encode($row['ApellidoMa'])."</option>";
+		$html.= "<option value='".$row['idusuario']."'>".utf8_encode($row['nombre'])." ".utf8_encode($row['apellidopa'])." ".utf8_encode($row['apellidoma'])."</option>";
 	}
 	echo $html;
 
