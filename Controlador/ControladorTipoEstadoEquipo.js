@@ -57,8 +57,8 @@ function EditarEstadoEquipo(id) {
       success: function (res){
           //EstadoTicketObject = JSON.parse(res);
           // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-          $('#txtIdEstadoEquipoEditar').val(res.IdTipoEstado);
-          $('#txtEstadoEquipoEditar').val(res.TipoEstado);
+          $('#txtIdEstadoEquipoEditar').val(res.idtipoestado);
+          $('#txtEstadoEquipoEditar').val(res.tipoestado);
           $("#ModalEstadoEquipo").modal("show"); 
       }
   });

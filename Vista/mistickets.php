@@ -6,8 +6,8 @@
 session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$queryTabla = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.TicketNom, ticket.Descripcion, ticket.Fecha, ticket.ObservacionPendiente FROM ticket");
-$queryEstado = mysqli_query($conn, "SELECT estadoticket.IdEstadoTicket, estadoticket.EstadoTicket FROM estadoticket");
+$queryTabla = mysqli_query($conn, "SELECT ticket.idticket, ticket.ticketnom, ticket.descripcion, ticket.fecha, ticket.observacionpendiente FROM ticket");
+$queryEstado = mysqli_query($conn, "SELECT estadoticket.idestadoticket, estadoticket.estadoticket FROM estadoticket");
 
 
 $varsesion = $_SESSION['IdUsuario'];
@@ -18,20 +18,20 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa ,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT idusuario, usuario, nombre, apellidopa ,tipousuario_idtipousuario FROM usuario WHERE idusuario = $topo";
 $resultado = mysqli_query($conn,$query);
-$queryPendiente = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket.FechaTicket, ticket.UsuarioAsignado, ticket.Descripcion, EstadoTicket 
+$queryPendiente = mysqli_query($conn, "SELECT ticket.idticket, ticket.ticket, ticket.fechaticket, ticket.usuarioasignado, ticket.descripcion, estadoticket 
 FROM ticket 
 INNER JOIN estadoticket
-ON ticket.EstadoTicket_IdEstadoTicket = estadoticket.IdEstadoTicket WHERE UsuarioAsignado = $topo AND EstadoTicket_IdEstadoTicket = 1");
-$queryProceso = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket.FechaTicket, ticket.UsuarioAsignado, ticket.Descripcion, ticket.ObservacionPendiente FROM ticket WHERE UsuarioAsignado = $topo AND EstadoTicket_IdEstadoTicket = 2");
-$queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket.FechaTicket, ticket.UsuarioAsignado, ticket.Descripcion, ticket.ObservacionPendiente, ticket.ObservacionProceso FROM ticket WHERE UsuarioAsignado = $topo AND EstadoTicket_IdEstadoTicket = 3");
+ON ticket.estadoticket_idestadoticket = estadoticket.idestadoticket WHERE usuarioasignado = $topo AND estadoticket_idestadoticket = 1");
+$queryProceso = mysqli_query($conn, "SELECT ticket.idticket, ticket.ticket, ticket.fechaticket, ticket.usuarioasignado, ticket.descripcion, ticket.observacionpendiente FROM ticket WHERE usuarioasignado = $topo AND estadoticket_idestadoticket = 2");
+$queryHecho = mysqli_query($conn, "SELECT ticket.idticket, ticket.ticket, ticket.fechaticket, ticket.usuarioasignado, ticket.descripcion, ticket.observacionpendiente, ticket.observacionproceso FROM ticket WHERE usuarioasignado = $topo AND estadoticket_idestadoticket = 3");
 
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Representative</title>
+	<title>Mis Tickets</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="shortcut icon" href="assets/img/iconweb.png">
@@ -66,7 +66,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
+				<h4><?php echo utf8_encode($datos['nombre'])?> <?php echo utf8_encode($datos['apellidopa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -74,7 +74,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 				<figure class="full-box">
 					<img src="./assets/img/LogoHome.png" alt="UserIcon">
 					<figcaption class="text-center text-titles">
-						<h5><?php echo utf8_encode($datos['Usuario'])?></h5>
+						<h5><?php echo utf8_encode($datos['usuario'])?></h5>
 					</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
@@ -87,14 +87,14 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 			</div>
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-			    <?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+			    <?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="home.php">
 						<i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
 					</a>
 				</li>
 				<?php } ?>
-				<?php  if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+				<?php  if($datos['tipousuario_idtipousuario'] == '1'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Mantenimiento <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -128,23 +128,23 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 					</ul>
 				</li>
 				<?php } ?>
-				<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-card zmdi-hc-fw"></i> Tickets <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-					<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+					<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 						<li>
 							<a href="ticket.php"> <i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Tickets</a>
 						</li>
 						<?php } ?>
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 						<li>
 							<a href="mistickets.php"> <i class="zmdi zmdi-notifications"></i> Mis Tickets</a>
 						</li>
 						<?php } ?>
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 						<li>
 							<a href="estadoticket.php"> <i class="zmdi zmdi-label"></i> Estado de Tickets</a>
 						</li>
@@ -152,7 +152,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 					</ul>
 				</li>
 				<?php } ?>
-				<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-store"></i> Centros de Negocios <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -167,18 +167,18 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 					</ul>
 				</li>	
 				<?php } ?>
-				<?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+				<?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-time"></i> Asistencias <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-					    <?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+					    <?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 						<li>
 							<a href="asistencia.php"><i class="zmdi zmdi-calendar-check"></i> Lista de Asistencias</a>
 						</li>
 						<?php } ?>
-						<?php if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>	
+						<?php if($datos['tipousuario_idtipousuario'] == '1'){ ?>	
 						<li>
 							<a href="estadotiempo.php"><i class="zmdi zmdi-memory"></i> Estados Tiempo</a>
 						</li>
@@ -237,12 +237,12 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 												<tbody>
 													<?php foreach($queryPendiente as $tabla){?>
 													<tr>
-														<td style="width: 10%"><?php echo utf8_encode($tabla['IdTicket']) ?></td>
-														<td style="width: 20%"><?php echo utf8_encode($tabla['Ticket']) ?></td>
-														<td style="width: 10%"><?php echo utf8_encode($tabla['FechaTicket']) ?></td>
-														<td style="width: 40%"><?php echo utf8_encode($tabla['Descripcion']) ?></td>
-														<td style="width: 40%"><?php echo utf8_encode($tabla['EstadoTicket']) ?></td>
-														<td style="width: 10%"><a onclick="EditarMisTickets('<?php echo $tabla['IdTicket'] ?>')" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+														<td style="width: 10%"><?php echo utf8_encode($tabla['idticket']) ?></td>
+														<td style="width: 20%"><?php echo utf8_encode($tabla['ticket']) ?></td>
+														<td style="width: 10%"><?php echo utf8_encode($tabla['fechaticket']) ?></td>
+														<td style="width: 40%"><?php echo utf8_encode($tabla['descripcion']) ?></td>
+														<td style="width: 40%"><?php echo utf8_encode($tabla['estadoticket']) ?></td>
+														<td style="width: 10%"><a onclick="EditarMisTickets('<?php echo $tabla['idticket'] ?>')" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 														<!-- <td style="width: 10%"><button type="button" onclick="EliminarArea(<?php //echo $tabla['IdTicket'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td> -->
 													</tr>
 													<?php } ?>
@@ -270,12 +270,12 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 								<tbody>
 									<?php foreach($queryProceso as $tabla){?>
 									<tr>
-										<td style="width: 10%"><?php echo utf8_encode($tabla['IdTicket']) ?></td>
-										<td style="width: 20%"><?php echo utf8_encode($tabla['Ticket']) ?></td>
-										<td style="width: 10%"><?php echo utf8_encode($tabla['FechaTicket']) ?></td>
-										<td style="width: 30%"><?php echo utf8_encode($tabla['Descripcion']) ?></td>
-										<td style="width: 30%"><?php echo utf8_encode($tabla['ObservacionPendiente']) ?></td>
-										<td style="width: 10%"><a onclick="EditarMisTicketsProceso('<?php echo $tabla['IdTicket'] ?>')" data-toggle="modal" data-target="#ModalActualizarProcesoTickets"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+										<td style="width: 10%"><?php echo utf8_encode($tabla['idticket']) ?></td>
+										<td style="width: 20%"><?php echo utf8_encode($tabla['ticket']) ?></td>
+										<td style="width: 10%"><?php echo utf8_encode($tabla['fechaticket']) ?></td>
+										<td style="width: 30%"><?php echo utf8_encode($tabla['descripcion']) ?></td>
+										<td style="width: 30%"><?php echo utf8_encode($tabla['observacionpendiente']) ?></td>
+										<td style="width: 10%"><a onclick="EditarMisTicketsProceso('<?php echo $tabla['idticket'] ?>')" data-toggle="modal" data-target="#ModalActualizarProcesoTickets"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
 										<!-- <td style="width: 10%"><button type="button" onclick="EliminarArea(<?php // echo $tabla['IdTicket'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td> -->
 									</tr>
 									<?php } ?>
@@ -301,14 +301,14 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 								<tbody>
 									<?php foreach($queryHecho as $tabla){?>
 									<tr>
-										<td style="width: 10%"><?php echo $tabla['IdTicket'] ?></td>
-										<td style="width: 20%"><?php echo utf8_encode($tabla['Ticket']) ?></td>
-										<td style="width: 10%"><?php echo utf8_encode($tabla['FechaTicket']) ?></td>
-										<td style="width: 30%"><?php echo utf8_encode($tabla['Descripcion']) ?></td>
-										<td style="width: 30%"><?php echo utf8_encode($tabla['ObservacionPendiente']) ?></td>
-										<td style="width: 30%"><?php echo utf8_encode($tabla['ObservacionProceso']) ?></td>
-										<td><a onclick="EditarMisTicketsHecho('<?php echo $tabla['IdTicket'] ?>')"  class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
-										<td style="width: 10%"><button type="button" onclick="EliminarArea(<?php echo $tabla['IdTicket'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
+										<td style="width: 10%"><?php echo $tabla['idticket'] ?></td>
+										<td style="width: 20%"><?php echo utf8_encode($tabla['ticket']) ?></td>
+										<td style="width: 10%"><?php echo utf8_encode($tabla['fechaticket']) ?></td>
+										<td style="width: 30%"><?php echo utf8_encode($tabla['descripcion']) ?></td>
+										<td style="width: 30%"><?php echo utf8_encode($tabla['observacionpendiente']) ?></td>
+										<td style="width: 30%"><?php echo utf8_encode($tabla['observacionproceso']) ?></td>
+										<td><a onclick="EditarMisTicketsHecho('<?php echo $tabla['idticket'] ?>')"  class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>
+										<td style="width: 10%"><button type="button" onclick="EliminarArea(<?php echo $tabla['idticket'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 									</tr>
 									<?php } ?>
 								</tbody>
@@ -358,7 +358,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 				<select class="form-control" id="slcEstadoEditarHecho">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione su Nuevo Estado de Ticket --</option>
 					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo utf8_encode($estado['EstadoTicket']) ?></option>
+					<option value="<?php echo $estado['idestadoticket'] ?>"><?php echo utf8_encode($estado['estadoticket']) ?></option>
 				<?php } ?>
 				</select>
 			</div>
@@ -402,7 +402,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 				<select class="form-control" id="slcEstadoEditar">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione su Nuevo Estado de Ticket --</option>
 					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo utf8_encode($estado['EstadoTicket']) ?></option>
+					<option value="<?php echo $estado['idestadoticket'] ?>"><?php echo utf8_encode($estado['estadoticket']) ?></option>
 				<?php } ?>
 				</select>
 			</div>
@@ -452,7 +452,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.IdTicket, ticket.Ticket, ticket
 				<select class="form-control" id="slcEstadoEditarProceso">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione su Nuevo Estado de Ticket --</option>
 					<?php foreach($queryEstado as $estado){ ?>
-					<option value="<?php echo $estado['IdEstadoTicket'] ?>"><?php echo utf8_encode($estado['EstadoTicket']) ?></option>
+					<option value="<?php echo $estado['idestadoticket'] ?>"><?php echo utf8_encode($estado['estadoticket']) ?></option>
 				<?php } ?>
 				</select>
 			</div>

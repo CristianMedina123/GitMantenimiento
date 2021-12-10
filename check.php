@@ -7,11 +7,11 @@ $queryEstado = mysqli_query($conn, "SELECT idestadotiempo, estadotiempo FROM est
 $queryUsuario = mysqli_query($conn, "SELECT idusuario, usuario, nombre, apellidopa, apellidoma FROM usuario");
 $queryTabla = mysqli_query($conn, "SELECT controltiempo.idcontroltiempo, controltiempo.fechatiempo, estadotiempo.estadotiempo AS Tiempo, usuario.nombre, usuario.apellidopa, usuario.apellidoma, usuario.psw,centronegocio.centronegocio, centronegocio.estadocn FROM controltiempo
 INNER JOIN usuario
-ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
+ON controltiempo.usuario_idusuario = usuario.idusuario
 INNER JOIN centronegocio
-ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
+ON controltiempo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
 INNER JOIN estadotiempo
-ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo");
+ON controltiempo.estadotiempo_idestadotiempo = estadotiempo.idestadotiempo");
 
 ?>
 <!DOCTYPE html>

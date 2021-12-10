@@ -7,9 +7,9 @@ function EditarMisTickets(id) {
         data: cadena,
         success: function (res){
             EstadoTicketObject = JSON.parse(res);
-            $('#txtIdTicketEditar').val(EstadoTicketObject.IdTicket);
-            $('#txtTicketNom1Editar').val(EstadoTicketObject.Ticket);
-            $('#slcEstadoEditar').val(EstadoTicketObject.EstadoTicket_IdEstadoTicket);
+            $('#txtIdTicketEditar').val(EstadoTicketObject.idticket);
+            $('#txtTicketNom1Editar').val(EstadoTicketObject.ticket);
+            $('#slcEstadoEditar').val(EstadoTicketObject.estadoticket_idestadoticket);
             $("#ModalActualizarMisTickets").modal("show"); 
         }                    
     });
@@ -56,11 +56,11 @@ function EditarMisTicketsProceso(id) {
         success: function (res){
             EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-            $('#txtIdTicketEditarProceso').val(EstadoTicketObject.IdTicket);
-            $('#txtTicketEditarProceso').val(EstadoTicketObject.Ticket);
-            $('#txtObsPendienteEditarProceso').val(EstadoTicketObject.ObservacionPendiente);
-            $('#txtObsPendienteProcesoEditarProceso').val(EstadoTicketObject.ObservacionProceso);
-            $('#slcEstadoEditarProceso').val(EstadoTicketObject.EstadoTicket_IdEstadoTicket);
+            $('#txtIdTicketEditarProceso').val(EstadoTicketObject.idticket);
+            $('#txtTicketEditarProceso').val(EstadoTicketObject.ticket);
+            $('#txtObsPendienteEditarProceso').val(EstadoTicketObject.observacionpendiente);
+            $('#txtObsPendienteProcesoEditarProceso').val(EstadoTicketObject.observacionproceso);
+            $('#slcEstadoEditarProceso').val(EstadoTicketObject.estadoticket_idestadoticket);
             $("#ModalActualizarProcesoTickets").modal("show");  
         }
     });
@@ -108,12 +108,12 @@ function EditarMisTicketsHecho(id) {
         success: function (res){
             EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-            $('#txtIdTicketEditarProcesoHecho').val(EstadoTicketObject.IdTicket);
-            $('#txtTicketEditarProcesoHecho').val(EstadoTicketObject.Ticket);
-            $('#txtObsPendienteEditarProcesoHecho').val(EstadoTicketObject.ObservacionPendiente);
-            $('#txtObsPendienteProcesoEditarProcesoHecho').val(EstadoTicketObject.ObservacionProceso);
-            $('#txtObsPendienteHechosEditarProceso').val(EstadoTicketObject.ObservacionCompletado);
-            $('#slcEstadoEditarHecho').val(EstadoTicketObject.EstadoTicket_IdEstadoTicket);
+            $('#txtIdTicketEditarProcesoHecho').val(EstadoTicketObject.idticket);
+            $('#txtTicketEditarProcesoHecho').val(EstadoTicketObject.ticket);
+            $('#txtObsPendienteEditarProcesoHecho').val(EstadoTicketObject.observacionpendiente);
+            $('#txtObsPendienteProcesoEditarProcesoHecho').val(EstadoTicketObject.observacionproceso);
+            $('#txtObsPendienteHechosEditarProceso').val(EstadoTicketObject.observacioncompletado);
+            $('#slcEstadoEditarHecho').val(EstadoTicketObject.estadoticket_idestadoticket);
             $("#ModalActualizarHechoTickets").modal("show");  
         }
     });

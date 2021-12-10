@@ -2,7 +2,7 @@
 	session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
 
-$query_TipoUsuario = mysqli_query($conn,"SELECT IdTipoUsuario, TipoUsuario FROM tipousuario");
+$query_TipoUsuario = mysqli_query($conn,"SELECT idtipousuario, tipousuario FROM tipousuario");
 $varsesion = $_SESSION['IdUsuario'];
 
 if($varsesion == null || $varsesion = ''){
@@ -11,7 +11,7 @@ if($varsesion == null || $varsesion = ''){
 }
 
 $topo = $_SESSION['IdUsuario'];
-$query = "SELECT IdUsuario, Usuario, Nombre, ApellidoPa,TipoUsuario_IdTipoUsuario FROM usuario WHERE IdUsuario = $topo";
+$query = "SELECT idusuario, usuario, nombre, apellidopa ,tipousuario_idtipousuario FROM usuario WHERE idusuario = $topo";
 $resultado = mysqli_query($conn,$query);
 ?>
 <!DOCTYPE html>
@@ -53,7 +53,7 @@ $resultado = mysqli_query($conn,$query);
 		<div class="full-box dashboard-sideBar-ct">
 			<!--SideBar Title -->
 			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
-				<h4><?php echo utf8_encode($datos['Nombre'])?> <?php echo utf8_encode($datos['ApellidoPa'])?></h4>
+				<h4><?php echo utf8_encode($datos['nombre'])?> <?php echo utf8_encode($datos['apellidopa'])?></h4>
 				 <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
 			</div>
 			<!-- SideBar User info -->
@@ -61,7 +61,7 @@ $resultado = mysqli_query($conn,$query);
 				<figure class="full-box">
 					<img src="./assets/img/LogoHome.png" alt="UserIcon">
 					<figcaption class="text-center text-titles">
-						<h5><?php echo utf8_encode($datos['Usuario'])?></h5>
+						<h5><?php echo utf8_encode($datos['usuario'])?></h5>
 					</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
@@ -74,14 +74,14 @@ $resultado = mysqli_query($conn,$query);
 			</div>
 			<!-- SideBar Menu -->
 			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
-			    <?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+			    <?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="home.php">
 						<i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
 					</a>
 				</li>
 				<?php } ?>
-				<?php  if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+				<?php  if($datos['tipousuario_idtipousuario'] == '1'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-case zmdi-hc-fw"></i> Mantenimiento <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -121,23 +121,23 @@ $resultado = mysqli_query($conn,$query);
 					</ul>
 				</li>
 				<?php } ?>
-				<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-card zmdi-hc-fw"></i> Tickets <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 						<li>
 							<a href="ticket.php"> <i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Tickets</a>
 						</li>
 						<?php } ?>
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 						<li>
 							<a href="mistickets.php"> <i class="zmdi zmdi-notifications"></i> Mis Tickets</a>
 						</li>
 						<?php } ?>
-						<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 						<li>
 							<a href="estadoticket.php"> <i class="zmdi zmdi-label"></i> Estado de Tickets</a>
 						</li>
@@ -145,7 +145,7 @@ $resultado = mysqli_query($conn,$query);
 					</ul>
 				</li>
 				<?php } ?>
-				<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-store"></i> Centros de Negocios <i class="zmdi zmdi-caret-down pull-right"></i>
@@ -160,18 +160,18 @@ $resultado = mysqli_query($conn,$query);
 					</ul>
 				</li>	
 				<?php } ?>
-				<?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+				<?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 				<li>
 					<a href="#!" class="btn-sideBar-SubMenu">
 						<i class="zmdi zmdi-time"></i> Asistencias <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-					    <?php if($datos['TipoUsuario_IdTipoUsuario'] == '1' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+					    <?php if($datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 						<li>
 							<a href="asistencia.php"><i class="zmdi zmdi-calendar-check"></i> Lista de Asistencias</a>
 						</li>
 						<?php } ?>
-						<?php if($datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>	
+						<?php if($datos['tipousuario_idtipousuario'] == '1'){ ?>	
 						<li>
 							<a href="estadotiempo.php"><i class="zmdi zmdi-memory"></i> Estados Tiempo</a>
 						</li>
@@ -195,7 +195,7 @@ $resultado = mysqli_query($conn,$query);
 			</ul>
 		</nav>
 		<!-- Content page -->
-		<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '1'){ ?>
+		<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 		<div class="container-fluid">
 			<div class="page-header">
 			  <h1 class="text-titles"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i> Empleados<small> de ANLI</small></h1>
@@ -240,9 +240,9 @@ $resultado = mysqli_query($conn,$query);
 									<tbody>
 										<?php foreach($query_TipoUsuario as $fila){ ?>
 										<tr>
-											<td><?php echo utf8_encode($fila['TipoUsuario']) ?></td>
-											<td><a onclick="EditarTipoUsuario('<?php echo $fila['IdTipoUsuario'] ?>')" data-toggle="modal" data-target="#ModalTipoUsuarioEditar"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a>
-											<td><button type="button" onclick="EliminarTipoUsuario(<?php echo $fila['IdTipoUsuario'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
+											<td><?php echo utf8_encode($fila['tipousuario']) ?></td>
+											<td><a onclick="EditarTipoUsuario('<?php echo $fila['idtipousuario'] ?>')" data-toggle="modal" data-target="#ModalTipoUsuarioEditar"   class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a>
+											<td><button type="button" onclick="EliminarTipoUsuario(<?php echo $fila['idtipousuario'] ?>)" class="btn btn-danger btn-raised btn-xs"><i class="zmdi zmdi-delete"></i></button></td>
 										</tr>
 										<?php } ?>
 									</tbody>
@@ -281,7 +281,7 @@ $resultado = mysqli_query($conn,$query);
 </div>
 
 	<?php } ?>
-	<?php if( $datos['TipoUsuario_IdTipoUsuario'] == '2' || $datos['TipoUsuario_IdTipoUsuario'] == '3'){ ?>
+	<?php if( $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-11 text-center">

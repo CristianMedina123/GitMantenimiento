@@ -57,8 +57,8 @@ function EditarTipoUsuario(id) {
       success: function (res){
           //EstadoTicketObject = JSON.parse(res);
           // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-          $('#txtIdTipoUsuario').val(res.IdTipoUsuario);
-          $('#txtTipoUsuarioEditar').val(res.TipoUsuario);
+          $('#txtIdTipoUsuario').val(res.idtipousuario);
+          $('#txtTipoUsuarioEditar').val(res.tipousuario);
           $("#ModalTipoUsuarioEditar").modal("show"); 
       }
   });
