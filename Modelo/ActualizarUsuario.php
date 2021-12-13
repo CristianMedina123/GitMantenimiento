@@ -15,17 +15,17 @@ $ingreso = mysqli_real_escape_string($conn, utf8_decode($_POST['ingreso']));
 $cumple = mysqli_real_escape_string($conn, utf8_decode($_POST['cumple']));
 
 $query = "UPDATE usuario SET 
-Usuario = '$usuario', 
-Psw = '$psw',
-Nombre = '$nombre',
-ApellidoPa = '$apepat',
-ApellidoMa = '$apemat',
-FechaIngreso = '$ingreso',
-FechaCumple = '$cumple',
-CentroNegocio_idCentroNegocio = $centro,
-Area_IdArea = $area,
-TipoUsuario_IdTipoUsuario = $tipo
-WHERE IdUsuario = $id";
+usuario = '$usuario', 
+psw = '$psw',
+nombre = '$nombre',
+apellidopa = '$apepat',
+apellidoma = '$apemat',
+fechaingreso = '$ingreso',
+fechacumple = '$cumple',
+centronegocio_idcentronegocio = $centro,
+area_idarea = $area,
+tipousuario_idtipousuario = $tipo
+WHERE idusuario = $id";
 
 echo mysqli_query($conn, $query);
 mysqli_close($conn);

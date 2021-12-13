@@ -6,9 +6,9 @@ $obspendiente =  mysqli_real_escape_string($conn, utf8_decode($_POST['obspendien
 $estado =  mysqli_real_escape_string($conn, utf8_decode($_POST['estado']));
 
 $query = "UPDATE ticket SET 
-ObservacionProceso = '$obspendiente', 
-EstadoTicket_IdEstadoTicket = $estado 
-WHERE IdTicket = $id";
+observacionproceso = '$obspendiente', 
+estadoticket_idestadticket = $estado 
+WHERE idticket = $id";
 echo mysqli_query($conn, $query);
 mysqli_close($conn);
 

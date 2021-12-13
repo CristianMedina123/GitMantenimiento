@@ -12,7 +12,7 @@ $centro = mysqli_real_escape_string($conn, utf8_decode($_POST['centro']));
 $area = mysqli_real_escape_string($conn, utf8_decode($_POST['area']));
 $estado = mysqli_real_escape_string($conn, utf8_decode($_POST['estado']));
 
-$query = "INSERT INTO equipo (Codigo, Equipo, Marca, Modelo, Descripcion, CentroNegocio_idCentroNegocio, Area_IdArea, TipoEstado_IdTipoEstado) 
+$query = "INSERT INTO equipo (codigo, equipo, marca, modelo, descripcion, centronegocio_idcentronegocio, area_idarea, tipoestado_idtipoestado) 
 VALUES 
 ('$codigo', '$equipo', '$marca', '$modelo', '$desc', '$centro', '$area', '$estado')";
 echo mysqli_query($conn, $query);

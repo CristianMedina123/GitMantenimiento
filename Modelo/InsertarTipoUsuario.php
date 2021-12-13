@@ -3,7 +3,7 @@ include 'conexion.php';
 mysqli_set_charset( $conn, "utf8" );
 $tipo = mysqli_real_escape_string($conn, utf8_decode($_POST['tipo']));
 
-$query = "INSERT INTO tipousuario (`TipoUsuario`) VALUES ('$tipo')";
+$query = "INSERT INTO tipousuario (`tipousuario`) VALUES ('$tipo')";
 // echo mysqli_query($conn, $query);
 // mysqli_close($conn);
 

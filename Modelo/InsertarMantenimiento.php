@@ -9,7 +9,7 @@ $equipo = mysqli_real_escape_string($conn, utf8_decode($_POST['equipo']));
 // $centro = mysqli_real_escape_string($conn, utf8_decode($_POST['centro']));Equipo_CentroNegocio_idCentroNegocio
 $usuario = mysqli_real_escape_string($conn, utf8_decode($_POST['tipo']));
 
-$query = "INSERT INTO mantenimiento (Mantenimiento, FechaMantenimiento, Descripcion, Equipo_idEquipo, Usuario_IdUsuario) VALUES 
+$query = "INSERT INTO mantenimiento (mantenimiento, fechamantenimiento, descripcion, equipo_idequipo, usuario_idusuario) VALUES 
 ('$mantenimiento', '$fecha', '$desc', '$equipo', '$usuario')";
 echo mysqli_query($conn,$query);
 mysqli_close($conn);

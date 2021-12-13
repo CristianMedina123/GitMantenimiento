@@ -21,7 +21,7 @@ $filaUsuario = mysqli_fetch_assoc($resultadoCountUsuarios);
 //CONSULTA CONTABLE PARA VER TICKET PENDIENTES
 $query_countTicket = "SELECT COUNT(*) AS pendiente FROM ticket
 INNER JOIN estadoticket
-ON ticket.EstadoTicket_IdEstadoTicket = estadoticket.IdEstadoTicket WHERE estadoticket.EstadoTicket = 'Pendiente'";
+ON ticket.estadoticket_idestadoticket = estadoticket.idestadoticket WHERE estadoticket.estadoticket = 'pendiente'";
 $resultadoCountTicket = mysqli_query($conn, $query_countTicket);
 $filaTicket = mysqli_fetch_assoc($resultadoCountTicket);
 

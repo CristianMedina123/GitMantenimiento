@@ -5,7 +5,7 @@ mysqli_set_charset( $conn, "utf8" );
 
 $id =  mysqli_real_escape_string($conn, utf8_decode($_POST['id']));
 
-$query = "DELETE FROM ticket WHERE IdTicket = '$id'";
+$query = "DELETE FROM ticket WHERE idticket = '$id'";
 echo mysqli_query($conn, $query);
 mysqli_close($conn);
 

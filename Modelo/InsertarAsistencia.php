@@ -12,7 +12,7 @@ $hora = mysqli_real_escape_string($conn, utf8_decode($_POST['hora']));
 
 
 
-$query = "INSERT INTO controltiempo (fechatiempo, HoraTiempo, EstadoTiempo_IdEstadoTiempo, Usuario_IdUsuario, CentroNegocio_IdCentroNegocio) 
+$query = "INSERT INTO controltiempo (fechatiempo, horatiempo, estadotiempo_idestadotiempo, usuario_idusuario, centronegocio_idcentronegocio) 
 VALUES ('$fecha', '$hora' ,'$estado', '$id', '$centro')";
 echo mysqli_query($conn,$query);
 mysqli_close($conn);

@@ -10,13 +10,12 @@ $equipo =  mysqli_real_escape_string($conn, utf8_decode($_POST['equipo']));
 $usuario =  mysqli_real_escape_string($conn, utf8_decode($_POST['usuario']));
 
 $query = "UPDATE mantenimiento SET 
-Mantenimiento = '$mantenimiento',
-FechaMantenimiento = '$fecha',
-Descripcion = '$descripcion',
-Equipo_idEquipo = $equipo,
-
-Usuario_IdUsuario = $usuario 
-WHERE IdMantenimiento = '$id'";
+mantenimiento = '$mantenimiento',
+fechamantenimiento = '$fecha',
+descripcion = '$descripcion',
+equipo_idequipo = $equipo,
+usuario_idusuario = $usuario 
+WHERE idmantenimiento = '$id'";
 echo mysqli_query($conn, $query);
 mysqli_close($conn);
 
