@@ -185,6 +185,18 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.idticket, ticket.ticket, ticket
 						<?php } ?>
 					</ul>
 				</li>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+					<i class="zmdi zmdi-file-text"></i> Reportes <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="reportesgeneral.php"><i class="zmdi zmdi-folder"></i> Sección de Reportes</a>
+						</li>
+					</ul>
+				</li>	
+				<?php } ?>	
 				<?php } ?>	
 			</ul>
 		</div>
@@ -204,7 +216,7 @@ $queryHecho = mysqli_query($conn, "SELECT ticket.idticket, ticket.ticket, ticket
 	<!-- Content page -->
 	<div class="container-fluid">
 			<div class="page-header">
-			  <h1 class="text-titles"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Mis Tickets <small>Listado</small></h1>
+			  <h1 class="text-titles"><i class="zmdi zmdi-label"></i> Mis Tickets <small>Listado</small></h1>
 			</div>
 			<p class="lead">Estos son los tickets que tienes pendientes, en proceso y completados.</p>
 		</div>

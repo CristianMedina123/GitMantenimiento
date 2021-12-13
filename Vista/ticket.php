@@ -194,6 +194,18 @@ $resultado = mysqli_query($conn,$query);
 						<?php } ?>
 					</ul>
 				</li>
+				<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+					<i class="zmdi zmdi-file-text"></i> Reportes <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="reportesgeneral.php"><i class="zmdi zmdi-folder"></i> Sección de Reportes</a>
+						</li>
+					</ul>
+				</li>	
+				<?php } ?>	
 				<?php } ?>	
 			</ul>
 		</div>
@@ -214,7 +226,7 @@ $resultado = mysqli_query($conn,$query);
 		<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3' ){ ?>
 		<div class="container-fluid">
 			<div class="page-header">
-			  <h1 class="text-titles"><i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Ticket <small>de ANLI</small></h1>
+			  <h1 class="text-titles"><i class="zmdi zmdi-label"></i> Ticket <small>de ANLI</small></h1>
 			</div>
 			<p class="lead">El apartado de los Tickets es para dar un mejor seguimiento de los procesos que son asignados al personal de ANLI.</p>
 		</div>

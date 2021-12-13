@@ -210,9 +210,9 @@ $resultado = mysqli_query($conn,$query);
 		<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 		<div class="container-fluid">
 			<div class="page-header">
-			  <h1 class="text-titles"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Áreas de <small>ANLI</small></h1>
+			  <h1 class="text-titles"><i class="zmdi zmdi-file-text"></i> Reportes de <small>ANLI</small></h1>
 			</div>
-			<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptas reiciendis tempora voluptatum eius porro ipsa quae voluptates officiis sapiente sunt dolorem, velit quos a qui nobis sed, dignissimos possimus!</p>
+			<p class="lead">En este apartado se pueden realizar reportes de la información que se tiene en la base de datos, estos reportes son clasificados por “Mantenimiento”, “Tickets” y “Asistencias”.</p>
 		</div>
 		<div class="container-fluid">
 
@@ -252,7 +252,7 @@ $resultado = mysqli_query($conn,$query);
 						<a data-toggle="modal" data-target="#ModalPdfCentros" class="botonctrlreport"><i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por CN</a>
 						<a data-toggle="modal" data-target="#ModalPdfFechaAsistencia" class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</a>
 						<a data-toggle="modal" data-target="#ModalPdfFechaCNAsistencia" class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por Fechas y CN</a>
-						<a data-toggle="modal" data-target="#ModalPdfUsuarioIrComer" class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i><br/> Usuario/ Motivo </a>
+						<a data-toggle="modal" data-target="#ModalPdfUsuarioIrComer" class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i><br/> Usuario / Motivo </a>
 						<a data-toggle="modal" data-target="#ModalPdfUsuarioFechaCN" class="botonctrlreport"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Motivos</a>
 						<a data-toggle="modal" data-target="#ModalCumple" class="botonctrlreport"><i class="zmdi zmdi-cake zmdi-hc-3x"></i> <br/> Cumpleaños</a>
 					</div>
@@ -341,7 +341,7 @@ $resultado = mysqli_query($conn,$query);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Equipos Asignados</h2>
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Equipos</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -576,14 +576,14 @@ $resultado = mysqli_query($conn,$query);
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Tickets Completados</h2>
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Tickets</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 	  	<div class="form-group">
-			<label class="control-label">Seleccione un Estadp de Ticket</label>
+			<label class="control-label">Seleccione un Estado de Ticket</label>
 			<select class="form-control" id="slcestadoticketreportepdf">
 				<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado Ticket --</option>
 				<?php foreach($queryestadoticket as $estadoticket){ ?>
