@@ -4,7 +4,7 @@ include 'conexion.php';
 
 $id = $_POST['id'];
 
-$query = mysqli_query($conn, "SELECT usuario.IdUsuario, usuario.Usuario, usuario.Password as contra ,usuario.Nombre, usuario.ApellidoPat,centronegocio.IdCentroNegocio, centronegocio.CentroNegocio, area.IdArea, area.AreaNombre, tipousuario.IdTipoUsuario, tipousuario.TipoUsuario FROM usuario
+$query = mysqli_query($conn, "SELECT usuario.idusuario, usuario.usuario, usuario.psw as contra ,usuario.nombre, usuario.apellidopa,centronegocio.IdCentroNegocio, centronegocio.CentroNegocio, area.IdArea, area.AreaNombre, tipousuario.IdTipoUsuario, tipousuario.TipoUsuario FROM usuario
 INNER JOIN centronegocio
 ON usuario.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
 INNER JOIN area

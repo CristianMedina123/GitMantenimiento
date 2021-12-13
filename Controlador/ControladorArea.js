@@ -55,9 +55,9 @@ function EliminarArea(id) {
         success: function (res){//si se arroja algo se extrae los datos
             //EstadoTicketObject = JSON.parse(res);
             // titulo.innerHTML = TipoIngredienteObject[0].nombre;
-            $('#txtIdAreaEditar').val(res.IdArea);
-            $('#txtAreaEditar').val(res.AreaNombre);//se extrae la información del json y se pone en el input
-            $('#slcCentrosEditar').val(res.IdCentroNegocio);
+            $('#txtIdAreaEditar').val(res.idarea);
+            $('#txtAreaEditar').val(res.areanombre);//se extrae la información del json y se pone en el input
+            $('#slcCentrosEditar').val(res.idcentronegocio);
             $("#ModalActualizarArea").modal("show"); 
         }
     });
