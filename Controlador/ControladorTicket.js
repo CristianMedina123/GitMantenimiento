@@ -19,6 +19,16 @@ $("#slccnticketcreador").change(function () {
     });
 })
 
+$("#slccnusuarioticket").change(function () {
+
+    $("#slccnusuarioticket option:selected").each(function () {
+        id_centro = $(this).val();
+        $.post("../Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){
+            $("#slcusuarioPDF").html(data);
+        });            
+    });
+})
+
 function InsertarTicket(){
 
     var tituloTicket = $('#txtticket').val();

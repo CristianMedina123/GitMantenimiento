@@ -45,15 +45,15 @@ $fecha =  $_GET['fecha'];
 $fecha2 =  $_GET['fecha2'];
 $cn =  $_GET['cn'];
 
-$query = mysqli_query($conn, "SELECT controltiempo.FechaTiempo, controltiempo.HoraTiempo,estadotiempo.EstadoTiempo as motivo,centronegocio.EstadoCN, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa 
+$query = mysqli_query($conn, "SELECT controltiempo.fechatiempo, controltiempo.horatiempo,estadotiempo.estadotiempo as motivo,centronegocio.estadocn, centronegocio.centronegocio,usuario.nombre, usuario.apellidopa, usuario.apellidoma 
 FROM controltiempo  
 INNER JOIN usuario
-ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
+ON controltiempo.usuario_idusuario = usuario.idusuario
 INNER JOIN centronegocio
-ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
+ON controltiempo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
 INNER JOIN estadotiempo
-ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo
-WHERE IdCentroNegocio = $cn AND FechaTiempo  BETWEEN '$fecha%' AND '$fecha2%'");
+ON controltiempo.estadotiempo_idestadotiempo = estadotiempo.idestadotiempo
+WHERE idcentronegocio = $cn AND fechatiempo  BETWEEN '$fecha%' AND '$fecha2%'");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -62,14 +62,14 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(15,8, $row['FechaTiempo'], 1, 0, 'C', 0);
-    $pdf->Cell(15,8, $row['HoraTiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(15,8, $row['fechatiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(15,8, $row['horatiempo'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['motivo'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['Nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['ApellidoPa'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['ApellidoMa'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['CentroNegocio'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['EstadoCN'], 1, 1, 'C', 0);
+    $pdf->Cell(25,8, $row['nombre'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['apellidopa'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['apellidoma'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['centronegocio'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['estadocn'], 1, 1, 'C', 0);
 }
 
 

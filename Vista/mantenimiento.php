@@ -378,7 +378,7 @@ $resultado = mysqli_query($conn,$query);
 				<select class="form-control" id="slcEquipoPDF">
 					<option value="0" disabled="disabled" selected="true" >-- Seleccione un Equipo --</option>
 					<?php foreach($query_equipo as $equipo){ ?>
-						<option value="<?php echo $equipo['idequipo'] ?>"><?php echo utf8_encode($equipo['equipo']) ?> <?php echo utf8_encode($equipo['marca']) ?> <?php echo utf8_encode($equipo['codigo']) ?></option>
+						<option value="<?php echo $equipo['idequipo'] ?>"><?php echo utf8_encode($equipo['equipo']) ?> / <?php echo utf8_encode($equipo['codigo']) ?> / <?php echo utf8_encode($equipo['marca']) ?> </option>
 					<?php } ?>
 				</select>
 			</div>

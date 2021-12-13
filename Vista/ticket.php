@@ -24,7 +24,8 @@ ON ticket.usuarioasignado = usuario.idusuario");
 $queryCentroTepic = mysqli_query($conn, "SELECT usuario.idusuario, usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM usuario
 INNER JOIN centronegocio
 ON usuario.centronegocio_idcentronegocio = centronegocio.idcentronegocio
-WHERE IdCentroNegocio = 1");
+WHERE idcentronegocio = 1
+ORDER BY nombre ASC");
 
 $queryCN = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
 
@@ -449,7 +450,15 @@ $resultado = mysqli_query($conn,$query);
       </div>
       <div class="modal-body">
 	  	<label>Este es un reporte para ver todos los tickets del usuario seleccionado.</label>
-
+		  <div class="form-group">
+			<label class="control-label">Seleccione un CN</label>
+			<select class="form-control" id="slccnusuarioticket">
+				<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
+				<?php foreach($queryCN as $cnt){ ?>
+				<option value="<?php echo $cnt['idcentronegocio']  ?>"><?php echo utf8_encode($cnt['centronegocio']) ?> <?php echo utf8_encode($cnt['estadocn']) ?></option>
+				<?php } ?>
+			</select>
+		</div>
 		<div class="form-group">
 			<label class="control-label">Seleccione al Usuario</label>
 			<select class="form-control" id="slcusuarioPDF">

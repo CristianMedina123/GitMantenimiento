@@ -136,6 +136,9 @@ $("#rptMantEquipo").on("click", function () {
   );
 });
 
+
+
+
 $("#rptMantCN").on("click", function () {
   var cn = $("#slcCNPDF").val();
 

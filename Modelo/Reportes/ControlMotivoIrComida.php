@@ -43,14 +43,14 @@ require '../conexion.php';
 $usuario =  $_GET['usuario'];
 $estado =  $_GET['estado'];
 
-$query = mysqli_query($conn, "SELECT estadotiempo.EstadoTiempo,estadotiempo.IdEstadoTiempo,controltiempo.HoraTiempo,controltiempo.FechaTiempo, controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM controltiempo 
+$query = mysqli_query($conn, "SELECT estadotiempo.estadotiempo,estadotiempo.idestadotiempo,controltiempo.horatiempo,controltiempo.fechatiempo, controltiempo.estadotiempo_idestadotiempo, controltiempo.usuario_idusuario, controltiempo.centronegocio_idcentronegocio, centronegocio.centronegocio,usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM controltiempo 
 INNER JOIN centronegocio
-ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
+ON controltiempo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
 INNER JOIN usuario
-ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
+ON controltiempo.usuario_idusuario = usuario.idusuario
 INNER JOIN estadotiempo
-ON controltiempo.EstadoTiempo_IdEstadoTiempo = estadotiempo.IdEstadoTiempo
-WHERE usuario.IdUsuario = $usuario AND estadotiempo.IdEstadoTiempo = $estado ORDER BY controltiempo.FechaTiempo DESC");
+ON controltiempo.estadotiempo_idestadotiempo = estadotiempo.idestadotiempo
+WHERE usuario.idusuario = $usuario AND estadotiempo.idestadotiempo = $estado ORDER BY controltiempo.fechatiempo DESC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -59,13 +59,13 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(30,8, $row['EstadoTiempo'], 1, 0, 'C', 0);
-    $pdf->Cell(15,8, $row['FechaTiempo'], 1, 0, 'C', 0);
-    $pdf->Cell(15,8, $row['HoraTiempo'], 1, 0, 'C', 0);
-    $pdf->Cell(35,8, $row['CentroNegocio'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['Nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoPa'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoMa'], 1, 1, 'C', 0);
+    $pdf->Cell(30,8, $row['estadotiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(15,8, $row['fechatiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(15,8, $row['horatiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(35,8, $row['centronegocio'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['nombre'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['apellidopa'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['apellidoma'], 1, 1, 'C', 0);
 
 
 

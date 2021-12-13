@@ -42,12 +42,12 @@ require '../conexion.php';
 $fecha = $_GET['fecha'];
 $fecha2 = $_GET['fecha2'];
 
-$query = mysqli_query($conn, "SELECT controltiempo.FechaTiempo, controltiempo.HoraTiempo ,controltiempo.EstadoTiempo_IdEstadoTiempo, controltiempo.Usuario_IdUsuario, controltiempo.CentroNegocio_IdCentroNegocio, centronegocio.CentroNegocio,usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM controltiempo 
+$query = mysqli_query($conn, "SELECT controltiempo.fechatiempo, controltiempo.horatiempo ,controltiempo.estadotiempo_idrstadotiempo, controltiempo.usuario_idusuario, controltiempo.centronegocio_idcentronegocio, centronegocio.centronegocio,usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM controltiempo 
 INNER JOIN centronegocio
-ON controltiempo.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
+ON controltiempo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
 INNER JOIN usuario
-ON controltiempo.Usuario_IdUsuario = usuario.IdUsuario
-WHERE FechaTiempo BETWEEN '$fecha%' AND '$fecha2%' ORDER BY controltiempo.FechaTiempo DESC");
+ON controltiempo.usuario_idusuario = usuario.idusuario
+WHERE fechatiempo BETWEEN '$fecha%' AND '$fecha2%' ORDER BY controltiempo.fechatiempo DESC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -56,12 +56,12 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(30,8, $row['FechaTiempo'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['HoraTiempo'], 1, 0, 'C', 0);
-    $pdf->Cell(40,8, $row['CentroNegocio'], 1, 0, 'C', 0);
-    $pdf->Cell(40,8, $row['Nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(40,8, $row['ApellidoPa'], 1, 0, 'C', 0);
-    $pdf->Cell(40,8, $row['ApellidoMa'], 1, 1, 'C', 0);
+    $pdf->Cell(30,8, $row['fechatiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['horatiempo'], 1, 0, 'C', 0);
+    $pdf->Cell(40,8, $row['centronegocio'], 1, 0, 'C', 0);
+    $pdf->Cell(40,8, $row['nombre'], 1, 0, 'C', 0);
+    $pdf->Cell(40,8, $row['apellidopa'], 1, 0, 'C', 0);
+    $pdf->Cell(40,8, $row['apellidoma'], 1, 1, 'C', 0);
 
 }
 

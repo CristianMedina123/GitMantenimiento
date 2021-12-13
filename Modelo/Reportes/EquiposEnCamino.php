@@ -42,13 +42,13 @@ function Footer(){
 require '../conexion.php';
 
 
-$query = mysqli_query($conn, "SELECT equipo.Codigo, equipo.Equipo, equipo.Marca, equipo.Modelo, equipo.Descripcion,centronegocio.CentroNegocio,centronegocio.EstadoCN,tipoestado.tipoestado
+$query = mysqli_query($conn, "SELECT equipo.codigo, equipo.equipo, equipo.marca, equipo.modelo, equipo.descripcion,centronegocio.centronegocio,centronegocio.estadocn,tipoestado.tipoestado
 FROM equipo
 INNER JOIN tipoestado
-ON equipo.TipoEstado_IdTipoEstado = tipoestado.IdTipoEstado
+ON equipo.tipoestado_idtipoestado = tipoestado.idtipoestado
 INNER JOIN centronegocio
-ON equipo.CentroNegocio_idCentroNegocio = centronegocio.IdCentroNegocio
-WHERE TipoEstado_IdTipoEstado = 3 ORDER BY CentroNegocio_idCentroNegocio DESC");
+ON equipo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
+WHERE tipoestado_idtipoestado = 3 ORDER BY centronegocio_idcentronegocio DESC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
@@ -57,12 +57,12 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(25,8, $row['Equipo'], 1, 0, 'C', 0);
-    $pdf->Cell(20,8, $row['Codigo'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['Marca'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['Modelo'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['CentroNegocio'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['EstadoCN'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['equipo'], 1, 0, 'C', 0);
+    $pdf->Cell(20,8, $row['codigo'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['marca'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['modelo'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['centronegocio'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['estadocn'], 1, 0, 'C', 0);
     $pdf->Cell(30,8, $row['tipoestado'], 1, 1, 'C', 0);
 }
 

@@ -40,11 +40,11 @@ function Footer(){
 require '../conexion.php';
 // $usuario =  mysqli_real_escape_string($conn, utf8_decode($_POST['id']));
 
-$query = mysqli_query($conn, "SELECT ticket.Ticket,ticket.FechaTicket,estadoticket, usuario.Nombre, usuario.ApellidoPa, usuario.ApellidoMa FROM ticket
+$query = mysqli_query($conn, "SELECT ticket.ticket,ticket.fechaticket,estadoticket, usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM ticket
 INNER JOIN usuario
-ON ticket.Usuario_IdUsuario = usuario.IdUsuario
+ON ticket.usuario_idusuario = usuario.idusuario
 INNER JOIN estadoticket
-ON ticket.EstadoTicket_IdEstadoTicket = estadoticket.IdEstadoTicket
+ON ticket.estadoticket_idestadoticket = estadoticket.idestadoticket
 WHERE IdEstadoTicket = 2");
 
 // $pdf = new PDF('L','mm','A4');
@@ -54,12 +54,12 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',7);
 
 while($row = $query->fetch_assoc()){
-    $pdf->Cell(55,8, $row['Ticket'], 1, 0, 'C', 0);
-    $pdf->Cell(25,8, $row['FechaTicket'], 1, 0, 'C', 0);
+    $pdf->Cell(55,8, $row['ticket'], 1, 0, 'C', 0);
+    $pdf->Cell(25,8, $row['fechaticket'], 1, 0, 'C', 0);
     $pdf->Cell(25,8, $row['estadoticket'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['Nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoPa'], 1, 0, 'C', 0);
-    $pdf->Cell(30,8, $row['ApellidoMa'], 1, 1, 'C', 0);
+    $pdf->Cell(30,8, $row['nombre'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['apellidopa'], 1, 0, 'C', 0);
+    $pdf->Cell(30,8, $row['apellidoma'], 1, 1, 'C', 0);
 }
 
 

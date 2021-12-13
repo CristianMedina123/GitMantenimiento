@@ -44,10 +44,10 @@ $cumple =  $_GET['cumple'];
 
 $query = mysqli_query($conn, "SELECT usuario.nombre,usuario.apellidopa,usuario.apellidoma,usuario.fechacumple,area.areanombre,centronegocio.centronegocio, centronegocio.estadocn FROM usuario
 INNER JOIN area
-ON usuario.Area_IdArea = area.IdArea
+ON usuario.area_idarea = area.idarea
 INNER JOIN centronegocio
-ON usuario.CentroNegocio_IdCentroNegocio = centronegocio.IdCentroNegocio
-WHERE MONTH(fechaCumple) = $cumple ORDER BY nombre ASC");
+ON usuario.centronegocio_idcentronegocio = centronegocio.idcentronegocio
+WHERE MONTH(fechacumple) = $cumple ORDER BY nombre ASC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();
