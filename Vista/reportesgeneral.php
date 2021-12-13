@@ -1,35 +1,56 @@
-<?php
-	session_start();//iniciar la sesion
-	require '../Modelo/conexion.php';
-	include '../Modelo/consultasCount.php';
-    
-    $varsesion = $_SESSION['IdUsuario'];
+<?php 
+session_start();//iniciar la sesion
+include '../Modelo/conexion.php';
 
-	if($varsesion == null || $varsesion = ''){
-	    header("Location: ../index.html");
-	    die();
-    }
+$querySelectAreas = mysqli_query($conn, "SELECT idarea, areanombre, centronegocio_idcentronegocio, centronegocio FROM area INNER JOIN centronegocio ON area.centronegocio_idcentronegocio = centronegocio.idcentronegocio ORDER BY areanombre ASC");
+$queryCentros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
+$queryTabla = mysqli_query($conn, "SELECT area.idarea, area.areanombre, centronegocio.centronegocio FROM area
+INNER JOIN centronegocio ON area.centronegocio_idcentronegocio = centronegocio.idcentronegocio ORDER BY centronegocio ASC");
 
-	$topo = $_SESSION['IdUsuario'];
-	$query = "SELECT idusuario, usuario, nombre, apellidopa ,tipousuario_idtipousuario FROM usuario WHERE idusuario = $topo";
-	$resultado = mysqli_query($conn,$query);
+$varsesion = $_SESSION['IdUsuario'];
 
-	$topo2 = $_SESSION['IdUsuario'];
-	$query2 = "SELECT idusuario, usuario, nombre, apellidopa ,tipousuario_idtipousuario FROM usuario WHERE idusuario = $topo2";
-	$resultado2 = mysqli_query($conn,$query2);	
+if($varsesion == null || $varsesion = ''){
+	header("Location: ../index.html");
+	die();
+}
+
+$topo = $_SESSION['IdUsuario'];
+$query = "SELECT idusuario, usuario, nombre, apellidopa ,tipousuario_idtipousuario FROM usuario WHERE idusuario = $topo";
+$resultado = mysqli_query($conn,$query);
+
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Inicio</title>
+	<title>Area</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="shortcut icon" href="assets/img/iconweb.png">
 	<link rel="stylesheet" href="./css/main.css">
+	<!-- JavaScript -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+	<!-- Bootstrap theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+	<!-- RTL version-->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.rtl.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.rtl.min.css"/>
+	<!-- Bootstrap theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.rtl.min.css"/>
+	<!-- DATATABLE -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+  
 </head>
-<body>				
-	<?php while($datos = mysqli_fetch_array($resultado)){ ?>
+<body>
+<?php while($datos = mysqli_fetch_array($resultado)){ ?>
 	<!-- SideBar -->
 	<section class="full-box cover dashboard-sideBar">
 		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
@@ -44,7 +65,7 @@
 				<figure class="full-box">
 					<img src="./assets/img/LogoHome.png" alt="UserIcon">
 					<figcaption class="text-center text-titles">
-						<h5><?php echo $datos['usuario']?></h5>
+						<h5><?php echo utf8_encode($datos['usuario'])?></h5>
 					</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
@@ -110,7 +131,7 @@
 						<i class="zmdi zmdi-card zmdi-hc-fw"></i> Tickets <i class="zmdi zmdi-caret-down pull-right"></i>
 					</a>
 					<ul class="list-unstyled full-box">
-						<?php if( $datos['tipousuario_idtipousuario'] == '1' || $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
+						<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 						<li>
 							<a href="ticket.php"> <i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Tickets</a>
 						</li>
@@ -161,26 +182,13 @@
 						<?php } ?>
 					</ul>
 				</li>
-				<?php } ?>
-				<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
-				<li>
-					<a href="#!" class="btn-sideBar-SubMenu">
-					<i class="zmdi zmdi-file-text"></i> Reportes <i class="zmdi zmdi-caret-down pull-right"></i>
-					</a>
-					<ul class="list-unstyled full-box">
-						<li>
-							<a href="reportesgeneral.php"><i class="zmdi zmdi-folder"></i> Sección de Reportes</a>
-						</li>
-					</ul>
-				</li>	
 				<?php } ?>	
 			</ul>
 		</div>
 	</section>
-	<?php } ?>
+
 
 	<!-- Content page-->
-
 	<section class="full-box dashboard-contentPage">
 		<!-- NavBar -->
 		<nav class="full-box dashboard-Navbar">
@@ -191,67 +199,71 @@
 			</ul>
 		</nav>
 		<!-- Content page -->
-		<?php while($datos2 = mysqli_fetch_array($resultado2)){ ?>
-			<?php if($datos2['tipousuario_idtipousuario'] == '1'){ ?>
+		<?php if( $datos['tipousuario_idtipousuario'] == '1'){ ?>
 		<div class="container-fluid">
 			<div class="page-header">
-			  <h1 class="text-titles">Sistema de <small>Mantenimientos de ANLI</small></h1>
+			  <h1 class="text-titles"><i class="zmdi zmdi-graduation-cap zmdi-hc-fw"></i> Áreas de <small>ANLI</small></h1>
+			</div>
+			<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptas reiciendis tempora voluptatum eius porro ipsa quae voluptates officiis sapiente sunt dolorem, velit quos a qui nobis sed, dignissimos possimus!</p>
+		</div>
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="contenedorBtn">
+				<h3 class="text-center">REPORTES DE MANTENIMIENTO</h3>
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<button class="botonmant1"><i class="zmdi zmdi-laptop-mac zmdi-hc-3x"></i> <br/> Por Equipo</button>
+						<button class="botonmant1"><i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por CN</button>
+						<button class="botonmant1"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</button>
+						<button class="botonmant1"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Estado</button>
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="contenedorBtn">
+				<h3 class="text-center">REPORTES DE TICKETS</h3>
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<button class="boton1"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Estado</button>
+						<button class="boton1"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</button>
+						<button class="boton1"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i> <br/> Por Usuario</button>
+					</div>
+					<div class="col-md-2"></div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="contenedorBtn">
+				<h3 class="text-center">REPORTES DE CONTROL ASISTENCIA</h3>
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<button class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i> <br/> Por Usuario</button>
+						<button class="botonctrlreport"><i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por CN</button>
+						<button class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</button>
+						<button class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por Fechas y CN</button>
+						<button class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i><br/> Usuario/ Motivo </button>
+						<button class="botonctrlreport"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Motivos</button>
+						<button class="botonctrlreport"><i class="zmdi zmdi-cake zmdi-hc-3x"></i> <br/> Cumpleaños</button>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
 			</div>
 		</div>
-		<div class="full-box text-center" style="padding: 30px 10px;">
-			<article class="full-box tile">
-				<div class="full-box tile-title text-center text-titles text-uppercase">
-					Usuarios
+	</section>
+	<?php } ?>
+	<?php if( $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-11 text-center">
+					<h2> No tienes acceso al contenido</h2>
 				</div>
-				<div class="full-box tile-icon text-center">
-					<i class="zmdi zmdi-accounts-alt"></i>
-				</div>
-				<div class="full-box tile-number text-titles">
-					<p class="full-box"><?php echo $filaUsuario['usuario']; ?></p>
-					<small>Registrados</small>
-				</div>
-			</article>
-			<article class="full-box tile">
-				<div class="full-box tile-title text-center text-titles text-uppercase">
-					Equipos
-				</div>
-				<div class="full-box tile-icon text-center">
-					<i class="zmdi zmdi-desktop-mac"></i>
-				</div>
-				<div class="full-box tile-number text-titles">
-					<p class="full-box"><?php echo $fila['numequipos'] ?></p>
-					<small>Registrados</small>
-				</div>
-			</article>
-			<article class="full-box tile">
-				<div class="full-box tile-title text-center text-titles text-uppercase">
-					Centros de Negocios
-				</div>
-				<div class="full-box tile-icon text-center">
-					<i class="zmdi zmdi-store"></i>
-				</div>
-				<div class="full-box tile-number text-titles">
-					<p class="full-box"><?php echo $filaCentro['numcentros'] ?></p>
-					<small>Registrados</small>
-				</div>
-			</article>
-			<article class="full-box tile">
-				<div class="full-box tile-title text-center text-titles text-uppercase">
-					Tickets Pendientes
-				</div>
-				<div class="full-box tile-icon text-center">
-					<i class="zmdi zmdi-account-box-mail"></i>
-				</div>
-				<div class="full-box tile-number text-titles">
-					<p class="full-box"><?php echo $filaTicket['pendiente'] ?></p>
-					<small>Registrados</small>
-				</div>
-			</article>
+			</div>
 		</div>
-		<?php }else{ ?>
-				<h1 class="text-center mt-3 display-3">Bienvenido al Sistema</h1>
-			<?php } ?>
-		<?php } ?>
+	<?php } ?>
+<?php } ?>
 	<!--====== Scripts -->
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="./js/sweetalert2.min.js"></script>
@@ -260,6 +272,8 @@
 	<script src="./js/ripples.min.js"></script>
 	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="./js/main.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+	<script src="../Controlador/ControladorArea.js"></script>
 	<script>
 		$.material.init();
 	</script>

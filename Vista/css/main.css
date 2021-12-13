@@ -625,23 +625,79 @@ body, html{
 	}
 }
 
-/* #btnReporte {
-    width:80px;
-    height:19px;
-    background-color: #aaa !important;
-    color: #000;
-    padding: 15;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.8s;
+.contenedorBtn {
+	margin: 25px;
+	justify-content: center;
+	align-items: center;
 }
 
-#btnReporte:hover {
-    transition: 0.8s;
-    background-color: #000 !important;
-    color: #aaa;
-    padding: 15;
-    cursor: pointer;
-} */
+.boton1{
+
+    display:inline-block;
+    width:30%;
+    padding:5px;
+    border: 3px solid black;
+    border-radius:10px;
+    text-decoration: none;
+    color:black;
+    font-weight: bold;
+    transition: all 0.9s;
+    text-align: center;
+    font-size: 15px;
+    
+  }
+
+  .boton1:hover{
+ 
+    background:black;
+    color:white;
+
+  }
+
+  .botonmant1{
+
+    display:inline-block;
+    width:20%;
+    padding:5px;
+    border: 3px solid black;
+    border-radius:10px;
+    text-decoration: none;
+    color:black;
+    font-weight: bold;
+    transition: all 0.9s;
+    text-align: center;
+    font-size: 15px;
+    
+  }
+
+  .botonmant1:hover{
+ 
+    background:black;
+    color:white;
+
+  }
 
 
+  .botonctrlreport{
+
+    display:inline-block;
+    width:11%;
+    padding:5px;
+    border: 3px solid black;
+    border-radius:10px;
+    text-decoration: none;
+    color:black;
+    font-weight: bold;
+    transition: all 0.9s;
+    text-align: center;
+    font-size: 15px;
+	margin-bottom: 30px;
+    
+  }
+
+  .botonctrlreport:hover{
+ 
+    background:black;
+    color:white;
+
+  }
