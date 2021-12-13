@@ -428,7 +428,15 @@ $resultado = mysqli_query($conn,$query);
         </button>
       </div>
       <div class="modal-body">
-	  	<label>Este es un reporte para ver todos los tickets "Completados".</label>
+		  <div class="form-group">
+			<label class="control-label">Seleccione un Estadp de Ticket</label>
+			<select class="form-control" id="slcestadoticketreportepdf">
+				<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado Ticket --</option>
+				<?php foreach($queryEstado as $estadoticket){ ?>
+				<option value="<?php echo $estadoticket['idestadoticket']  ?>"><?php echo utf8_encode($estadoticket['estadoticket']) ?></option>
+				<?php } ?>
+			</select>
+		</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

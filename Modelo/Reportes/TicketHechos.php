@@ -38,13 +38,13 @@ function Footer(){
 
 require '../conexion.php';
 // $usuario =  mysqli_real_escape_string($conn, utf8_decode($_POST['id']));
-
+$estado = $_GET['estado'];
 $query = mysqli_query($conn, "SELECT ticket.ticket,ticket.fechaticket,estadoticket, usuario.nombre, usuario.apellidopa, usuario.apellidoma FROM ticket
 INNER JOIN usuario
 ON ticket.usuario_idusuario = usuario.idusuario
 INNER JOIN estadoticket
 ON ticket.estadoticket_idestadoticket = estadoticket.idestadoticket
-WHERE idestadoticket = 3");
+WHERE idestadoticket = $estado");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();

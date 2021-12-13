@@ -1,6 +1,7 @@
 <?php 
 session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
+$queryestadoticket = mysqli_query($conn, "SELECT idestadoticket, estadoticket FROM estadoticket ORDER BY estadoticket ASC");
 $query_estado = mysqli_query($conn, "SELECT idtipoestado, tipoestado FROM tipoestado");
 $queryEstado = mysqli_query($conn, "SELECT idestadotiempo, estadotiempo FROM estadotiempo ORDER BY estadotiempo ASC");
 $query_centros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
@@ -234,7 +235,7 @@ $resultado = mysqli_query($conn,$query);
 				<h3 class="text-center">REPORTES DE TICKETS</h3>
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<button class="boton1"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Estado</button>
+						<a data-toggle="modal" data-target="#ModalPdfHechos" class="boton1"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Estado</a>
 						<a data-toggle="modal" data-target="#ModalPdfFechaTicket" class="boton1"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</a>
 						<a data-toggle="modal" data-target="#ModalPdfUsuario" class="boton1"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i> <br/> Por Usuario</a>
 					</div>
@@ -581,7 +582,15 @@ $resultado = mysqli_query($conn,$query);
         </button>
       </div>
       <div class="modal-body">
-	  	<label>Este es un reporte para ver todos los tickets "Completados".</label>
+	  	<div class="form-group">
+			<label class="control-label">Seleccione un Estadp de Ticket</label>
+			<select class="form-control" id="slcestadoticketreportepdf">
+				<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado Ticket --</option>
+				<?php foreach($queryestadoticket as $estadoticket){ ?>
+				<option value="<?php echo $estadoticket['idestadoticket']  ?>"><?php echo utf8_encode($estadoticket['estadoticket']) ?></option>
+				<?php } ?>
+			</select>
+		</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

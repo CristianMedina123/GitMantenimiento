@@ -84,8 +84,9 @@ $("#rptTicketProceso").on("click", function () {
 });
 
 $("#rptTicketCompletos").on("click", function () {
+  var estado = $("#slcestadoticketreportepdf").val();
   window.open(
-    "../Modelo/Reportes/TicketHechos.php",
+    "../Modelo/Reportes/TicketHechos.php?estado="+estado,
     "_blank"
   );
 });
