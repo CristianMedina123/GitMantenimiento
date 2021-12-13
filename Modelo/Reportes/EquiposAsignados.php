@@ -38,13 +38,13 @@ function Footer(){
 
 require '../conexion.php';
 // $usuario =  mysqli_real_escape_string($conn, utf8_decode($_POST['id']));
-
+$estado = $_GET['estado'];
 $query = mysqli_query($conn, "SELECT equipo.equipo, equipo.codigo, equipo.modelo,centronegocio.centronegocio, centronegocio.estadocn,  tipoestado.tipoestado FROM equipo
 INNER JOIN centronegocio
 ON equipo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
 INNER JOIN tipoestado
 ON equipo.tipoestado_idtipoestado = tipoestado.idtipoestado
-WHERE idtipoestado = 1 ORDER BY idcentronegocio DESC");
+WHERE idtipoestado = $estado ORDER BY idcentronegocio DESC");
 
 // $pdf = new PDF('L','mm','A4');
 $pdf = new PDF();

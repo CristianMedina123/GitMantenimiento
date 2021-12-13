@@ -1,7 +1,7 @@
 <?php
 session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
-
+$query_estado = mysqli_query($conn, "SELECT idtipoestado, tipoestado FROM tipoestado");
 $query_centros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
 $query_usuario = mysqli_query($conn, "SELECT idusuario ,nombre, apellidopa, apellidoma FROM usuario WHERE area_idarea = 1 ORDER BY nombre ASC");
 $query_equipo = mysqli_query($conn, "SELECT equipo.equipo,equipo.marca, equipo.codigo, equipo.idequipo FROM equipo ORDER BY codigo ASC");
@@ -435,6 +435,15 @@ $resultado = mysqli_query($conn,$query);
       </div>
       <div class="modal-body">
 	  	<label>Este es un reporte para ver todos los equipos "Asignados".</label>
+		  <div class="form-group">
+				<label class="control-label">Centro de Negocios</label>
+				<select class="form-control" id="slcestadomantenimientoreportepdf">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado --</option>
+					<?php foreach($query_estado as $estado){ ?>
+					<option value="<?php echo $estado['idtipoestado'] ?>"><?php echo utf8_encode($estado['tipoestado']) ?> </option>
+					<?php } ?>
+				</select>
+			</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

@@ -151,8 +151,9 @@ $("#rptMantCN").on("click", function () {
 
 
 $("#rptMantEquipoAsignados").on("click", function () {
+  var estado = $("#slcestadomantenimientoreportepdf").val();
   window.open(
-    "../Modelo/Reportes/EquiposAsignados.php",
+    "../Modelo/Reportes/EquiposAsignados.php?estado="+estado,
     "_blank"
   );
 });

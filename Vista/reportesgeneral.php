@@ -1,12 +1,19 @@
 <?php 
 session_start();//iniciar la sesion
 include '../Modelo/conexion.php';
-
-$querySelectAreas = mysqli_query($conn, "SELECT idarea, areanombre, centronegocio_idcentronegocio, centronegocio FROM area INNER JOIN centronegocio ON area.centronegocio_idcentronegocio = centronegocio.idcentronegocio ORDER BY areanombre ASC");
-$queryCentros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
-$queryTabla = mysqli_query($conn, "SELECT area.idarea, area.areanombre, centronegocio.centronegocio FROM area
-INNER JOIN centronegocio ON area.centronegocio_idcentronegocio = centronegocio.idcentronegocio ORDER BY centronegocio ASC");
-
+$query_estado = mysqli_query($conn, "SELECT idtipoestado, tipoestado FROM tipoestado");
+$queryEstado = mysqli_query($conn, "SELECT idestadotiempo, estadotiempo FROM estadotiempo ORDER BY estadotiempo ASC");
+$query_centros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio ORDER BY centronegocio ASC");
+$query_usuario = mysqli_query($conn, "SELECT idusuario ,nombre, apellidopa, apellidoma FROM usuario WHERE area_idarea = 1 ORDER BY nombre ASC");
+$query_equipo = mysqli_query($conn, "SELECT equipo.equipo,equipo.marca, equipo.codigo, equipo.idequipo FROM equipo ORDER BY codigo ASC");
+$queryTabla = mysqli_query($conn, "SELECT mantenimiento.idmantenimiento, mantenimiento.mantenimiento, mantenimiento.fechamantenimiento,  mantenimiento.descripcion, equipo.codigo, equipo.equipo, usuario.nombre, usuario.apellidopa, usuario.apellidoma,centronegocio.idcentronegocio, centronegocio.centronegocio,centronegocio.estadocn  FROM mantenimiento
+INNER JOIN equipo
+ON mantenimiento.equipo_idequipo = equipo.idequipo
+INNER JOIN usuario
+ON mantenimiento.usuario_idusuario = usuario.idusuario
+INNER JOIN centronegocio
+ON equipo.centronegocio_idcentronegocio = centronegocio.idcentronegocio
+ORDER BY mantenimiento.fechamantenimiento ASC");
 $varsesion = $_SESSION['IdUsuario'];
 
 if($varsesion == null || $varsesion = ''){
@@ -22,7 +29,7 @@ $resultado = mysqli_query($conn,$query);
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Area</title>
+	<title>Reporte Generales</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="shortcut icon" href="assets/img/iconweb.png">
@@ -213,10 +220,10 @@ $resultado = mysqli_query($conn,$query);
 				<h3 class="text-center">REPORTES DE MANTENIMIENTO</h3>
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<button class="botonmant1"><i class="zmdi zmdi-laptop-mac zmdi-hc-3x"></i> <br/> Por Equipo</button>
-						<button class="botonmant1"><i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por CN</button>
-						<button class="botonmant1"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</button>
-						<button class="botonmant1"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Estado</button>
+						<a type="button" data-toggle="modal" data-target="#ModalPdfEquipo" class="botonmant1"><i class="zmdi zmdi-laptop-mac zmdi-hc-3x"></i> <br/> Por Equipo</a>
+						<a data-toggle="modal" data-target="#ModalPdfCN" class="botonmant1"><i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por CN</a>
+						<a data-toggle="modal" data-target="#ModalPdfEquiposFecha" class="botonmant1"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</a>
+						<a data-toggle="modal" data-target="#ModalPdfEquiposAsignados" class="botonmant1"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Estado</a>
 					</div>
 					<div class="col-md-2"></div>
 				</div>
@@ -228,8 +235,8 @@ $resultado = mysqli_query($conn,$query);
 					<div class="col-md-2"></div>
 					<div class="col-md-8">
 						<button class="boton1"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Estado</button>
-						<button class="boton1"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</button>
-						<button class="boton1"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i> <br/> Por Usuario</button>
+						<a data-toggle="modal" data-target="#ModalPdfFechaTicket" class="boton1"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</a>
+						<a data-toggle="modal" data-target="#ModalPdfUsuario" class="boton1"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i> <br/> Por Usuario</a>
 					</div>
 					<div class="col-md-2"></div>
 				</div>
@@ -240,19 +247,679 @@ $resultado = mysqli_query($conn,$query);
 				<h3 class="text-center">REPORTES DE CONTROL ASISTENCIA</h3>
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
-						<button class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i> <br/> Por Usuario</button>
-						<button class="botonctrlreport"><i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por CN</button>
-						<button class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</button>
-						<button class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por Fechas y CN</button>
-						<button class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i><br/> Usuario/ Motivo </button>
-						<button class="botonctrlreport"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Motivos</button>
-						<button class="botonctrlreport"><i class="zmdi zmdi-cake zmdi-hc-3x"></i> <br/> Cumpleaños</button>
+						<a data-toggle="modal" data-target="#ModalPdfUsuario" class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i> <br/> Por Usuario</a>
+						<a data-toggle="modal" data-target="#ModalPdfCentros" class="botonctrlreport"><i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por CN</a>
+						<a data-toggle="modal" data-target="#ModalPdfFechaAsistencia" class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</a>
+						<a data-toggle="modal" data-target="#ModalPdfFechaCNAsistencia" class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por Fechas y CN</a>
+						<a data-toggle="modal" data-target="#ModalPdfUsuarioIrComer" class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i><br/> Usuario/ Motivo </a>
+						<a data-toggle="modal" data-target="#ModalPdfUsuarioFechaCN" class="botonctrlreport"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Motivos</a>
+						<a data-toggle="modal" data-target="#ModalCumple" class="botonctrlreport"><i class="zmdi zmdi-cake zmdi-hc-3x"></i> <br/> Cumpleaños</a>
 					</div>
 					<div class="col-md-1"></div>
 				</div>
 			</div>
 		</div>
 	</section>
+
+<!-- *******************************  REPORTES MODALS MANTENIMINENTO************************************************** -->
+
+
+<!-- Modal PDF TICKETS PENDIENTES-->
+<div class="modal fade" id="ModalPdfEquipo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte por Equipo</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte para ver todos los mantenimientos de un equipo.</label>
+		  <div class="form-group">
+				<label class="control-label">Centro de Negocios</label>
+				<select class="form-control" id="slcCentroPDF">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
+					<?php foreach($query_centros as $centro){ ?>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Seleccione el Equipo</label>
+				<select class="form-control" id="slcEquipoPDF">
+					<option value="0" disabled="disabled" selected="true" >-- Seleccione un Equipo --</option>
+					<?php foreach($query_equipo as $equipo){ ?>
+						<option value="<?php echo $equipo['idequipo'] ?>"><?php echo utf8_encode($equipo['equipo']) ?> / <?php echo utf8_encode($equipo['codigo']) ?> / <?php echo utf8_encode($equipo['marca']) ?> </option>
+					<?php } ?>
+				</select>
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptMantEquipo" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal PDF TICKETS CN-->
+<div class="modal fade" id="ModalPdfCN" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Mantenimiento CN</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte para ver todos los mantenimientos de un cn.</label>
+		  <div class="form-group">
+				<label class="control-label">Centro de Negocios</label>
+				<select class="form-control" id="slcCNPDF">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
+					<?php foreach($query_centros as $centro){ ?>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptMantCN" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PDF TICKETS EQUIPOS ASIGNADOS-->
+<div class="modal fade" id="ModalPdfEquiposAsignados" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Equipos Asignados</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte para ver todos los equipos "Asignados".</label>
+		  <div class="form-group">
+				<label class="control-label">Centro de Negocios</label>
+				<select class="form-control" id="slcestadomantenimientoreportepdf">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Estado --</option>
+					<?php foreach($query_estado as $estado){ ?>
+					<option value="<?php echo $estado['idtipoestado'] ?>"><?php echo utf8_encode($estado['tipoestado']) ?> </option>
+					<?php } ?>
+				</select>
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptMantEquipoAsignados" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PDF TICKETS EQUIPOS INACTIVOS-->
+<div class="modal fade" id="ModalPdfEquiposInactivos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Equipos Inactivos</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte para ver todos los equipos "Inactivos".</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptMantEquipoInactivos" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal PDF TICKETS EQUIPOS EN CAMINO-->
+<div class="modal fade" id="ModalPdfEquiposCamino" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Equipos En Camino</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte para ver todos los equipos "En Camino".</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptMantEquipoCamino" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PDF TICKETS EQUIPOS FECHA-->
+<div class="modal fade" id="ModalPdfEquiposFecha" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Equipos por Fecha</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte muestra una lista de mantenimiento del día seleccionado.</label>
+		<h4>Fecha Incial</h4>
+		<input type="date" id="idfechaequipopdf">
+		<h4>Fecha Final</h4>
+		<input type="date" id="idfechaequipopdf2">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptEquipoFechabtn" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalActualizarMantenimiento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Editar Equipo de ANLI</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<div class="form-group label-floating">
+		  	<!-- <label class="control-label">ID</label> -->
+		  	<input type="hidden"  class="form-control"  id="txtIdMantenimientoEditar">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Mantenimiento</b></h4>
+							<input type="text" class="form-control" id="txtMantenimientoEditar" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Fecha Mantenimiento</b></h4>
+							<input type="date" class="form-control" id="txtFechaEditar" autocomplete="off">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<div class="form-group">
+							<h4><b>Descripción</b></h4>
+							<input type="text" class="form-control" id="txtDescripcionEditar" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<h4><b>CN</b></h4>
+						<div class="form-group">
+							<select class="form-control" id="slcCentroEditar">
+								<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
+								<?php foreach($query_centros as $centro){ ?>
+								<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
+								<?php } ?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<h4><b>Equipo</b></h4>
+						<div class="form-group">
+							<select class="form-control" id="slcEquipoEditar">
+								<option value="0" disabled="disabled" selected="true">-- Seleccione Nuevo Equipo --</option>
+								<?php foreach($query_equipo as $equipo){ ?>
+								<option value="<?php echo $equipo['idequipo'] ?>"><?php echo utf8_encode($equipo['equipo']) ?> <?php echo utf8_encode($equipo['marca']) ?> <?php echo utf8_encode($equipo['codigo']) ?></option>
+							<?php } ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-2">
+						<h4><b>Usuario Mantenimiento</b></h4>
+						<div class="form-group">
+							<select class="form-control" id="slcUsuarioEditar">
+								<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario--</option>
+								<?php foreach($query_usuario as $usuario){ ?>
+								<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
+								<?php } ?>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="ActualizarMantenimiento()" class="btn btn-primary">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- **************************************** TICKETS *************************************** -->
+
+
+
+
+<!-- Modal PDF TICKETS PENDIENTES-->
+<div class="modal fade" id="ModalPdfPendientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Tickets Pendientes</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte para ver todos los tickets "Pendientes".</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptTicketPendiente" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PDF TICKETS PROCESO-->
+<div class="modal fade" id="ModalPdfProceso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Tickets Pendientes</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte para ver todos los tickets "En Proceso".</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptTicketProceso" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PDF TICKETS PROCESO-->
+<div class="modal fade" id="ModalPdfHechos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Tickets Completados</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte para ver todos los tickets "Completados".</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptTicketCompletos" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PDF TICKETS USUARIOS-->
+<div class="modal fade" id="ModalPdfUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Tickets de Usuarios</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte para ver todos los tickets del usuario seleccionado.</label>
+		  <div class="form-group">
+			<label class="control-label">Seleccione un CN</label>
+			<select class="form-control" id="slccnusuarioticket">
+				<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
+				<?php foreach($query_centros as $cnt){ ?>
+				<option value="<?php echo $cnt['idcentronegocio']  ?>"><?php echo utf8_encode($cnt['centronegocio']) ?> <?php echo utf8_encode($cnt['estadocn']) ?></option>
+				<?php } ?>
+			</select>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Seleccione al Usuario</label>
+			<select class="form-control" id="slcusuarioPDF">
+				<option value="0" disabled="disabled" selected="true">-- Seleccione al Usuario responsable --</option>
+				<?php foreach($queryCentroTepic as $usuario){ ?>
+				<option value="<?php echo $usuario['idusuario']  ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
+				<?php } ?>
+			</select>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptTicketUsuario" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal PDF TICKETS FECHAS-->
+<div class="modal fade" id="ModalPdfFechaTicket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Tickets por Fecha</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Este es un reporte genera un listado del día seleccionado.</label>
+		<h4>Fecha de Inicio</h4>
+		<input type="date" id="rptTicketFechaPDF">	
+		<h4>Fecha de Final</h4>
+		<input type="date" id="rptTicketFechaPDF2">	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptTicketFechaPDFbtn" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ******************************************  CONTROL DE ASISTENCIA ************************************* -->
+
+
+<!-- Modal PDF por Usuario-->
+<div class="modal fade" id="ModalPdfUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte por Usuario</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slcCentroUsuarioPDF">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
+					<?php foreach($queryCentros as $centro){ ?>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn'])  ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+	  	<div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slcusuarioReportePDF">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
+					<?php foreach($queryUsuario as $usuario){ ?>
+					<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptEntradasUsuario" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PDF por Usuario-->
+<div class="modal fade" id="ModalCumple" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Cumpleaños</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slccumple">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un mes --</option>
+					<option value="1">Enero</option>
+					<option value="2">Febrero</option>
+					<option value="3">Marzo</option>
+					<option value="4">Abril</option>
+					<option value="5">Mayo</option>
+					<option value="6">Junio</option>
+					<option value="7">Julio</option>
+					<option value="8">Agosto</option>
+					<option value="9">Septiembre</option>
+					<option value="10">Octubre</option>
+					<option value="11">Noviembre</option>
+					<option value="12">Diciembre</option>
+				</select>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnrptcumple" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal PDF CN-->
+<div class="modal fade" id="ModalPdfCentros" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte por CN</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<div class="form-group label-floating">
+		  <div class="form-group">
+				<!-- <label class="control-label">Centro de Negocios</label> -->
+				<select class="form-control" id="slccentroPDF">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
+					<?php foreach($query_centros as $centro){ ?>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptEntradasCN" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal PDF FECHA-->
+<div class="modal fade" id="ModalPdfFechaAsistencia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte por CN</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<div class="form-group label-floating">
+			<label>Este reporte genera una lista de asistencia por el día seleccionado</label>
+			<input type="date" id="idfechaasistenciarpt2fecha">
+			<input type="date" id="idfechaasistenciarpt2fecha2">
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnrptFechaAsistencia" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal PDF FECHA y CN-->
+<div class="modal fade" id="ModalPdfFechaCNAsistencia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte por CN  FECHAS</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group label-floating">
+		  <div class="form-group">
+				<!-- <label class="control-label">Centro de Negocios</label> -->
+				<select class="form-control" id="slccentroAsistenciaPDF">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Centro de Negocios --</option>
+					<?php foreach($query_centros as $centro){ ?>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+	  	<div class="form-group label-floating">
+			<label>Este reporte genera una lista de asistencia por el día seleccionado</label>
+			<input type="date" id="idfechaasistenciarptasistencia">
+			<input type="date" id="idfechaasistenciarpt2asistencia">
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnrptFechaCNAsistencia" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal PDF por MOTIVO IR A COMER-->
+<div class="modal fade" id="ModalPdfUsuarioIrComer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Ir a Comer</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slcCentroUsuarioPDFMotivo">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
+					<?php foreach($query_centros as $centro){ ?>
+					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn'])  ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+	  	<div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slcusuarioReportePDFMotivoUser">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
+					<?php foreach($query_usuario as $usuario){ ?>
+					<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+		<div class="form-group label-floating">
+			<div class="form-group">
+				<select class="form-control" id="slcusuarioReportePDFMotivo">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Motivo --</option>
+					<?php foreach($queryEstado as $estado){ ?>
+					<option value="<?php echo $estado['idestadotiempo'] ?>"><?php echo utf8_encode($estado['estadotiempo']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptEntradasUsuarioMotivo" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal PDF por MOTIVO IR A COMER-->
+<div class="modal fade" id="ModalPdfUsuarioFechaCN" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte de Motivo en CN</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  <div class="form-group label-floating">
+	  <div class="form-group">
+				<select class="form-control" id="slcusuarioReportePDFMotivoMotivoCN">
+					<option value="0" disabled="disabled" selected="true">-- Seleccione un Motivo --</option>
+					<?php foreach($queryEstado as $estado){ ?>
+					<option value="<?php echo $estado['idestadotiempo'] ?>"><?php echo utf8_encode($estado['estadotiempo']) ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+		<div class="form-group label-floating">
+			<label>Este reporte genera una lista de asistencia por el día seleccionado</label>
+			<input type="date" id="idfechaasistenciarptasistenciaMotivoCN">
+			<input type="date" id="idfechaasistenciarpt2asistenciaMotivoCN">
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptEntradasUsuarioMotivoMotivoCN" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 	<?php } ?>
 	<?php if( $datos['tipousuario_idtipousuario'] == '2' || $datos['tipousuario_idtipousuario'] == '3'){ ?>
 		<div class="container">
@@ -273,7 +940,10 @@ $resultado = mysqli_query($conn,$query);
 	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="./js/main.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-	<script src="../Controlador/ControladorArea.js"></script>
+	<script src="../Controlador/ControladorMantenimiento.js"></script>
+	<script src="../Controlador/ControladorTicket.js"></script>
+	<script src="../Controlador/ControladorAsistencia.js"></script>
+	<script src="../Controlador/ReporteUsuario.js"></script>
 	<script>
 		$.material.init();
 	</script>
