@@ -223,7 +223,7 @@ $resultado = mysqli_query($conn,$query);
 			<div class="page-header">
 			  <h1 class="text-titles"><i class="zmdi zmdi-desktop-mac"></i> Equipos en<small> ANLI</small></h1>
 			</div>
-			<p class="lead">Estos son los equipos de cómputos registrados en ANLI para mantener un control de asignación.</p>
+			<p class="lead">Estos serán los equipos que pertenecen a ANLI para tener un mejor control de administración acerca de los dispositivos, saber dónde es que están y en qué estado se mantiene.</p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">

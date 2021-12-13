@@ -216,7 +216,7 @@ $resultado = mysqli_query($conn,$query);
 			<div class="page-header">
 			  <h1 class="text-titles"><i class="zmdi zmdi-nature"></i> Áreas de <small>ANLI</small></h1>
 			</div>
-			<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse voluptas reiciendis tempora voluptatum eius porro ipsa quae voluptates officiis sapiente sunt dolorem, velit quos a qui nobis sed, dignissimos possimus!</p>
+			<p class="lead">Las áreas registradas son las que existen dentro de cada uno de los centros de negocios, es decir; se tendrá un mejor control administrativo si se le asignan las áreas correspondientes de los centros de negocios. </p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">

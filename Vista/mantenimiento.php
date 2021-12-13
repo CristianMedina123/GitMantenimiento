@@ -223,7 +223,7 @@ $resultado = mysqli_query($conn,$query);
 			<div class="page-header">
 			  <h1 class="text-titles"><i class="zmdi zmdi-desktop-mac"></i> Mantenimiento <small>a Equipos de Cómputo</small></h1>
 			</div>
-			<p class="lead">En este apartado se darán de alta los mantenimientos a los equipos de cómputo.</p>
+			<p class="lead">Esta sección se realizará la inserción de información para el mantenimiento que se le realizó al equipo, esto para tener un mejor control y administración de los mantenimientos que se realizaron.</p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">

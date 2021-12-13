@@ -212,7 +212,7 @@ $resultado = mysqli_query($conn,$query);
 			<div class="page-header">
 			  <h1 class="text-titles"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i> Empleados<small> de ANLI</small></h1>
 			</div>
-			<p class="lead">Esto es lo que identificará al usuario, dará privilegios a los diferentes tipos de rango.</p>
+			<p class="lead">Los tipos de usuarios deberán ser solo 3, para mantener un privilegio adecuado del funcionamiento del sistema, se recomienda no ingresar más tipos de usuario.</p>
 		</div>
 		<div class="container-fluid">
 			<div class="row">

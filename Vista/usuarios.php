@@ -225,7 +225,7 @@ ORDER BY nombre ASC");
 			<div class="page-header">
 			  <h1 class="text-titles"><i class="zmdi zmdi-account zmdi-hc-fw"></i> Usuarios <small>administradores</small></h1>
 			</div>
-			<p class="lead">Estos usuarios serán los dedicados para controlar el sistema de mantenimiento.</p>
+			<p class="lead">Los usuarios que se den de alta, tendrán que efectuar el checkout de asistencia desde el apartado asignado, de la misma manera participan en el módulo de ticket para resaltar tareas importantes.</p>
 		</div>
 		
 		<div class="container-fluid">
