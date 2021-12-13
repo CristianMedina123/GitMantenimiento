@@ -42,7 +42,7 @@
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
-					<img src="./assets/img/LogoHome.png" alt="UserIcon">
+					<img src="./assets/img/home-icon.jpg" alt="UserIcon">
 					<figcaption class="text-center text-titles">
 						<h5><?php echo $datos['usuario']?></h5>
 					</figcaption>

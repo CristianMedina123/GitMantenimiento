@@ -54,7 +54,7 @@ ON controltiempo.estadotiempo_idestadotiempo = estadotiempo.idestadotiempo");
 			<!-- SideBar User info -->
 			<div class="full-box dashboard-sideBar-UserInfo">
 				<figure class="full-box">
-					<img src="./assets/img/LogoHome.png" alt="UserIcon">
+					<img src="./assets/img/home-icon.jpg" alt="UserIcon">
 					<figcaption class="text-center text-titles">User Name</figcaption>
 				</figure>
 				<ul class="full-box list-unstyled text-center">
