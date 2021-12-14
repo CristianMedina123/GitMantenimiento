@@ -636,10 +636,10 @@ body, html{
     display:inline-block;
     width:30%;
     padding:5px;
-    border: 3px solid black;
+    border: 3px solid #EE4D2A;
     border-radius:10px;
     text-decoration: none !important;
-    color:black;
+    color:#EE4D2A;
     font-weight: bold;
     transition: all 0.9s;
     text-align: center;
@@ -649,7 +649,7 @@ body, html{
 
   .boton1:hover{
  
-    background:black;
+    background:#EE4D2A;
     color:white;
 
   }
@@ -659,10 +659,10 @@ body, html{
     display:inline-block;
     width:20%;
     padding:5px;
-    border: 3px solid black;
+    border: 3px solid #EE4D2A;
     border-radius:10px;
     text-decoration: none !important;
-    color:black;
+    color:#EE4D2A;
     font-weight: bold;
     transition: all 0.9s;
     text-align: center;
@@ -673,7 +673,7 @@ body, html{
 
   .botonmant1:hover{
  
-    background:black;
+    background:#EE4D2A;
     color:white;
 
   }
@@ -682,12 +682,12 @@ body, html{
   .botonctrlreport{
 
     display:inline-block;
-    width:11%;
+    width: 130px;
     padding:5px;
-    border: 3px solid black;
+    border: 3px solid #EE4D2A;
     border-radius:10px;
     text-decoration: none !important;
-    color:black;
+    color:#EE4D2A;
     font-weight: bold;
     transition: all 0.9s;
     text-align: center;
@@ -698,7 +698,7 @@ body, html{
 
   .botonctrlreport:hover{
  
-    background:black;
+    background:#EE4D2A;
     color:white;
 
   }

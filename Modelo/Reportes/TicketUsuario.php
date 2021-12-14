@@ -12,7 +12,7 @@ function Header(){
     // Movernos a la derecha
     $this->Cell(60);
     // Título
-    $this->Cell(70,10,'Reportes de Tickets en Hechos',0,0,'C');
+    $this->Cell(70,10,'Reportes de Tickets por Usuario',0,0,'C');
     // Salto de línea
     $this->SetFont('Arial','B',9);
     $this->Ln(20);

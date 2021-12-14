@@ -246,9 +246,9 @@ $resultado = mysqli_query($conn,$query);
 			<div class="row">
 				<div class="contenedorBtn">
 				<h3 class="text-center">REPORTES DE CONTROL ASISTENCIA</h3>
-					<div class="col-md-1"></div>
-					<div class="col-md-10">
-						<a data-toggle="modal" data-target="#ModalPdfUsuario" class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i> <br/> Por Usuario</a>
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<a data-toggle="modal" data-target="#ModalPdfUsuarioAsistencia" class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i> <br/> Por Usuario</a>
 						<a data-toggle="modal" data-target="#ModalPdfCentros" class="botonctrlreport"><i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por CN</a>
 						<a data-toggle="modal" data-target="#ModalPdfFechaAsistencia" class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <br/> Por Fechas</a>
 						<a data-toggle="modal" data-target="#ModalPdfFechaCNAsistencia" class="botonctrlreport"><i class="zmdi zmdi-calendar-alt zmdi-hc-3x"></i> <i class="zmdi zmdi-store zmdi-hc-3x"></i> <br/> Por Fechas y CN</a>
@@ -256,7 +256,7 @@ $resultado = mysqli_query($conn,$query);
 						<a data-toggle="modal" data-target="#ModalPdfUsuarioFechaCN" class="botonctrlreport"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Motivos</a>
 						<a data-toggle="modal" data-target="#ModalCumple" class="botonctrlreport"><i class="zmdi zmdi-cake zmdi-hc-3x"></i> <br/> Cumpleaños</a>
 					</div>
-					<div class="col-md-1"></div>
+					<div class="col-md-2"></div>
 				</div>
 			</div>
 		</div>
@@ -669,7 +669,7 @@ $resultado = mysqli_query($conn,$query);
 
 
 <!-- Modal PDF por Usuario-->
-<div class="modal fade" id="ModalPdfUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalPdfUsuarioAsistencia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -683,7 +683,7 @@ $resultado = mysqli_query($conn,$query);
 			<div class="form-group">
 				<select class="form-control" id="slcCentroUsuarioPDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un CN --</option>
-					<?php foreach($queryCentros as $centro){ ?>
+					<?php foreach($query_centros as $centro){ ?>
 					<option value="<?php echo $centro['idcentronegocio'] ?>"><?php echo utf8_encode($centro['centronegocio']) ?> / <?php echo utf8_encode($centro['estadocn'])  ?></option>
 					<?php } ?>
 				</select>
@@ -693,7 +693,7 @@ $resultado = mysqli_query($conn,$query);
 			<div class="form-group">
 				<select class="form-control" id="slcusuarioReportePDF">
 					<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
-					<?php foreach($queryUsuario as $usuario){ ?>
+					<?php foreach($query_usuario as $usuario){ ?>
 					<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
 					<?php } ?>
 				</select>
