@@ -1,14 +1,13 @@
-$( document ).ready(function(){
-    //Se selecciona el Select Padre
-    $("#slccentroCheck").change(function () {
-        $("#slccentroCheck option:selected").each(function () { //Se toma el dato seleccionado para mandarlo como parametro.
-            id_centro = $(this).val();
-            $.post("Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){//El parametro se manda al query Hijo
-                $("#slcusuarioCheck").html(data);//El query Hijo obtiene el dato.
-            });            
-        });
-    })
-});
+// $( document ).ready(function(){
+//     $("#slccentroCheck").change(function () {
+//         $("#slccentroCheck option:selected").each(function () { 
+//             id_centro = $(this).val();
+//             $.post("Modelo/SelectAsistenci.php", { id_centro: id_centro }, function(data){
+//                 $("#slcusuarioCheck").html(data);
+//             });            
+//         });
+//     })
+// });
 //Se extrae la fecha y se le da formato.
 var d = new Date();
 var fecha = d.getFullYear() + "-" +(d.getMonth()+1)  + "-"+ d.getDate();
@@ -20,7 +19,7 @@ function InsertarAsistencia2(){
     //Se declara las variables que obtiene los datos del input
     var user = $('#txtusuario').val();
     var psw = $('#psw').val();
-    var id = $('#slcusuarioCheck').val();
+    // var id = $('#slcusuarioCheck').val();
     var estado = $('#slcestado').val();
     var centro = $('#slccentroCheck').val();
 
@@ -28,14 +27,18 @@ function InsertarAsistencia2(){
     //Se declara las cadenas anidadas
     //Cadena: Datos= Esta cadena pasa los parametros del usuario para controlar Asistencia.
     //Cadena: DatosAsistencia= Se toman los datos para tomar la Asistencia.
-    datos = 'user='+user+'&id='+id+'&psw='+psw;
-    datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha+'&hora='+hora;
-
+    // datos = 'user='+user+'&id='+id+'&psw='+psw;
+    datos = 'user='+user+'&psw='+psw;
+    //datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha+'&hora='+hora;
+    //datosAsistencia = 'estado='+estado+'&centro='+centro+'&fecha='+fecha+'&hora='+hora;
         $.ajax({
             type: "POST",
               url: "Modelo/ValidarUsuarioAsistencia.php",//Se manda la primer cadena para validar datos
               data: datos,
               success: function (res){//En caso de que se ejecuta el query
+                var objetoUsuario = JSON.parse(res);
+                var id = objetoUsuario.idusuario;
+                datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha+'&hora='+hora;
                 if (res != "null") {
                     $.ajax({
                         type: "POST",

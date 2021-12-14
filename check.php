@@ -46,7 +46,7 @@ ON controltiempo.estadotiempo_idestadotiempo = estadotiempo.idestadotiempo");
 <body class="cover" style="background-image: url(Vista/assets/img/loginFondoAux.jpg);">
 
 	<form autocomplete="off" class="full-box logInFormCheck" id="formCheckPantalla">
-		<p class="text-center text-muted"><i class="zmdi zmdi-account-circle zmdi-hc-5x"></i></p>
+		<p class="text-center text-muted"><img src="Vista/assets/img/home-icon.jpg" style="border-radius: 70px"></p>
 		<p class="text-center text-muted text-uppercase">Ingrese Usuario Para Asistencia</p>
 		<div class="form-group label-floating">
 		<fieldset>Asistencias de ANLI</fieldset>
@@ -87,15 +87,15 @@ ON controltiempo.estadotiempo_idestadotiempo = estadotiempo.idestadotiempo");
 			<div class="col-md-1 col-sm-2"></div>
 			<div class="col-md-3 col-sm-4">
 
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label class="control-label">Usuario</label>
 					<select class="form-control" id="slcusuarioCheck">
 						<option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
-						<?php foreach($queryUsuario as $usuario){ ?>
-						<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
-						<?php } ?>
+						<?php //foreach($queryUsuario as $usuario){ ?>
+						<option value="<?php //echo $usuario['idusuario'] ?>"><?php// echo utf8_encode($usuario['nombre']) ?> <?php// echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
+						<?php// } ?>
 					</select>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
