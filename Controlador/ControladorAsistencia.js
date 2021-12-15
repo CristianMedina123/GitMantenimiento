@@ -67,19 +67,55 @@ function InsertarAsistencia2(){
                     var objetoUsuario = JSON.parse(res);
                     var id = objetoUsuario.idusuario;
                     datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha+'&hora='+hora;
-                    $.ajax({
-                        type: "POST",
-                          url: "../Modelo/InsertarAsistencia.php",//Se inserta los datos con la segunda cadena
-                          data: datosAsistencia,
-                          success: function (res){
-                            if (res == 1) {
-                              alertify.success('¡Se insertó el registro!');
-                              setTimeout(function(){ location.reload(); }, 2000);
-                            }else {
-                                alertify.error('Ocurrió un error');
-                            }
-                          },
-                    });
+                    fecha1completo = fecha + " " + hora;
+                    datosFechaPeriodoSelect = 'id='+id;
+                    if(estado == 2){
+                        $.ajax({
+                            type: "POST",
+                              url: "../Modelo/SelectFechaPeriodo.php",//Se inserta los datos con la segunda cadena
+                              data: datosFechaPeriodoSelect,
+                              success: function (res){
+                                var objetoPeriodo = JSON.parse(res);
+                                var idcontrol = objetoPeriodo.idcontroltiempo;
+                                var fechaperiodo2 = objetoPeriodo.fechatiempo;
+                                var horaperiodo = objetoPeriodo.horatiempo;
+                                var fechacompleta = fechaperiodo2 + " " +horaperiodo;
+                                datosperiodos = 'fecha1='+fecha1completo+'&fecha2='+fechacompleta+'&id='+id;
+                                if (res != "null") {
+                                    $.ajax({
+                                        type: "POST",
+                                          url: "../Modelo/InsertPeriodo.php",//Se inserta los datos con la segunda cadena
+                                          data: datosperiodos,
+                                          success: function (res){
+                                            if (res == 1) {
+                                              alertify.success('¡Se insertó el registro!');
+
+                                            }else {
+                                                alertify.error('Ocurrió un error');
+                                            }
+                                          },
+                                    });
+                                }else {
+                                    alertify.error('Ocurrió un error');
+                                }//ELSE FIN
+                              },
+                        });
+                    }else {
+                        $.ajax({
+                            type: "POST",
+                              url: "../Modelo/InsertarAsistencia.php",//Se inserta los datos con la segunda cadena
+                              data: datosAsistencia,
+                              success: function (res){
+                                if (res == 1) {
+                                  alertify.success('¡Se insertó el registro!');
+                                  setTimeout(function(){ location.reload(); }, 2000);
+                                }else {
+                                    alertify.error('Ocurrió un error');
+                                }
+                              },
+                        });
+                    }//ELSE fin
+
                 }else {
                     alertify.alert('Ocurrió un error','El Usuario no corresponde con el nombre de Empleado', function(){ alertify.error('¡Error!'); }).set('closable', false);
                 }

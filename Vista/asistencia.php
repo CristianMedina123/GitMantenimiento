@@ -285,15 +285,14 @@ $resultado = mysqli_query($conn,$query);
 									</div>
 									<div class="col-md-2"></div>
 									<div class="col-md-4">
-										<div class="form-group">
-												<!-- <label class="control-label">Usuario</label> -->
+										<!-- <div class="form-group">
 											<select class="form-control" id="slcusuario">
 												  <option value="0" disabled="disabled" selected="true">-- Seleccione un Usuario --</option>
-													<?php foreach($queryUsuario as $usuario){ ?>
-													<option value="<?php echo $usuario['idusuario'] ?>"><?php echo utf8_encode($usuario['nombre']) ?> <?php echo utf8_encode($usuario['apellidopa']) ?> <?php echo utf8_encode($usuario['apellidoma']) ?></option>
-													<?php } ?>
+													<?php// foreach($queryUsuario as $usuario){ ?>
+													<option value="<?php //echo $usuario['idusuario'] ?>"><?php// echo utf8_encode($usuario['nombre']) ?> <?php// echo utf8_encode($usuario['apellidopa']) ?> <?php // echo utf8_encode($usuario['apellidoma']) ?></option>
+													<?php// } ?>
 											</select>
-										</div>
+										</div> -->
 									</div>
 								</div>
 								<div class="row">
