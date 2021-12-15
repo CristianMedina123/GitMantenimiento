@@ -4,7 +4,7 @@ include '../Modelo/conexion.php';
 $queryCentros = mysqli_query($conn, "SELECT idcentronegocio, centronegocio, estadocn FROM centronegocio order by centronegocio ASC");
 $queryEstado = mysqli_query($conn, "SELECT idestadotiempo, estadotiempo FROM estadotiempo ORDER BY estadotiempo ASC");
 $queryUsuario = mysqli_query($conn, "SELECT idusuario, usuario, nombre, apellidopa, apellidoma FROM usuario ORDER BY nombre ASC");
-$queryTabla = mysqli_query($conn, "SELECT controltiempo.idcontroltiempo, controltiempo.fechatiempo, estadotiempo.estadotiempo, usuario.nombre, usuario.apellidopa, usuario.apellidoma, centronegocio.centronegocio, centronegocio.estadocn FROM controltiempo
+$queryTabla = mysqli_query($conn, "SELECT controltiempo.idcontroltiempo, controltiempo.fechatiempo, controltiempo.horatiempo,estadotiempo.estadotiempo, usuario.nombre, usuario.apellidopa, usuario.apellidoma, centronegocio.centronegocio, centronegocio.estadocn FROM controltiempo
 INNER JOIN usuario
 ON controltiempo.usuario_idusuario = usuario.idusuario
 INNER JOIN centronegocio
@@ -333,7 +333,7 @@ $resultado = mysqli_query($conn,$query);
 										<?php foreach($queryTabla as $tabla){?>
 										<tr>
 											<td><?php echo utf8_encode($tabla['nombre']) ?> <?php echo utf8_encode($tabla['apellidopa']) ?> <?php echo utf8_encode($tabla['apellidoma'])?></td>
-											<td><?php echo utf8_encode($tabla['fechatiempo']) ?></td>
+											<td><?php echo utf8_encode($tabla['fechatiempo']) ?>  <?php echo utf8_encode($tabla['horatiempo']) ?></td>
 											<td><?php echo utf8_encode($tabla['centronegocio']) ?> / <?php echo utf8_encode($tabla['estadocn']) ?></td>
 											<td><?php echo utf8_encode($tabla['estadotiempo']) ?></td>
 											<!-- <td><a href="#!" class="btn btn-success btn-raised btn-xs"><i class="zmdi zmdi-refresh"></i></a></td>

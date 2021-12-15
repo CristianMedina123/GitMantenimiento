@@ -47,7 +47,7 @@ var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
 function InsertarAsistencia2(){
     //Se declaran las variables para extraer datos de los inputs
     var user = $('#txtusuario').val();
-    var id = $('#slcusuario').val();
+    //var id = $('#slcusuario').val();
     var estado = $('#slcestado').val();
     var centro = $('#slccentro').val();
     var psw = $('#txtpsw').val();
@@ -55,8 +55,8 @@ function InsertarAsistencia2(){
     //Se declaran dos cadenas
     //Cadena: Datos= Esta cadena extrae el usuario y lo manda como parametro para acceder a la siguiente consulta
     //Cadena= DatosAsistencia= Esta cadena extrae todos los datos faltantes para insertar la Asistencia.
-    datos = 'user='+user+'&id='+id+'&psw='+psw;
-    datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha+'&hora='+hora;
+    datos = 'user='+user+'&psw='+psw;
+    //datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha+'&hora='+hora;
 
         $.ajax({
             type: "POST",
@@ -64,6 +64,9 @@ function InsertarAsistencia2(){
               data: datos,
               success: function (res){//Si la consulta es correcta, se valida los datos para insercción
                 if (res != "null") {
+                    var objetoUsuario = JSON.parse(res);
+                    var id = objetoUsuario.idusuario;
+                    datosAsistencia = 'id='+id+'&estado='+estado+'&centro='+centro+'&fecha='+fecha+'&hora='+hora;
                     $.ajax({
                         type: "POST",
                           url: "../Modelo/InsertarAsistencia.php",//Se inserta los datos con la segunda cadena
