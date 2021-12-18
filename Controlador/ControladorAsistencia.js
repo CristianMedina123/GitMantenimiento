@@ -123,6 +123,8 @@ function InsertarAsistencia2(){
         });
 }
 
+
+
 //CODIGO DEL DATATABLE
 $(document).ready(function () {
     $('#id_tabla_asistencia').DataTable({

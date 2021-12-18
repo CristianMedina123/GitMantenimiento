@@ -255,6 +255,7 @@ $resultado = mysqli_query($conn,$query);
 						<a data-toggle="modal" data-target="#ModalPdfUsuarioIrComer" class="botonctrlreport"><i class="zmdi zmdi-account-circle zmdi-hc-3x"></i><br/> Usuario / Motivo </a>
 						<a data-toggle="modal" data-target="#ModalPdfUsuarioFechaCN" class="botonctrlreport"><i class="zmdi zmdi-info zmdi-hc-3x"></i> <br/> Por Motivos</a>
 						<a data-toggle="modal" data-target="#ModalCumple" class="botonctrlreport"><i class="zmdi zmdi-cake zmdi-hc-3x"></i> <br/> Cumpleaños</a>
+						<a data-toggle="modal" data-target="#ModalHorasTrabajadas" class="botonctrlreport"><i class="zmdi zmdi-cake zmdi-hc-3x"></i> <br/> Horas Trabajadas</a>
 					</div>
 					<div class="col-md-2"></div>
 				</div>
@@ -525,7 +526,26 @@ $resultado = mysqli_query($conn,$query);
 
 
 <!-- **************************************** TICKETS *************************************** -->
-
+<!-- Modal PDF Horas Trabajadas-->
+<div class="modal fade" id="ModalHorasTrabajadas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">Generar Reporte Tickets Pendientes</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	  	<label>Sacará el reporte de las horas trabajadas de los usuarios semanalmente.</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="rptHorasTrabajadasBtn" class="btn btn-primary"> <i class="zmdi zmdi-file-text"></i> Generar Reporte</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

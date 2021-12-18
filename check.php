@@ -62,6 +62,7 @@ ON controltiempo.estadotiempo_idestadotiempo = estadotiempo.idestadotiempo");
 			<div class="col-md-1 col-sm-2"></div>
 			<div class="col-md-3 col-sm-4">
 			<div class="form-group">
+				
 					<label class="control-label">Asistencia: </label>
 					<select class="form-control" id="slcestado">
 						<option value="0" disabled="disabled" selected="true">-- Seleccione el Motivo de Asitencia --</option>
@@ -105,6 +106,7 @@ ON controltiempo.estadotiempo_idestadotiempo = estadotiempo.idestadotiempo");
 					<label class="control-label">Ingresa tu Usuario</label>
 					<input class="form-control" type="text" id="txtusuario" autocomplete="off">
 				</div>
+				<a href="index.html" class="btn btn-primary btn-raised btn-sm">Ir a Cheking</a>
 			</div>
 			<div class="col-md-1 col-sm-2"></div>
 			<div class="col-md-3 col-sm-4">
@@ -114,6 +116,7 @@ ON controltiempo.estadotiempo_idestadotiempo = estadotiempo.idestadotiempo");
 				</div>
 				<p class="text-center">
 					<button type="button" onclick="InsertarAsistencia2()"  class="btn btn-danger btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Save</button>
+					
 				</p>
 			</div>
 		</div>

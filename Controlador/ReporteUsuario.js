@@ -185,3 +185,27 @@ $("#rptEquipoFechabtn").on("click", function () {
 });
 
 
+//REPORTE PARA SACAR HORAS LABORADAS
+$("#rptHorasTrabajadasBtn").on("click", function () {
+  const fecha = new Date();
+  const year = fecha.getFullYear();
+  const month = fecha.getMonth();
+  const day = fecha.getDate();
+  const fechaSabado = year + "-" + (month + 1) + "-" + day;
+  
+  const year2 = fecha.getFullYear();
+  const month2 = fecha.getMonth();
+  const day2 = fecha.getDate();
+  const fechaDomingo = year2 + "-" + (month2 + 1) + "-" + parseFloat(day2 - 6);
+
+  // if(fechaDomingo != 0){
+  //   alert("Debes de esperar al Sábado");
+  // }else{
+    window.open(
+      "../Modelo/Reportes/HoraTrabajo.php?fechaSabado=" +fechaSabado+"&fechaDomingo="+fechaDomingo,
+      "_blank"
+    );
+  // }
+});
+
+
